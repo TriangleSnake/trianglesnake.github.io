@@ -14,11 +14,11 @@ https://blog.trianglesnake.com/tags/command-injection/
 https://blog.trianglesnake.com/tags/SQLi/
 https://blog.trianglesnake.com/tags/web/
 https://blog.trianglesnake.com/tags/reverse/
-https://blog.trianglesnake.com/tags/CVE/
-https://blog.trianglesnake.com/tags/argument-injection/
-https://blog.trianglesnake.com/tags/PHP/
 https://blog.trianglesnake.com/tags/misc/
 https://blog.trianglesnake.com/tags/proxmox/
 https://blog.trianglesnake.com/tags/linux/
+https://blog.trianglesnake.com/tags/CVE/
+https://blog.trianglesnake.com/tags/argument-injection/
+https://blog.trianglesnake.com/tags/PHP/
 https://blog.trianglesnake.com/categories/CTF/
 https://blog.trianglesnake.com/categories/CTF/Cheatsheet/
