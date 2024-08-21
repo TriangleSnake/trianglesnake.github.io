@@ -4,7 +4,7 @@
   <url>
     <loc>https://blog.trianglesnake.com/about/index.html</loc>
     
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,92 +85,92 @@
 
   <url>
     <loc>https://blog.trianglesnake.com/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://blog.trianglesnake.com/tags/web/</loc>
-    <lastmod>2024-08-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.trianglesnake.com/tags/writeup/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/CTF/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/command-injection/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/SQLi/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/web/</loc>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/reverse/</loc>
-    <lastmod>2024-08-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/proxmox/</loc>
-    <lastmod>2024-08-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/linux/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/misc/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/proxmox/</loc>
+    <lastmod>2024-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/linux/</loc>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/CVE/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/argument-injection/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/PHP/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -179,14 +179,14 @@
   
   <url>
     <loc>https://blog.trianglesnake.com/categories/CTF/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.trianglesnake.com/categories/CTF/Cheatsheet/</loc>
-    <lastmod>2024-08-20</lastmod>
+    <lastmod>2024-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
