@@ -108,34 +108,6 @@
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/tags/CVE/</loc>
-    <lastmod>2024-10-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/web/</loc>
-    <lastmod>2024-10-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/argument-injection/</loc>
-    <lastmod>2024-10-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/PHP/</loc>
-    <lastmod>2024-10-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.trianglesnake.com/tags/CTF/</loc>
     <lastmod>2024-10-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -157,7 +129,35 @@
   </url>
   
   <url>
+    <loc>https://blog.trianglesnake.com/tags/web/</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.trianglesnake.com/tags/reverse/</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/CVE/</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/argument-injection/</loc>
+    <lastmod>2024-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/PHP/</loc>
     <lastmod>2024-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
