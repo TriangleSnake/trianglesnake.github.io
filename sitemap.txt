@@ -24,5 +24,6 @@ https://blog.trianglesnake.com/tags/misc/
 https://blog.trianglesnake.com/categories/CTF/
 https://blog.trianglesnake.com/categories/CVE/
 https://blog.trianglesnake.com/categories/CTF/Writeup/
+https://blog.trianglesnake.com/categories/Cyber-Security/
 https://blog.trianglesnake.com/categories/Others/
 https://blog.trianglesnake.com/categories/CTF/Cheatsheet/
