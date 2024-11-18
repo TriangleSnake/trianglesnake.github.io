@@ -48,7 +48,188 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/triblog.svg" alt="TriangeSnake&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/trianglesnake"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分類</a></li><li class="is-active"><a href="#" aria-current="page">Others</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-05-14T07:44:07.000Z" title="2024/5/14 下午3:44:07">2024-05-14</time>發表</span><span class="level-item"><time dateTime="2024-08-28T05:15:36.522Z" title="2024/8/28 下午1:15:36">2024-08-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Others/">Others</a></span><span class="level-item">1 分鐘讀完 (大約142個字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a></p><div class="content"><p>在開始之前，建議先備份一下，因為我上次用parted的時候沒打單位直接把sda變成32MB大家要小心</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/triblog.svg" alt="TriangeSnake&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/trianglesnake"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分類</a></li><li class="is-active"><a href="#" aria-current="page">Others</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-11-18T11:22:14.000Z" title="2024/11/18 下午7:22:14">2024-11-18</time>發表</span><span class="level-item"><time dateTime="2024-11-18T11:25:35.578Z" title="2024/11/18 下午7:25:35">2024-11-18</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Others/">Others</a></span><span class="level-item">17 分鐘讀完 (大約2587個字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/11/18/%E8%B7%A8%E7%A7%91%E7%B3%BB%E6%8E%A8%E7%94%84%E5%9B%9B%E5%A4%A7%E8%B3%87%E5%AE%89%E6%89%80%E6%8E%A8%E7%94%84%E5%BF%83%E5%BE%97/">跨科系推甄四大資安所推甄心得</a></p><div class="content"><h1 id="跨科系推甄四大資安所推甄心得"><a href="#跨科系推甄四大資安所推甄心得" class="headerlink" title="跨科系推甄四大資安所推甄心得"></a>跨科系推甄四大資安所推甄心得</h1><p>因為網路上資安相關研究所推甄的心得本來就很少，所以寫這篇文給想要跨科系推甄或是有跟我一樣奇怪狀況的人參考。但是還是建議真的有和我一樣狀況的人還是要準備一下考試，不然有機會+365，畢竟不是所有學校都那麼看課外表現。</p>
+<h2 id="推甄系所與結果"><a href="#推甄系所與結果" class="headerlink" title="推甄系所與結果"></a>推甄系所與結果</h2><table>
+<thead>
+<tr>
+<th>校系</th>
+<th>成績</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>台大電機資安所</td>
+<td>67</td>
+<td>落榜</td>
+</tr>
+<tr>
+<td>交大資安甲</td>
+<td>78.67</td>
+<td>備28</td>
+</tr>
+<tr>
+<td>清大資安所</td>
+<td>書審 88.67 &#x2F; 口試 91.67</td>
+<td>正取</td>
+</tr>
+<tr>
+<td>成大資安學程</td>
+<td>書審 80.34 &#x2F; 口試 84.34</td>
+<td>備6</td>
+</tr>
+</tbody></table>
+<p>台大直接落榜、交大備到天邊，其實都和我預期的蠻符合，畢竟我的成績就是一坨💩，讀的科系甚至和電資差了十萬八千里，要靠經歷推上還是有點難度。</p>
+<h2 id="個人背景"><a href="#個人背景" class="headerlink" title="個人背景"></a>個人背景</h2><h3 id="學歷"><a href="#學歷" class="headerlink" title="學歷"></a>學歷</h3><p>國立成功大學 交通管理科學系 78.78 %</p>
+<h3 id="資安相關課程"><a href="#資安相關課程" class="headerlink" title="資安相關課程"></a>資安相關課程</h3><ul>
+<li>成大計網中心 關鍵基礎設施資安學程</li>
+<li>2023 AIS3</li>
+<li>臺灣好厲駭第八屆高階培訓、第九屆導師培訓制度</li>
+<li>台南市資安攻防演練</li>
+</ul>
+<h3 id="校內資訊相關課程"><a href="#校內資訊相關課程" class="headerlink" title="校內資訊相關課程"></a>校內資訊相關課程</h3><table>
+<thead>
+<tr>
+<th>開課單位</th>
+<th>課程名稱</th>
+<th>成績</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>資訊系</td>
+<td>程式設計（一）</td>
+<td>94 A+</td>
+</tr>
+<tr>
+<td>資訊系</td>
+<td>資訊安全</td>
+<td>修課中</td>
+</tr>
+<tr>
+<td>資訊系</td>
+<td>人工智慧導論</td>
+<td>75 B</td>
+</tr>
+<tr>
+<td>交管系</td>
+<td>計算機概論</td>
+<td>91 A+</td>
+</tr>
+<tr>
+<td>交管系</td>
+<td>計算機程式</td>
+<td>95 A+</td>
+</tr>
+<tr>
+<td>交管系</td>
+<td>通訊網路</td>
+<td></td>
+</tr>
+<tr>
+<td>通識</td>
+<td>py出跨域首部曲 Python</td>
+<td>97 A+</td>
+</tr>
+</tbody></table>
+<h3 id="專題"><a href="#專題" class="headerlink" title="專題"></a>專題</h3><p>V2X車聯網的攻擊復現與入侵偵測平台</p>
+<h3 id="社群參與"><a href="#社群參與" class="headerlink" title="社群參與"></a>社群參與</h3><ul>
+<li>NCKU GDSC 資安組組長</li>
+<li>成大資安社、B33F 50UP 牛肉湯戰隊共同創辦人</li>
+<li>TSCCTF 第一、二屆行政組組長</li>
+<li>2024 DEVCORE Conference 會眾</li>
+<li>2024 HITCON 會眾</li>
+</ul>
+<h3 id="教學經歷"><a href="#教學經歷" class="headerlink" title="教學經歷"></a>教學經歷</h3><ul>
+<li>2024 AIS3 TA</li>
+<li>2024 AIS3 Junior TA</li>
+<li>計算機程式 TA</li>
+<li>網路安全實務與社會實踐 TA</li>
+</ul>
+<h3 id="其他資安經歷"><a href="#其他資安經歷" class="headerlink" title="其他資安經歷"></a>其他資安經歷</h3><ul>
+<li>113年度行政院國家網路攻防演練 攻擊手</li>
+<li>AIS3 Pre-Exam &amp; MyFirstCTF 出題者</li>
+<li>資訊安全 期末工控CTF 出題者</li>
+</ul>
+<h3 id="競賽成績"><a href="#競賽成績" class="headerlink" title="競賽成績"></a>競賽成績</h3><ul>
+<li>2023 神盾盃 CTF - Qual 5th &#x2F; Final 9th</li>
+<li>2023 T貓盃 CTF - Qual 2nd &#x2F; Final 7th</li>
+<li>2023 CGGC CTF - Qual 3rd &#x2F; Final 5th</li>
+<li>2024 AIS3 EOF CTF - Final 7th</li>
+<li>2024 picoCTF - 29th &#x2F; 6957</li>
+<li>第54屆全國技能競賽南區賽 網路安全職類 - 銅牌</li>
+<li>第54屆全國技能競賽全國賽 網路安全職類 - 第四名</li>
+<li>2024 HITCON Cyber Range 學生場 - 第二名</li>
+</ul>
+<h3 id="實習"><a href="#實習" class="headerlink" title="實習"></a>實習</h3><ul>
+<li>DEVCORE Red Team Intern</li>
+<li>資策會資安所 工控資安實習</li>
+</ul>
+<h2 id="書審準備"><a href="#書審準備" class="headerlink" title="書審準備"></a>書審準備</h2><p>基本上各校需要繳交的東西都大同小異<br>自傳、讀書計劃、推薦函兩封、歷年成績單</p>
+<p>但是交大很搞他要填一個超大坨的表格，會問你修過的課、成績、競賽、專題等，然後競賽專題全部都要填貢獻度請指導老師簽名，建議可以提早開始準備<br>然後台大會需要填一排修課的成績，什麼計組、資結的修課分數然後我全部都沒修過空一排</p>
+<h3 id="自傳"><a href="#自傳" class="headerlink" title="自傳"></a>自傳</h3><p>我是把自傳弄成類似經歷的形式，避免一大坨小作文，根本沒人想看<br>自傳大綱大概長這樣，然後再根據各校要求做微調：</p>
+<ol>
+<li>個人簡歷</li>
+<li>自我介紹</li>
+<li>修課紀錄</li>
+<li>資安相關經歷</li>
+<li>課外活動參與</li>
+<li>曾參與之研究</li>
+</ol>
+<h3 id="研究計劃書"><a href="#研究計劃書" class="headerlink" title="研究計劃書"></a>研究計劃書</h3><p>研究計劃書我其實沒有很認真寫，就寫一些未來想研究的 research proposal ，我是寫Web Security、IoT Security、AI 在資安領域的應用三個，以及近程中程遠程的計劃，一頁之內搞定。</p>
+<h3 id="其他有利審查資料"><a href="#其他有利審查資料" class="headerlink" title="其他有利審查資料"></a>其他有利審查資料</h3><p>就放獎狀、證書吧！</p>
+<h3 id="推薦信"><a href="#推薦信" class="headerlink" title="推薦信"></a>推薦信</h3><p>推薦信一封我找了之前一起做專案的教授幫忙寫推薦信，另一封請 <code>AIS3</code> 交大的老師幫忙寫，都是要先擬草稿給老師，<del>寫自己的推薦信感覺很臭屁</del>但是還是要盡量把自己做過的事情寫上去，盡量具體一點不要那種很空洞的形容，真的非常感謝兩位願意幫我寫推薦信的教授。</p>
+<p>補充一下其實可以找專題教授幫忙寫應該會蠻有幫助的，但我想說已經找到兩位教授了就沒有請第三位教授幫我寫，後來才發現其他人推薦信都五封寫好寫滿</p>
+<h2 id="面試準備"><a href="#面試準備" class="headerlink" title="面試準備"></a>面試準備</h2><p>面試只有成大、清大兩間，基本上沒什麼準備，就上網爬一下文看過去幾年都問了什麼，然後把自己的專題記熟。</p>
+<h3 id="成大"><a href="#成大" class="headerlink" title="成大"></a>成大</h3><p>因為是主場，結果就大意了，去面試的時候什麼都沒帶，和 Kazma 吃麥當勞吃到一半他突然問說誒啊你有帶那個成績單什麼的嗎？然後我才發現我什麼都沒帶，緊急去 7-11 印了一份一頁的英文簡歷，然後發現成績單有加密 ibon 印不出來，爛成大</p>
+<p>進去有三關，一關的時間是三分鐘</p>
+<h4 id="第一關：蔡邦維教授"><a href="#第一關：蔡邦維教授" class="headerlink" title="第一關：蔡邦維教授"></a>第一關：蔡邦維教授</h4><blockquote>
+<p>Q: 給一隻白板筆，問如果今天實驗室想要架網路，你的架構會長怎樣？可以自己加網路設備或防護設備<br>A: 鬼畫一通大概長這樣：<br><img src="/2024/11/18/%E8%B7%A8%E7%A7%91%E7%B3%BB%E6%8E%A8%E7%94%84%E5%9B%9B%E5%A4%A7%E8%B3%87%E5%AE%89%E6%89%80%E6%8E%A8%E7%94%84%E5%BF%83%E5%BE%97/IMG_0659.jpg"></p>
+</blockquote>
+<h4 id="第二關：李忠憲教授"><a href="#第二關：李忠憲教授" class="headerlink" title="第二關：李忠憲教授"></a>第二關：李忠憲教授</h4><blockquote>
+<p>Q: 請先自我介紹<br>A: 大概講一下最開始怎麼接觸CTF的、比過哪些賽、AIS3助教和DEVCORE的實習</p>
+</blockquote>
+<blockquote>
+<p>Q: DEVCORE紅隊演練是在幹嘛的？<br>A: 針對企業的網段嘗試入侵、橫向移動、提權、持久化控制，嘗試找出系統的弱點</p>
+</blockquote>
+<blockquote>
+<p>Q: 有想要考證照嗎？<br>A: 有想，但是證照目前對我來說太貴了，應該會未來進公司或實驗室有補助再去考</p>
+</blockquote>
+<blockquote>
+<p>Q: 你覺得攻擊比較難還是防守？<br>A: 當然是防守，攻擊只要找到系統的一個最脆弱的地方就可以滲透進去，但是防守卻是要全方位的把所有弱點都補好才可以。</p>
+</blockquote>
+<blockquote>
+<p>Q: 你怎麼看資安倫理？<br>A: 我比較不敢去亂搞人家的東西，所以所有攻擊都是在對方允許的狀況，或是自己架的環境進行<br>Q: 什麼狀況別人會允許你去打他<br>A: 像紅隊演練就是很經典的例子，企業請你去滲透他的內網看看有沒有什麼問題，然後還有今年參加過行政院的資安攻防演練，就是去打打看政府的網站有沒有什麼漏洞。</p>
+</blockquote>
+<p>這題回答得亂七八糟，因為完全沒料到會問這麼道德層面的問題，回答得好像也不是老師想問的</p>
+<h4 id="第三關：劉亦賢教授"><a href="#第三關：劉亦賢教授" class="headerlink" title="第三關：劉亦賢教授"></a>第三關：劉亦賢教授</h4><p>這關老師有準備兩張紙，一張是<code>C++</code>的程式碼，另一張上面有四個問題</p>
+<ol>
+<li><code>CIA Triad</code></li>
+<li><code>ISO 27001</code> 和 <code>IEC 62443</code>（後面那個有點忘記是這個還是<code>ISO 27701</code>）</li>
+<li><code>WAF</code></li>
+<li><code>IDS</code>&#x2F;<code>IPS</code>&#x2F;<code>NIDS</code>&#x2F;<code>HIDS</code></li>
+</ol>
+<blockquote>
+<p>Q: 講一個讓我能對你刮目相看的經歷<br>A: 回答基本上跟上一關的自我介紹差不多</p>
+</blockquote>
+<blockquote>
+<p>Q: 你是 Com…Communication Management 這是什麼系？電..電信管理還是什麼？（因為我的履歷是英文的所以老師不知道我讀什麼系）<br>A: 額…交…交通管理系，不是電資相關的科系<br>教授：喔喔沒關係沒關係。</p>
+</blockquote>
+<blockquote>
+<p>Q: 你從這四題裡面挑一題回答<br>A: 我回答第四個<br>Intrusion Detection System，透過payload pattern 或其他偵測方法偵測惡意流量<br>HIDS 是 Host-Based 的 IDS 通常部署在電腦裡面，偵測系統事件，有沒有調用一些可疑的 <code>API Sequence</code> 之類的<br>NIDS Network-Based ，放在網路架構中，可能透過 switch 的 Mirror port 對網路流量做分析，可以是分散式的<br>IPS 是 Intrusion Prevension System ，相較於 IDS 不只會偵測惡意流量還會把可疑的流量直接 ban 掉<br>之前有在自己的 <code>PVE</code> 環境中架過類似的東西（開源的<code>SIEM</code>）<br>教授：你知道 <code>SIEM</code> 和 <code>IDS</code> 、 <code>IPS</code> 不一樣嗎<br>知…知道…</p>
+</blockquote>
+<blockquote>
+<p>Q: 你覺得這段程式碼(<code>C++</code>)可能會有什麼問題（程式碼大概就是有定義一個 structure 然後下面print出一堆 <code>%lld</code>）<br>A: （看了一分鐘）額…因為我比較走 Web 領域所以 binary 比較不熟</p>
+</blockquote>
+<p>我那個時候想說這個程式連個 <code>input</code> 都沒有要怎麼打，到現在還是不知道問題是在哪QQ</p>
+<h3 id="清大"><a href="#清大" class="headerlink" title="清大"></a>清大</h3><p>清大面試五分鐘，其中有三分鐘是自我介紹、兩分鐘教授提問，面試會有三個教授坐在對面</p>
+<blockquote>
+<p>Q: 你還有報哪些研究所？<br>A: 因為未來基本確定要走資安，所以報的都是資安相關研究所，目前是報台清交成的資安研究所</p>
+</blockquote>
+<blockquote>
+<p>Q: 我看你實務上的經驗已經很夠了，但是研究所主要是做研究的，你有什麼研究成果嗎？<br>A: 之前有和資工系教授合作做 SSDLC 相關案例的研究，專題也是做資安相關的研究，做車路聯網相關的攻擊復現和檢測，未來會比較想研究 Web Security 或 IoT 相關的漏洞研究</p>
+</blockquote>
+<p>清大面超快做兩個小時的車來三分鐘就面完了，感謝潘茗脩及門及地機車接送，然後半路遇到大正百寶能、被早午餐店坑，新竹風真的超級大</p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>感謝一路上幫助我的人們，牛肉湯的大家、幫我寫推薦信的老師們，等結果的兩個禮拜每天都不用睡等到精神耗弱快中風，做夢都會夢到推甄的東西，還好最後還是有學校唸，我愛大家</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-05-14T07:44:07.000Z" title="2024/5/14 下午3:44:07">2024-05-14</time>發表</span><span class="level-item"><time dateTime="2024-08-28T05:15:36.522Z" title="2024/8/28 下午1:15:36">2024-08-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Others/">Others</a></span><span class="level-item">1 分鐘讀完 (大約142個字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a></p><div class="content"><p>在開始之前，建議先備份一下，因為我上次用parted的時候沒打單位直接把sda變成32MB大家要小心</p>
 <ol>
 <li><p>點選要更改的 <code>VM</code> -&gt; <code>Hardware</code> -&gt; <code>要擴容的Hard Disk</code> -&gt; <code>Disk Action</code> -&gt; <code>Resize</code></p>
 <blockquote>
@@ -75,7 +256,7 @@
 <li><p>使用 <code>resize2fs</code> 將文件系統擴容</p>
 </li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> resize2fs /dev/sda1</span><br></pre></td></tr></table></figure></div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/46417323" alt="TriangleSnake"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">TriangleSnake</p><p class="is-size-6 is-block">National Cheng Kung University</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Taiwan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分類</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">標籤</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/TriangleSnake" target="_blank" rel="me noopener">追蹤</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/TriangleSnake"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分類</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CTF/"><span class="level-start"><span class="level-item">CTF</span></span><span class="level-end"><span class="level-item tag">6</span></span></a><ul><li><a class="level is-mobile" href="/categories/CTF/Cheatsheet/"><span class="level-start"><span class="level-item">Cheatsheet</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/CTF/Writeup/"><span class="level-start"><span class="level-item">Writeup</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/CVE/"><span class="level-start"><span class="level-item">CVE</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Cyber-Security/"><span class="level-start"><span class="level-item">Cyber Security</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Others/"><span class="level-start"><span class="level-item">Others</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-10-30T18:02:43.000Z">2024-10-31</time></p><p class="title"><a href="/2024/10/31/One-Million-ASUS-Routers-Under-Control-Exploiting-ASUS-DDNS-to-MITM-Admin-Credentials/">One Million ASUS Routers Under Control: Exploiting ASUS DDNS to MITM Admin Credentials</a></p><p class="categories"><a href="/categories/Cyber-Security/">Cyber Security</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-08-08T08:32:52.000Z">2024-08-08</time></p><p class="title"><a href="/2024/08/08/CVE-2024-4577-PHP-CGI%E6%BC%8F%E6%B4%9E%E8%A4%87%E7%8F%BE%E5%8F%8A%E7%A0%94%E7%A9%B6/">CVE-2024-4577 PHP CGI漏洞複現及研究</a></p><p class="categories"><a href="/categories/CVE/">CVE</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-30T06:04:15.000Z">2024-06-30</time></p><p class="title"><a href="/2024/06/30/2024-AIS3-pre-exam-MFCTF-writeup/">2024 AIS3 pre-exam &amp; MFCTF writeup</a></p><p class="categories"><a href="/categories/CTF/">CTF</a> / <a href="/categories/CTF/Writeup/">Writeup</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-14T07:44:07.000Z">2024-05-14</time></p><p class="title"><a href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a></p><p class="categories"><a href="/categories/Others/">Others</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-30T07:11:21.000Z">2024-04-30</time></p><p class="title"><a href="/2024/04/30/CTF-Cheatsheet-Web/">CTF Cheatsheet - Web</a></p><p class="categories"><a href="/categories/CTF/">CTF</a> / <a href="/categories/CTF/Cheatsheet/">Cheatsheet</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/06/"><span class="level-start"><span class="level-item">六月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/05/"><span class="level-start"><span class="level-item">五月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/04/"><span class="level-start"><span class="level-item">四月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CTF/"><span class="tag">CTF</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CVE/"><span class="tag">CVE</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQLi/"><span class="tag">SQLi</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/argument-injection/"><span class="tag">argument injection</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/command-injection/"><span class="tag">command injection</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/misc/"><span class="tag">misc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/proxmox/"><span class="tag">proxmox</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/reverse/"><span class="tag">reverse</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/web/"><span class="tag">web</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/writeup/"><span class="tag">writeup</span><span class="tag">5</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/triblog.svg" alt="TriangeSnake&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 TriangleSnake</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2024</p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-tw");</script><script>var IcarusThemeSettings = {
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> resize2fs /dev/sda1</span><br></pre></td></tr></table></figure></div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/46417323" alt="TriangleSnake"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">TriangleSnake</p><p class="is-size-6 is-block">National Cheng Kung University</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Taiwan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">10</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分類</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">標籤</p><a href="/tags"><p class="title">15</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/TriangleSnake" target="_blank" rel="me noopener">追蹤</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/TriangleSnake"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分類</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Cybersecurity/"><span class="level-start"><span class="level-item">Cybersecurity</span></span><span class="level-end"><span class="level-item tag">8</span></span></a><ul><li><a class="level is-mobile" href="/categories/Cybersecurity/CTF/"><span class="level-start"><span class="level-item">CTF</span></span><span class="level-end"><span class="level-item tag">6</span></span></a><ul><li><a class="level is-mobile" href="/categories/Cybersecurity/CTF/Cheatsheet/"><span class="level-start"><span class="level-item">Cheatsheet</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Cybersecurity/CTF/Writeup/"><span class="level-start"><span class="level-item">Writeup</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Cybersecurity/CVE/"><span class="level-start"><span class="level-item">CVE</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Others/"><span class="level-start"><span class="level-item">Others</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-11-18T11:22:14.000Z">2024-11-18</time></p><p class="title"><a href="/2024/11/18/%E8%B7%A8%E7%A7%91%E7%B3%BB%E6%8E%A8%E7%94%84%E5%9B%9B%E5%A4%A7%E8%B3%87%E5%AE%89%E6%89%80%E6%8E%A8%E7%94%84%E5%BF%83%E5%BE%97/">跨科系推甄四大資安所推甄心得</a></p><p class="categories"><a href="/categories/Others/">Others</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-10-30T18:02:43.000Z">2024-10-31</time></p><p class="title"><a href="/2024/10/31/One-Million-ASUS-Routers-Under-Control-Exploiting-ASUS-DDNS-to-MITM-Admin-Credentials/">One Million ASUS Routers Under Control: Exploiting ASUS DDNS to MITM Admin Credentials</a></p><p class="categories"><a href="/categories/Cybersecurity/">Cybersecurity</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-08-08T08:32:52.000Z">2024-08-08</time></p><p class="title"><a href="/2024/08/08/CVE-2024-4577-PHP-CGI%E6%BC%8F%E6%B4%9E%E8%A4%87%E7%8F%BE%E5%8F%8A%E7%A0%94%E7%A9%B6/">CVE-2024-4577 PHP CGI漏洞複現及研究</a></p><p class="categories"><a href="/categories/Cybersecurity/">Cybersecurity</a> / <a href="/categories/Cybersecurity/CVE/">CVE</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-06-30T06:04:15.000Z">2024-06-30</time></p><p class="title"><a href="/2024/06/30/2024-AIS3-pre-exam-MFCTF-writeup/">2024 AIS3 pre-exam &amp; MFCTF writeup</a></p><p class="categories"><a href="/categories/Cybersecurity/">Cybersecurity</a> / <a href="/categories/Cybersecurity/CTF/">CTF</a> / <a href="/categories/Cybersecurity/CTF/Writeup/">Writeup</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-14T07:44:07.000Z">2024-05-14</time></p><p class="title"><a href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a></p><p class="categories"><a href="/categories/Others/">Others</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/06/"><span class="level-start"><span class="level-item">六月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/05/"><span class="level-start"><span class="level-item">五月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/04/"><span class="level-start"><span class="level-item">四月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CTF/"><span class="tag">CTF</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CVE/"><span class="tag">CVE</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQLi/"><span class="tag">SQLi</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/argument-injection/"><span class="tag">argument injection</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/command-injection/"><span class="tag">command injection</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/misc/"><span class="tag">misc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/proxmox/"><span class="tag">proxmox</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/reverse/"><span class="tag">reverse</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/web/"><span class="tag">web</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/writeup/"><span class="tag">writeup</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8E%A8%E7%94%84/"><span class="tag">推甄</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A0%94%E7%A9%B6%E6%89%80/"><span class="tag">研究所</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B3%87%E5%AE%89/"><span class="tag">資安</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/triblog.svg" alt="TriangeSnake&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 TriangleSnake</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2024</p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-tw");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
