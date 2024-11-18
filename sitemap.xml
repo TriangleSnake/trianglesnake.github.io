@@ -245,14 +245,14 @@
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Cheatsheet/</loc>
+    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
+    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Cheatsheet/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
