@@ -152,13 +152,6 @@
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/tags/misc/</loc>
-    <lastmod>2024-11-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.trianglesnake.com/tags/CVE/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -174,20 +167,6 @@
   
   <url>
     <loc>https://blog.trianglesnake.com/tags/PHP/</loc>
-    <lastmod>2024-11-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/proxmox/</loc>
-    <lastmod>2024-11-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.trianglesnake.com/tags/linux/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -214,17 +193,31 @@
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/</loc>
+    <loc>https://blog.trianglesnake.com/tags/proxmox/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CVE/</loc>
+    <loc>https://blog.trianglesnake.com/tags/linux/</loc>
+    <lastmod>2024-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/tags/misc/</loc>
+    <lastmod>2024-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -245,7 +238,7 @@
   </url>
   
   <url>
-    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
+    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CVE/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -253,6 +246,13 @@
   
   <url>
     <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Cheatsheet/</loc>
+    <lastmod>2024-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
     <lastmod>2024-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
