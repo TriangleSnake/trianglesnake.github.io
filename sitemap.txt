@@ -13,11 +13,11 @@ https://trianglesnake.com/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%
 https://trianglesnake.com/
 https://trianglesnake.com/tags/writeup/
 https://trianglesnake.com/tags/CTF/
+https://trianglesnake.com/tags/web/
+https://trianglesnake.com/tags/misc/
 https://trianglesnake.com/tags/command-injection/
 https://trianglesnake.com/tags/SQLi/
-https://trianglesnake.com/tags/web/
 https://trianglesnake.com/tags/reverse/
-https://trianglesnake.com/tags/misc/
 https://trianglesnake.com/tags/CVE/
 https://trianglesnake.com/tags/argument-injection/
 https://trianglesnake.com/tags/PHP/
@@ -28,7 +28,7 @@ https://trianglesnake.com/tags/%E6%8E%A8%E7%94%84/
 https://trianglesnake.com/tags/%E8%B3%87%E5%AE%89/
 https://trianglesnake.com/categories/Cybersecurity/
 https://trianglesnake.com/categories/Cybersecurity/CTF/
-https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/
 https://trianglesnake.com/categories/Cybersecurity/CVE/
+https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/
 https://trianglesnake.com/categories/Others/
 https://trianglesnake.com/categories/Cybersecurity/CTF/Cheatsheet/

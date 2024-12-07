@@ -133,6 +133,20 @@
   </url>
   
   <url>
+    <loc>https://trianglesnake.com/tags/web/</loc>
+    <lastmod>2024-12-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://trianglesnake.com/tags/misc/</loc>
+    <lastmod>2024-12-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://trianglesnake.com/tags/command-injection/</loc>
     <lastmod>2024-12-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -147,21 +161,7 @@
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/tags/web/</loc>
-    <lastmod>2024-12-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://trianglesnake.com/tags/reverse/</loc>
-    <lastmod>2024-12-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/misc/</loc>
     <lastmod>2024-12-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
+    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
     <lastmod>2024-12-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
+    <loc>https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
     <lastmod>2024-12-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
