@@ -184,6 +184,20 @@
   </url>
   
   <url>
+    <loc>https://trianglesnake.com/tags/proxmox/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://trianglesnake.com/tags/linux/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://trianglesnake.com/tags/CVE/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -199,20 +213,6 @@
   
   <url>
     <loc>https://trianglesnake.com/tags/PHP/</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/proxmox/</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/linux/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -256,13 +256,6 @@
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
-    <lastmod>2025-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://trianglesnake.com/categories/Others/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -271,6 +264,13 @@
   
   <url>
     <loc>https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/</loc>
+    <lastmod>2025-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
     <lastmod>2025-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
