@@ -19,10 +19,10 @@ https://trianglesnake.com/tags/SQLi/
 https://trianglesnake.com/tags/web/
 https://trianglesnake.com/tags/reverse/
 https://trianglesnake.com/tags/misc/
+https://trianglesnake.com/tags/apache/
 https://trianglesnake.com/tags/CVE/
 https://trianglesnake.com/tags/argument-injection/
 https://trianglesnake.com/tags/PHP/
-https://trianglesnake.com/tags/apache/
 https://trianglesnake.com/tags/proxmox/
 https://trianglesnake.com/tags/linux/
 https://trianglesnake.com/tags/%E7%A0%94%E7%A9%B6%E6%89%80/
@@ -31,6 +31,6 @@ https://trianglesnake.com/tags/%E8%B3%87%E5%AE%89/
 https://trianglesnake.com/categories/Cybersecurity/
 https://trianglesnake.com/categories/Cybersecurity/CTF/
 https://trianglesnake.com/categories/Cybersecurity/CVE/
+https://trianglesnake.com/categories/Others/
 https://trianglesnake.com/categories/Cybersecurity/CTF/Writeup/
 https://trianglesnake.com/categories/Cybersecurity/CTF/Cheatsheet/
-https://trianglesnake.com/categories/Others/
