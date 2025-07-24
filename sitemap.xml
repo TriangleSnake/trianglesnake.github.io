@@ -151,6 +151,20 @@
   </url>
   
   <url>
+    <loc>https://trianglesnake.com/tags/web/</loc>
+    <lastmod>2025-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://trianglesnake.com/tags/misc/</loc>
+    <lastmod>2025-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://trianglesnake.com/tags/command-injection/</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -165,21 +179,7 @@
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/tags/web/</loc>
-    <lastmod>2025-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://trianglesnake.com/tags/reverse/</loc>
-    <lastmod>2025-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/misc/</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -201,20 +201,6 @@
   
   <url>
     <loc>https://trianglesnake.com/tags/PHP/</loc>
-    <lastmod>2025-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/proxmox/</loc>
-    <lastmod>2025-07-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://trianglesnake.com/tags/linux/</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -248,6 +234,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://trianglesnake.com/tags/proxmox/</loc>
+    <lastmod>2025-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://trianglesnake.com/tags/linux/</loc>
+    <lastmod>2025-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -258,14 +258,14 @@
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/categories/Cybersecurity/CTF/</loc>
+    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://trianglesnake.com/categories/Cybersecurity/CVE/</loc>
+    <loc>https://trianglesnake.com/categories/Cybersecurity/CTF/</loc>
     <lastmod>2025-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
