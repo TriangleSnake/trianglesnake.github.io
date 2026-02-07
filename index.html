@@ -25,7 +25,7 @@
   <title>
     
 
-    typo
+    TriangeSnake&#39;s Blog
   </title>
 
   
@@ -67,6 +67,52 @@
 </header>
   <main class="main">
     <div class="post-list">
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/">2026 AIS3 EOF 心得</a>
+    <div class="post-item-summary">
+      前言自從上了研究所之後感覺有比較少跟 B33F 50UP 的大家打比賽，這場比賽 Chummy 在修程安沒辦法跟非修課生組隊，剩下的人全部跑去出題了，所以我找了同實驗室的 Albert 一起，然後他再拉兩個應該是竹狐的高中生一起，感謝其他三位隊友一起完成這次的比賽，還是混亂的 EOF 最對味。   
+初賽初賽拿下了第三名，只能說到 2025 年底 LLM 太強了， Crypto 和 Reverse 幾乎都是用 AI 御三家唱出來的，ChatGPT 甚至可以做到 FIFO( F
+      <a class="read-more" href="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2026.02.07</div>
+      <div class="tags">
+        
+        <div class="tag-item">CTF</div>
+        
+        <div class="tag-item">web</div>
+        
+        <div class="tag-item">misc</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
+    <a class="post-item-title" href="/2025/12/31/%E4%B8%80%E4%BA%9Bpyjail%E7%9A%84%E7%AD%86%E8%A8%98/">一些 PyJail 的筆記</a>
+    <div class="post-item-summary">
+      2025 年即將結束，今年也打了不少 CTF，其中不乏一些有趣的 pyjail，所以特別整理了一些 PyJail 的 tricks 和大家分享，最後也會放一些遇到的有趣題目。
+黑名單 bypass
+空格 -&gt; \t
+
+底線：  可以用全形繞過，但是 . 後面一定要接半形的 _，後面就可以用全形
+  blacklist = [&quot;__&quot;,&quot;.__&quot;]
+&gt;&gt;&gt; copyright._＿class＿＿
+&lt;class
+      <a class="read-more" href="/2025/12/31/%E4%B8%80%E4%BA%9Bpyjail%E7%9A%84%E7%AD%86%E8%A8%98/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2025.12.31</div>
+      <div class="tags">
+        
+        <div class="tag-item">CTF</div>
+        
+        <div class="tag-item">pyjail</div>
+        
+      </div>
+    </div>
+  </section>
   
   <section class="post-item">
     <a class="post-item-title" href="/2025/06/22/%E5%8F%AB%E4%BD%A0%E6%89%93%E9%9D%B6%E6%A9%9F%E5%B9%B3%E5%8F%B0%E4%B8%8D%E6%98%AF%E5%8F%AB%E4%BD%A0%E6%8A%8A%E6%95%B4%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%89%93%E4%B8%8B%E4%BE%86%EF%BC%81%E8%A8%98%E9%8C%84%E9%87%9D%E5%B0%8D-vulfocus-%E7%9A%84%E4%B8%80%E6%AC%A1%E6%BB%B2%E9%80%8F/">叫你打靶機平台不是叫你把整個平台打下來，記錄針對 vulfocus 的一次滲透</a>
@@ -282,59 +328,6 @@ resizepart 你想要resize的part，
         <div class="tag-item">proxmox</div>
         
         <div class="tag-item">linux</div>
-        
-      </div>
-    </div>
-  </section>
-  
-  <section class="post-item">
-    <a class="post-item-title" href="/2024/04/30/CTF-Cheatsheet-Web/">CTF Cheatsheet - Web</a>
-    <div class="post-item-summary">
-      webInformation Leak.git &#x2F; .svn &#x2F; .bzr版本控制系統
-.git洩漏可用scrabble將整個.git資料夾下載下來並用git 還原
-./scrabble http://www.example.com/
-
-Google Hackingsite:www.example.com
-intext:&quot;管理介面&quot;
-filetype:sql
-GHDB
-robots.txt
-.DS_Store
-.index.php.sw
-      <a class="read-more" href="/2024/04/30/CTF-Cheatsheet-Web/"> ... </a>
-    </div>
-    <div class="post-item-extra">
-      <div class="date">2024.04.30</div>
-      <div class="tags">
-        
-        <div class="tag-item">web</div>
-        
-      </div>
-    </div>
-  </section>
-  
-  <section class="post-item">
-    <a class="post-item-title" href="/2024/02/07/2023-AIS3-Pre-Exam-writeup/">2023 AIS3 Pre-Exam writeup</a>
-    <div class="post-item-summary">
-      MiscWelcomeAre you not a robot ?
-FLAG Format: ^AIS3&#123;[A-Z0-9+-*/!?-]+&#125;$
-
-Author: nella17
-
-點開pdf，flag直接寫在上面了，一開始以為-是_結果浪費一堆時間
-
-AIS3{WELC0ME-T0-2023-PRE-EXAM-&amp;-MY-FIRST-CTF}
-
-RobotAre you a robot?
-
-Note: This is NOT a reversing o
-      <a class="read-more" href="/2024/02/07/2023-AIS3-Pre-Exam-writeup/"> ... </a>
-    </div>
-    <div class="post-item-extra">
-      <div class="date">2024.02.07</div>
-      <div class="tags">
-        
-        <div class="tag-item">writeup</div>
         
       </div>
     </div>
