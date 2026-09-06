@@ -69,6 +69,27 @@
     <div class="post-list">
   
   <section class="post-item">
+    <a class="post-item-title" href="/2026/08/30/%E5%BE%9E%20kerberos%20relay%20attack%20%E5%88%B0%20SPN%20%E7%9A%84%E5%89%8D%E5%BE%8C%E8%A7%A3%E6%9E%90%E4%B8%8D%E4%B8%80%E8%87%B4%E5%95%8F%E9%A1%8C/">從 kerberos relay attack 到 SPN 的前後解析不一致問題</a>
+    <div class="post-item-summary">
+      關於 Relay Attack說到 relay attack 我相信大家一定都不陌生，透過 EFS 或 printer 等 RPC 可以將高權限的 NTLM 認證打到 attacker 的機器上面，並透過 ntlmrelayx 轉發進而拿到 smb &#x2F; ldap &#x2F; http 等服務的 session。
+不過這種打法在 kerberos 基本上不會成功，主要是因為 kerberos 的驗證中綁定了特定的 service， kerberos 的 ST 是用目
+      <a class="read-more" href="/2026/08/30/%E5%BE%9E%20kerberos%20relay%20attack%20%E5%88%B0%20SPN%20%E7%9A%84%E5%89%8D%E5%BE%8C%E8%A7%A3%E6%9E%90%E4%B8%8D%E4%B8%80%E8%87%B4%E5%95%8F%E9%A1%8C/"> ... </a>
+    </div>
+    <div class="post-item-extra">
+      <div class="date">2026.08.30</div>
+      <div class="tags">
+        
+        <div class="tag-item">CVE</div>
+        
+        <div class="tag-item">ActiveDirectory</div>
+        
+        <div class="tag-item">Kerberos</div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <section class="post-item">
     <a class="post-item-title" href="/2026/02/07/2026-ais3-eof-%E5%BF%83%E5%BE%97/">2026 AIS3 EOF 心得</a>
     <div class="post-item-summary">
       前言自從上了研究所之後感覺有比較少跟 B33F 50UP 的大家打比賽，這場比賽 Chummy 在修程安沒辦法跟非修課生組隊，剩下的人全部跑去出題了，所以我找了同實驗室的 Albert 一起，然後他再拉兩個應該是竹狐的高中生一起，感謝其他三位隊友一起完成這次的比賽，還是混亂的 EOF 最對味。   
@@ -293,41 +314,6 @@ This is a calculator written in Python. It’s a simple calculator, but some fun
         <div class="tag-item">web</div>
         
         <div class="tag-item">misc</div>
-        
-      </div>
-    </div>
-  </section>
-  
-  <section class="post-item">
-    <a class="post-item-title" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/">如何使用Parted幫 Proxmox VM 擴充磁碟大小</a>
-    <div class="post-item-summary">
-      在開始之前，建議先備份一下，因為我上次用parted的時候沒打單位直接把sda變成32MB大家要小心
-
-點選要更改的 VM -&gt; Hardware -&gt; 要擴容的Hard Disk -&gt; Disk Action -&gt; Resize
-
-
-
-
-進入VM lsblk 看一下是否有新增成功
-
-我這邊是擴容到36GB
-
-
-parted /dev/sda 進入parted，並用 print 查看一下配置
-
-
-
-
-resizepart 你想要resize的part，
-      <a class="read-more" href="/2024/05/14/%E5%A6%82%E4%BD%95%E5%B9%AB-Proxmox-VM-%E6%93%B4%E5%85%85%E7%A3%81%E7%A2%9F%E5%A4%A7%E5%B0%8F/"> ... </a>
-    </div>
-    <div class="post-item-extra">
-      <div class="date">2024.05.14</div>
-      <div class="tags">
-        
-        <div class="tag-item">proxmox</div>
-        
-        <div class="tag-item">linux</div>
         
       </div>
     </div>

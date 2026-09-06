@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head><!-- hexo injector head_begin start --><!-- Microsoft Clarity begins-->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "nq90i0uzl9");
+    </script>
+    <!-- Microsoft Clarity ends-->
+    <!-- Google tag (gtag.js) begins-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16453505124"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'AW-16453505124');
+    </script>
+    <!-- Google tag (gtag.js) ends-->
+    <!-- hexo injector head_begin end -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <title>
+    
+    從 kerberos relay attack 到 SPN 的前後解析不一致問題 丨
+    
+
+    TriangleSnake&#39;s Blog
+  </title>
+
+  
+  <link rel="shortcut icon" href="/icon.svg">
+  
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  
+
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/root.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/post.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <header class="header">
+  <section class="header-container">
+    <a class="logo" href="/">TriangleSnake&#39;s Blog</a>
+    <ul class="nav">
+      
+      <li><a href="/archives">archives</a></li>
+      
+      <li><a href="/about">about</a></li>
+      
+    </ul>
+  </section>
+</header>
+  <main class="main">
+    <article class="post">
+  
+  <div class="post-title">從 kerberos relay attack 到 SPN 的前後解析不一致問題</div>
+  <div class="post-meta">
+    <div class="date">2026 八月 30日</div>
+    <div class="tags">
+      
+      <div class="tag-item">CVE</div>
+      
+      <div class="tag-item">ActiveDirectory</div>
+      
+      <div class="tag-item">Kerberos</div>
+      
+    </div>
+  </div>
+  
+
+  <main class="post-content"><h1 id="關於-Relay-Attack"><a href="#關於-Relay-Attack" class="headerlink" title="關於 Relay Attack"></a>關於 Relay Attack</h1><p>說到 relay attack 我相信大家一定都不陌生，透過 EFS 或 printer 等 RPC 可以將高權限的 NTLM 認證打到 attacker 的機器上面，並透過 ntlmrelayx 轉發進而拿到 smb &#x2F; ldap &#x2F; http 等服務的 session。</p>
+<p>不過這種打法在 kerberos 基本上不會成功，主要是因為 kerberos 的驗證中綁定了特定的 service， kerberos 的 ST 是用目標 service 的 key 加密的。如果 UNC path 指定 attacker 的 hostname，KDC 找不到 attacker 的 SPN（因為 attacker 不在 domain 裡），會 fallback 到 NTLM，根本拿不到 kerberos ticket；如果指定 target 的 hostname，ticket 是正確的但 TCP 也連到 target，attacker 攔不到。兩個條件（正確的票 + 送到 attacker）沒辦法同時滿足。</p>
+<h1 id="如何做到-Kerberos-Relay"><a href="#如何做到-Kerberos-Relay" class="headerlink" title="如何做到 Kerberos Relay"></a>如何做到 Kerberos Relay</h1><p>早在 2021 年 James Forshaw 便針對 kerberos relay 的可行性進行<a target="_blank" rel="noopener" href="https://projectzero.google/2021/10/using-kerberos-for-authentication-relay.html">相關研究</a><br>理論上 kerberos relay 是可行的，不過當時除了中間人攻擊之外找不到合適的漏洞達成。</p>
+<p>要完成 kerberos relay，我們需要透過某種方法指定正確的 <code>SPN</code> ，同時將這個服務的 <code>AP_REQ</code> 送到自己手上。</p>
+<h2 id="DHCPv6-DNS-Spoofing"><a href="#DHCPv6-DNS-Spoofing" class="headerlink" title="DHCPv6 DNS Spoofing"></a>DHCPv6 DNS Spoofing</h2><p>2022 年 Dirk-jan 發表了一篇 <a target="_blank" rel="noopener" href="https://dirkjanm.io/relaying-kerberos-over-dns-with-krbrelayx-and-mitm6/">blog</a> 說明如何透過 DHCPv6 達成 kerberos relay。</p>
+<p>首先，在大部分的企業環境內根本沒人會用 DHCPv6，所以可以自己架一台 DHCPv6 回應所有 DHCPv6 solicit，並且把自己設定成 IPv6 DNS Resolver，為什麼要用 IPv6 ？因為 IPv6 的 precedence 會比 v4 還高，因此機器會優先詢問 IPv6 的 DNS Server。</p>
+<p>等 <code>victim</code> 的 DNS resolver 被劫持後，被動等待 <code>victim</code> 自行發起 DNS dynamic update（Windows 機器定期會做），此時：</p>
+<ol>
+<li><code>victim</code> 向假的 DNS server 發起 DNS dynamic update</li>
+<li>Attacker 的 DNS server 回應 SOA，把 primary nameserver 指向 target（例如 ADCS）的 hostname</li>
+<li><code>victim</code> 準備對 target hostname 做 authenticated DNS update，向 <code>KDC</code> 請求 target <code>SPN</code> 的 ST</li>
+<li><code>victim</code> 向 DNS 查詢 target 的 ip</li>
+<li>假的 DNS Resolver 回應 attacker 的 ip</li>
+<li><code>victim</code> 將 <code>AP-REQ</code> 發送到 attacker 手上</li>
+<li><code>attacker</code> 拿 AP-REQ relay 到 target 的其他 service（例如 ADCS HTTP endpoint），完成 kerberos relay</li>
+</ol>
+<h2 id="DNS-和-kerberos-的前後解析不一致"><a href="#DNS-和-kerberos-的前後解析不一致" class="headerlink" title="DNS 和 kerberos 的前後解析不一致"></a>DNS 和 kerberos 的前後解析不一致</h2><p>Synacktiv 在 2024 年的時候提出了<a target="_blank" rel="noopener" href="https://www.synacktiv.com/publications/relaying-kerberos-over-smb-using-krbrelayx">另一個手法</a></p>
+<p>首先，他們透過 dns 註冊了一組奇怪的 A Record：</p>
+<pre><code class="highlight plaintext">fileserver1UWhRCAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAfileserversBAAAA</code></pre>
+
+<p>接著要求 <code>victim</code> 強制認證 <code>fileserver1UWhRCAA..A</code> ，此時：</p>
+<ol>
+<li><code>victim</code> 向 DNS 查詢 <code>fileserver1UWhRCAA..A</code> ，得到 Attacker IP</li>
+<li><code>victim</code> 嘗試 parse 出 SPN，偵測到為 marshalled data，將 marshalled data strip 掉</li>
+<li>得到 SPN 為 <code>cifs/fileserver</code></li>
+<li>向 <code>KDC</code> 請求 <code>cifs/fileserver</code> 的 ST</li>
+<li>向 Attacker 發送 AP-REQ</li>
+</ol>
+<h1 id="SPN-的解析問題"><a href="#SPN-的解析問題" class="headerlink" title="SPN 的解析問題"></a>SPN 的解析問題</h1><p>為什麼 <code>fileserver1UWhRCA..A</code> 會被解析成 <code>cifs/fileserver</code>？</p>
+<p>我們可以來看 SMB client 的正常連線流程，當 SMB client 要連線到 <code>target</code> 時：</p>
+<ol>
+<li>SMB client 呼叫 <code>SecMakeSPNEx2(&quot;cifs&quot;, &quot;target&quot;)</code> ，<code>SecMakeSPNEx2</code> 會：<ol>
+<li>把 service class 和 hostname 組成 SPN： <code>cifs/target</code></li>
+<li>嘗試 <code>CredUnmarshalTargetInfo(&quot;cifs/target&quot;)</code> 回傳 <code>null</code></li>
+<li>呼叫 <code>CredMarshalTargetInfo</code> 把目標資訊 base64 encode</li>
+</ol>
+</li>
+<li>把 <code>SPN</code> 和 base64-encoded marshal 接起來丟給 <code>SSPI</code></li>
+</ol>
+<p>聽起來很合理，但如果 target 已經是 marshalled data 會發生什麼事？</p>
+<ol>
+<li>SMB client 呼叫 <code>SecMakeSPNEx2(&quot;cifs&quot;, &quot;targetMarshalledData&quot;)</code> ，<code>SecMakeSPNEx2</code> 會：<ol>
+<li>把 service class 和 hostname 組成 SPN： <code>cifs/targetMarshalledData</code></li>
+<li>嘗試 <code>CredUnmarshalTargetInfo(&quot;cifs/targetMarshalledData&quot;)</code> 回傳 unmarshalled data</li>
+<li>用 unmarshalled data 重新 <code>CredMarshalTargetInfo</code> 把目標資訊 base64 encode</li>
+</ol>
+</li>
+<li>把 <code>SPN</code> 和 base64-encoded marshal 接起來丟給 <code>SSPI</code></li>
+</ol>
+<p>此時 <code>fileserver1UWhRCA..A</code> 被成功解析出 <code>cifs/fileserver</code> 並申請正確的 ST ，但 DNS 卻解析出 <code>fileserver1UWhRCA..A</code> 的 ip，並將 AP-REQ 發送給 attacker，造成前後解析不一致的漏洞。</p>
+<h1 id="SecMakeSPNEx2"><a href="#SecMakeSPNEx2" class="headerlink" title="SecMakeSPNEx2"></a>SecMakeSPNEx2</h1><p>很明顯就是這個函式在搞，而 <code>SecMakeSPNEx2</code> 本身就是拿來解析 SPN 的，所以理論上可以控制輸入就是會有上面的這些問題</p>
+<h2 id="CVE-2025-33073"><a href="#CVE-2025-33073" class="headerlink" title="CVE-2025-33073"></a>CVE-2025-33073</h2><p>前面有提到 SMB client 在解析 target name 的時候可以透過 marshalled data 造成前後解析不一致，除了拿來做 kerberos relay 之外，Synacktiv 發現可以利用這個問題繞過 authentication reflection 的檢查</p>
+<h3 id="什麼是-Authentication-Reflection"><a href="#什麼是-Authentication-Reflection" class="headerlink" title="什麼是 Authentication Reflection"></a>什麼是 Authentication Reflection</h3><p>前面提到若透過 UNC path 觸發驗證便能拿到該使用者的 NTLM 認證（challenge-response），由於這些有問題的 RPC 通常都是以系統服務運行的，因此我們可以拿到該機器 machine account 的 NTLM 認證，那如果把它 relay 給他自己會發生什麼事？假設我們 relay 給自己的 SMB Service ，就會得到一個 SYSTEM 權限的 SMB session，但這也太蠢了吧？</p>
+<p>微軟也是這樣想的，早在 2008 年的 MS08-068 他們就把這個問題給修掉了，修法很簡單就是在 SMB server 端檢查 challenge 是不是自己發的，如果是就拒絕。</p>
+<p>但是遇到 <code>SecMakeSPNEx2</code> 一切都不一樣了，我們一樣將 <code>fileserver1UWhRCA..A</code> 指向 attacker IP，同時針對 <code>fileserver1</code> 發起 authentication coercion，此時：</p>
+<ol>
+<li>Coerce <code>fileserver1</code> 的 SYSTEM service 連到 <code>fileserver1UWhRCA..A</code></li>
+<li>DNS 解析 <code>fileserver1UWhRCA..A</code> → attacker IP → TCP 連到 attacker</li>
+<li><code>SecMakeSPNEx2</code> → <code>CredUnmarshalTargetInfo</code> strip marshalled data → hostname &#x3D; <code>fileserver1</code></li>
+<li><code>SspIsTargetLocalhost(&quot;fileserver1&quot;)</code> → 是自己 → 走 NTLM local authentication</li>
+<li>NTLM 認證透過已建好的 TCP 連線送到 attacker</li>
+<li>Attacker 用 ntlmrelayx relay 回 <code>fileserver1:445</code></li>
+<li><code>fileserver1</code> 的 SMB server 收到認證 → 來自外部 IP（attacker） → MS08-068 的 challenge 檢查不觸發（因為 challenge 不是同一個 SMB instance 發的）→ 認證通過</li>
+<li>拿到 SYSTEM 身份的 SMB session</li>
+</ol>
+<h3 id="修補"><a href="#修補" class="headerlink" title="修補"></a>修補</h3><p>在 <code>mrxsmb.sys</code> 的 <code>SmbCeCreateSrvCall</code> 中，新增了一段檢查：</p>
+<pre><code class="highlight c"><span class="keyword">if</span> ((<span class="type">unsigned</span> <span class="type">int</span>)CredUnmarshalTargetInfo(
+    TargetName-&gt;Buffer, 
+    TargetName-&gt;Length, <span class="number">0</span>, <span class="number">0</span>) != STATUS_INVALID_PARAMETER) 
+&#123;
+    <span class="keyword">return</span> STATUS_INVALID_PARAMETER;
+&#125;</code></pre>
+
+<p><code>CredUnmarshalTargetInfo</code> 在 target name 不包含 marshalled data 或格式錯誤時會回傳失敗（<code>STATUS_INVALID_PARAMETER</code>）。所以這段程式碼反過來用 — 如果 <code>CredUnmarshalTargetInfo</code> 成功了（代表 target name 裡有合法的 marshalled data），就拒絕建立 SMB 連線。</p>
+<p>在這個修補之後今年又被繞過了<br><code>CVE-2026-24294</code> 透過 SMB port multiplexing 新功能 connection reuse 時忘記檢查是否為相同 port 繞過<br><code>CVE-2026-26128</code> 透過 Unicode normalization 不一致繞過</p>
+<p>不過這兩個繞過方式並非透過 SPN 前後解析不一致達成，因此就不在這篇討論，有興趣的可以去看 synacktiv 的兩篇文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.synacktiv.com/publications/bypassing-windows-authentication-reflection-mitigations-for-system-shells-part-1">CVE-2026-24294</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.synacktiv.com/en/publications/bypassing-windows-authentication-reflection-mitigations-for-system-shells-part">CVE-2026-26128</a></li>
+</ul>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li>James Forshaw, <a target="_blank" rel="noopener" href="https://projectzero.google/2021/10/using-kerberos-for-authentication-relay.html">Using Kerberos for Authentication Relay Attacks</a>, Google Project Zero, 2021</li>
+<li>Dirk-jan Mollema, <a target="_blank" rel="noopener" href="https://dirkjanm.io/relaying-kerberos-over-dns-with-krbrelayx-and-mitm6/">Relaying Kerberos over DNS using krbrelayx and mitm6</a>, 2022</li>
+<li>James Forshaw, <a target="_blank" rel="noopener" href="https://www.tiraniddo.dev/2024/04/relaying-kerberos-authentication-from.html">Relaying Kerberos Authentication from DCOM OXID Resolving</a>, 2024</li>
+<li>Andrea Pierini (Decoder), <a target="_blank" rel="noopener" href="https://decoder.cloud/2025/11/24/reflecting-your-authentication-when-windows-ends-up-talking-to-itself/">Reflecting Your Authentication: When Windows Ends Up Talking to Itself</a>, 2024</li>
+<li>Synacktiv, <a target="_blank" rel="noopener" href="https://www.synacktiv.com/publications/relaying-kerberos-over-smb-using-krbrelayx">Relaying Kerberos over SMB using krbrelayx</a>, 2024</li>
+<li>Synacktiv, <a target="_blank" rel="noopener" href="https://www.synacktiv.com/en/publications/ntlm-reflection-is-dead-long-live-ntlm-reflection-an-in-depth-analysis-of-cve-2025">NTLM reflection is dead, long live NTLM reflection! — An in-depth analysis of CVE-2025-33073</a>, 2025</li>
+<li>RedTeam Pentesting, <a target="_blank" rel="noopener" href="https://blog.redteam-pentesting.de/2025/reflective-kerberos-relay-attack/">Playing with reflective relay to discover new vulnerabilities: CVE-2025-33073</a>, 2025</li>
+<li>Synacktiv, <a target="_blank" rel="noopener" href="https://www.synacktiv.com/publications/bypassing-windows-authentication-reflection-mitigations-for-system-shells-part-1">Bypassing Windows authentication reflection mitigations for SYSTEM shells — Part 1</a>, 2026</li>
+<li>Synacktiv, <a target="_blank" rel="noopener" href="https://www.synacktiv.com/en/publications/bypassing-windows-authentication-reflection-mitigations-for-system-shells-part">Bypassing Windows authentication reflection mitigations for SYSTEM shells — Part 2</a>, 2026</li>
+<li>Microsoft, <a target="_blank" rel="noopener" href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-33073">CVE-2025-33073 Advisory</a></li>
+</ul>
+</main>
+
+</article>
+
+
+<script src="/js/highlight.js"></script>
+
+  </main>
+  <footer class="footer">
+  
+  <span>Copyright © TriangleSnake</span>
+  
+</footer>
+  
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>
